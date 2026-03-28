@@ -37,31 +37,21 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 	</head>
 	<body>
 		<main class="video-container">
-			<video id="bg-video" autoplay loop muted playsinline>
-				<!-- The src is dynamically injected on the client side to ensure random selection on every visit -->
-			</video>
+			<video id="bg-video" autoplay loop muted playsinline></video>
 		</main>
 
 		<script>
-			// List of possible videos (URLs to be determined, using placeholders for now)
-			const videoList = [
-				"https://www.w3schools.com/html/mov_bbb.mp4",
-				"https://media.w3.org/2010/05/sintel/trailer.mp4",
-				"https://media.w3.org/2010/05/bunny/trailer.mp4",
-			];
+			const videoList = ["/videos/2026-03-28%20At%2014.42.26.m4v"];
 
-			// Select a random video from the list
 			const randomIndex = Math.floor(Math.random() * videoList.length);
 			const selectedVideoSrc = videoList[randomIndex];
 
-			// Initialize the video element
 			const videoElement = document.getElementById("bg-video");
 
 			if (videoElement instanceof HTMLVideoElement) {
 				videoElement.src = selectedVideoSrc;
 				videoElement.load();
 
-				// Play the video and handle potential autoplay prevention by browsers
 				const playPromise = videoElement.play();
 				if (playPromise !== undefined) {
 					playPromise.catch((error) => {

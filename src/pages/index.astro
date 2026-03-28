@@ -37,7 +37,15 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 	</head>
 	<body>
 		<main class="video-container">
-			<video id="bg-video" autoplay loop muted playsinline></video>
+			<video id="bg-video" autoplay loop playsinline></video>
+			<button
+				id="unmute-btn"
+				style="display: none; position: absolute; bottom: 30px; right: 30px; z-index: 10; padding: 12px 24px; background: rgba(0,0,0,0.6); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; font-family: system-ui, sans-serif; font-size: 16px; cursor: pointer; backdrop-filter: blur(4px); transition: all 0.3s ease;"
+				onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.borderColor='rgba(255,255,255,0.6)';"
+				onmouseout="this.style.background='rgba(0,0,0,0.6)'; this.style.borderColor='rgba(255,255,255,0.3)';"
+			>
+				🔊
+			</button>
 		</main>
 
 		<script>
@@ -48,8 +56,11 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 			const videoElement = document.getElementById("bg-video");
 
+			const unmuteBtn = document.getElementById("unmute-btn");
+
 			if (videoElement instanceof HTMLVideoElement) {
 				videoElement.src = selectedVideoSrc;
+				videoElement.muted = false; // Intentamos reproducir con sonido
 				videoElement.load();
 
 				const playPromise = videoElement.play();
@@ -59,6 +70,17 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 							"Autoplay was prevented by the browser:",
 							error,
 						);
+						// Fallback: reproducir silenciado y mostrar botón para activar sonido
+						videoElement.muted = true;
+						videoElement.play();
+
+						if (unmuteBtn) {
+							unmuteBtn.style.display = "block";
+							unmuteBtn.addEventListener("click", () => {
+								videoElement.muted = false;
+								unmuteBtn.style.display = "none";
+							});
+						}
 					});
 				}
 			}

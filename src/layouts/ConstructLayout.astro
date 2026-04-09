@@ -1,0 +1,235 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style is:global>
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+      :root {
+        --c-bg: #eee9dd;
+        --c-red: #da291c;
+        --c-black: #1a1a1a;
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--c-bg);
+        background-image: 
+          radial-gradient(#d3cebe 1px, transparent 1px),
+          radial-gradient(#d3cebe 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+        color: var(--c-black);
+        font-family: 'Oswald', 'Arial Black', Impact, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* Geometría global de fondo */
+      .bg-geometric {
+        position: fixed;
+        z-index: -1;
+      }
+      .bg-circle {
+        top: 20%; 
+        right: -5vw; 
+        width: 25vw; 
+        height: 25vw; 
+        background-color: var(--c-red); 
+        border: 8px solid var(--c-black); 
+        border-radius: 50%;
+      }
+      .bg-bar {
+        bottom: 10vh;
+        left: -10vw;
+        width: 150vw;
+        height: 5vh;
+        background-color: var(--c-black);
+        transform: rotate(-10deg);
+      }
+
+      /* Navegación Brutalista */
+      .constructivist-nav {
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 8px solid var(--c-black);
+        background: var(--c-bg);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 10px 0 var(--c-red);
+      }
+
+      .nav-brand {
+        background-color: var(--c-black);
+        color: var(--c-bg);
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-right: 8px solid var(--c-black);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.05em;
+      }
+
+      .nav-brand span.red {
+        color: var(--c-red);
+      }
+
+      .nav-links {
+        display: flex;
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-links li {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 1.5rem 2rem;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--c-black);
+        border-right: 6px solid var(--c-black);
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background-color: var(--c-red);
+        color: var(--c-black);
+      }
+
+      main {
+        flex: 1;
+        position: relative;
+        padding: 4rem 2rem;
+      }
+
+      /* Estilos tipográficos Constructivistas */
+      h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        text-transform: uppercase;
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.4;
+      }
+
+      /* Componentes reusables */
+      .block-header {
+        display: inline-block;
+        background-color: var(--c-black);
+        color: var(--c-bg);
+        padding: 0.5rem 1rem;
+        border: 4px solid var(--c-red);
+        transform: rotate(-2deg);
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        box-shadow: 8px 8px 0 var(--c-red);
+      }
+
+      .cta-button {
+        background-color: var(--c-black);
+        color: var(--c-bg);
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 6px solid var(--c-red);
+        display: inline-flex;
+        align-items: center;
+        box-shadow: 10px 10px 0 var(--c-red);
+        transition: transform 0.1s, box-shadow 0.1s;
+        cursor: pointer;
+        margin-top: 2rem;
+      }
+
+      .cta-button:active {
+        transform: translate(6px, 6px);
+        box-shadow: 4px 4px 0 var(--c-red);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          flex-direction: column;
+          width: 100%;
+        }
+        .nav-links a {
+          border-right: none;
+          border-bottom: 4px solid var(--c-black);
+          width: 100%;
+          justify-content: center;
+        }
+        .nav-brand {
+          width: 100%;
+          justify-content: center;
+          border-right: none;
+          border-bottom: 8px solid var(--c-black);
+        }
+        main {
+          padding: 2rem 1rem;
+        }
+        .block-header {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Elementos flotantes globales -->
+    <div class="bg-geometric bg-circle"></div>
+    <div class="bg-geometric bg-bar"></div>
+    
+    <nav class="constructivist-nav">
+      <a href="/inicio" class="nav-brand">C<span class="red">OSMOPOLITI</span>CAN</a>
+      <ul class="nav-links">
+        <li><a href="/revista" class={Astro.url.pathname.includes('/revista') ? 'active' : ''}>Revista</a></li>
+        <li><a href="/quienes-somos" class={Astro.url.pathname.includes('/quienes-somos') ? 'active' : ''}>Quiénes Somos</a></li>
+        <li><a href="/contacto" class={Astro.url.pathname.includes('/contacto') ? 'active' : ''}>Contacto</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer style="border-top: 10px solid var(--c-black); background: var(--c-black); color: var(--c-bg); padding: 3rem 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-transform: uppercase; font-size: 1.5rem;">
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <span style="color: var(--c-red); font-size: 2rem; line-height: 1;">VANGUARDIA</span>
+        <span>LATINOAMERICANA</span>
+      </div>
+      <div style="font-size: 3rem; color: var(--c-red); font-weight: 800; transform: rotate(-5deg); border: 4px solid var(--c-bg); padding: 0.2rem 1rem;">
+        © {new Date().getFullYear()}
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+---
+import ConstructLayout from '../layouts/ConstructLayout.astro';
+---
+
+<ConstructLayout title="Inicio - Cosmopolitican">
+  <div class="hero-section">
+    <div class="block-header">NUEVA ERA</div>
+    
+    <div class="massive-title">
+      <div class="bg-shape-1"></div>
+      <div class="black-stripe">LA VOZ</div>
+      <div class="red-stripe">DE LA VANGUARDIA</div>
+      <div class="black-stripe offset">COSMOPOLITICAN</div>
+    </div>
+    
+    <p class="hero-text">
+      Arte, Política y Conciencia en el sur del mundo. Explora nuestros manifiestos, crónicas y ensayos más recientes. Nada está escrito en piedra.
+    </p>
+    
+    <a href="/revista" class="cta-button">
+      LEER LA REVISTA 
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-left: 10px;">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</ConstructLayout>
+
+<style>
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .massive-title {
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .bg-shape-1 {
+    position: absolute;
+    top: -20%;
+    left: 40%;
+    width: 60%;
+    height: 140%;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      var(--c-red) 10px,
+      var(--c-red) 20px
+    );
+    z-index: -1;
+    transform: skew(-15deg);
+    border: 8px solid var(--c-black);
+  }
+  
+  .black-stripe, .red-stripe {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.85;
+    padding: 0 1rem;
+    border: 8px solid var(--c-black);
+    width: fit-content;
+    text-transform: uppercase;
+  }
+  
+  .black-stripe {
+    background-color: var(--c-black);
+    color: var(--c-bg);
+  }
+  
+  .red-stripe {
+    background-color: var(--c-red);
+    color: var(--c-black);
+    transform: rotate(-2deg);
+    margin-left: 2rem;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .offset {
+    margin-left: 1rem;
+  }
+  
+  .hero-text {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    max-width: 650px;
+    background-color: var(--c-bg);
+    border: 6px solid var(--c-black);
+    padding: 2rem;
+    box-shadow: 15px 15px 0 var(--c-red);
+    margin-bottom: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .bg-shape-1 {
+      display: none;
+    }
+    .red-stripe {
+      margin-left: 0.5rem;
+    }
+    .offset {
+      margin-left: 0;
+    }
+  }
+</style>

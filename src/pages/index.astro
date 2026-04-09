@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE_DESCRIPTION, SITE_TITLE, SHOW_UNDER_CONSTRUCTION } from "../consts";
+import UnderConstruction from "../components/UnderConstruction.astro";
 ---
 
 <!doctype html>
@@ -39,17 +40,21 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		</style>
 	</head>
 	<body>
-		<main class="video-container">
-			<video id="bg-video" autoplay loop playsinline></video>
-			<button
-				id="unmute-btn"
-				style="display: none; position: absolute; bottom: 30px; right: 30px; z-index: 10; padding: 12px 24px; background: rgba(0,0,0,0.6); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; font-family: system-ui, sans-serif; font-size: 16px; cursor: pointer; backdrop-filter: blur(4px); transition: all 0.3s ease;"
-				onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.borderColor='rgba(255,255,255,0.6)';"
-				onmouseout="this.style.background='rgba(0,0,0,0.6)'; this.style.borderColor='rgba(255,255,255,0.3)';"
-			>
-				🔊
-			</button>
-		</main>
+		{SHOW_UNDER_CONSTRUCTION ? (
+			<UnderConstruction />
+		) : (
+			<main class="video-container">
+				<video id="bg-video" autoplay loop playsinline></video>
+				<button
+					id="unmute-btn"
+					style="display: none; position: absolute; bottom: 30px; right: 30px; z-index: 10; padding: 12px 24px; background: rgba(0,0,0,0.6); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; font-family: system-ui, sans-serif; font-size: 16px; cursor: pointer; backdrop-filter: blur(4px); transition: all 0.3s ease;"
+					onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.borderColor='rgba(255,255,255,0.6)';"
+					onmouseout="this.style.background='rgba(0,0,0,0.6)'; this.style.borderColor='rgba(255,255,255,0.3)';"
+				>
+					🔊
+				</button>
+			</main>
+		)}
 
 		<script>
 			const videoList = ["/videos/2026-03-28%20At%2014.42.26.m4v"];

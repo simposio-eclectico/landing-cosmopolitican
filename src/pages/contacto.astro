@@ -1,0 +1,234 @@
+---
+import ConstructLayout from '../layouts/ConstructLayout.astro';
+---
+
+<ConstructLayout title="Contacto - Cosmopolitican">
+  <div class="contact-container">
+    <div class="block-header" style="transform: rotate(1deg);">COMUNICADO</div>
+    
+    <div class="contact-grid">
+      <div class="form-wrapper">
+        <h1 class="giant-heading">ENVIAR</h1>
+        <h1 class="giant-heading red-bg" style="margin-left: 2rem;">MENSAJE</h1>
+        
+        <form class="construct-form" onsubmit="event.preventDefault(); alert('Comunicado despachado con éxito.');">
+          <div class="form-group">
+            <label for="name">IDENTIDAD (NOMBRE)</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="email">CANAL (CORREO)</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="message">DECLARACIÓN</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          
+          <button type="submit" class="cta-button submit-btn">DESPACHAR COMUNICADO</button>
+        </form>
+      </div>
+      
+      <div class="info-sidebar">
+        <div class="info-block">
+          <h3>COORDENADAS</h3>
+          <p>SANTIAGO, CHILE</p>
+          <p>AMÉRICA LATINA</p>
+          <div class="divider"></div>
+          <p class="email-link">ORG@COSMOPOLITICAN.CL</p>
+        </div>
+        
+        <div class="geo-artwork">
+          <div class="bar bar-1"></div>
+          <div class="bar bar-2"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ConstructLayout>
+
+<style>
+  .contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  .giant-heading {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    margin: 0;
+    line-height: 0.85;
+    background-color: var(--c-black);
+    color: var(--c-bg);
+    padding: 1rem 2rem;
+    display: inline-block;
+    border: 6px solid var(--c-black);
+  }
+
+  .red-bg {
+    background-color: var(--c-red);
+    color: var(--c-black);
+    transform: rotate(2deg);
+    position: relative;
+    z-index: 2;
+    margin-top: -0.5rem;
+  }
+
+  /* Form Styles */
+  .construct-form {
+    background-color: var(--c-bg);
+    border: 8px solid var(--c-black);
+    padding: 3rem;
+    box-shadow: 15px 15px 0 var(--c-red);
+    margin-top: 3rem;
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--c-black);
+    margin-bottom: 0.5rem;
+    background-color: var(--c-black);
+    color: var(--c-bg);
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.25rem;
+    font-family: system-ui, sans-serif;
+    border: 4px solid var(--c-black);
+    background-color: var(--c-bg);
+    color: var(--c-black);
+    transition: all 0.2s;
+    box-sizing: border-box;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 6px 6px 0 var(--c-red);
+    transform: translate(-2px, -2px);
+  }
+
+  .submit-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 1.5rem;
+    border-width: 8px;
+    margin-top: 1rem;
+  }
+
+  /* Sidebar */
+  .info-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .info-block {
+    background-color: var(--c-red);
+    color: var(--c-bg);
+    border: 6px solid var(--c-black);
+    padding: 2.5rem;
+    box-shadow: 12px 12px 0 var(--c-black);
+    text-align: right;
+  }
+
+  .info-block h3 {
+    font-size: 3rem;
+    color: var(--c-black);
+    margin-bottom: 1.5rem;
+  }
+
+  .info-block p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--c-black);
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .divider {
+    height: 6px;
+    background-color: var(--c-black);
+    margin: 2rem 0;
+  }
+
+  .email-link {
+    font-size: 1.8rem !important;
+    background-color: var(--c-black);
+    color: var(--c-red) !important;
+    padding: 0.5rem;
+    display: inline-block;
+  }
+
+  /* Geometric Artwork */
+  .geo-artwork {
+    position: relative;
+    height: 300px;
+    background-image: radial-gradient(var(--c-red) 2px, transparent 2px);
+    background-size: 20px 20px;
+    border: 6px solid var(--c-black);
+    overflow: hidden;
+  }
+
+  .bar-1 {
+    position: absolute;
+    width: 120%;
+    height: 40px;
+    background-color: var(--c-black);
+    top: 30%;
+    left: -10%;
+    transform: rotate(25deg);
+  }
+
+  .bar-2 {
+    position: absolute;
+    width: 120%;
+    height: 20px;
+    background-color: var(--c-red);
+    top: 60%;
+    left: -10%;
+    transform: rotate(-15deg);
+  }
+
+  .circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--c-black);
+    bottom: 20px;
+    right: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .info-block {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,39 +1,46 @@
 ---
 import ConstructLayout from '../layouts/ConstructLayout.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES, SECTIONS } from '../consts';
+
+const revistas = await getCollection('revista');
+const sortedRevistas = revistas.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
 ---
 
 <ConstructLayout title="Revista - Cosmopolitican">
   <div class="revista-header">
     <div class="block-header" style="transform: rotate(2deg);">ARCHIVOS & EDICIONES</div>
     
+    <div class="filter-container">
+      <div class="filter-categories">
+        <button class="filter-btn category-btn active" data-category="all">Todos</button>
+        {categoryKeys.map((key) => (
+          <button class="filter-btn category-btn" data-category={CATEGORIES[key]}>{CATEGORIES[key]}</button>
+        ))}
+      </div>
+      
+      <div class="filter-sections" style="display: none;">
+        <!-- Sub-sections will be populated by JS when a category is clicked -->
+      </div>
+    </div>
+
     <div class="archive-grid">
-      <article class="issue-card featured">
-        <div class="issue-number">Nº 01</div>
-        <h2>EL DESPERTAR</h2>
-        <p>Manifiesto sobre la modernidad tardía y el rol del arte en el sur. Una exploración de los cimientos estéticos.</p>
-        <button class="cta-button">LEER AHORA</button>
-      </article>
-      
-      <article class="issue-card">
-        <div class="issue-number">Nº 00</div>
-        <h2>PRÓLOGO</h2>
-        <p>Borradores, ideas sueltas y el manifiesto original perdido.</p>
-        <button class="cta-button">EXAMINAR</button>
-      </article>
-      
-       <article class="issue-card dark">
-        <div class="issue-number">EXTRA</div>
-        <h2>POESÍA VISUAL</h2>
-        <p>Selección de fotomontajes constructivistas y gráfica radical.</p>
-        <button class="cta-button" style="border-color: var(--c-bg); box-shadow: 6px 6px 0 var(--c-bg);">VER COLECCIÓN</button>
-      </article>
-      
-      <article class="issue-card">
-        <div class="issue-number">Nº -1</div>
-        <h2>RUINAS</h2>
-        <p>Lo que construimos sobre los escombros del pasado.</p>
-        <button class="cta-button">DESCUBRIR</button>
-      </article>
+      {sortedRevistas.map((post) => (
+        <article 
+          class={`issue-card ${post.data.theme !== 'default' ? post.data.theme : ''}`.trim()}
+          data-category={post.data.category || ''}
+          data-section={post.data.section || ''}
+        >
+          <div class="issue-number">{post.data.issueNumber}</div>
+          <h2>{post.data.title}</h2>
+          <p>{post.data.summary}</p>
+          <a href={`/revista/${post.data.slug || post.id}`} style="text-decoration: none; align-self: flex-start; margin-top: auto; display: inline-block;">
+            <button class="cta-button" style={post.data.customStyles}>{post.data.buttonText}</button>
+          </a>
+        </article>
+      ))}
     </div>
   </div>
 </ConstructLayout>
@@ -42,6 +49,58 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
   .revista-header {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .filter-container {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .filter-categories, .filter-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    background: transparent;
+    color: var(--c-black);
+    border: 4px solid var(--c-black);
+    padding: 0.5rem 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 var(--c-black);
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--c-black);
+  }
+
+  .filter-btn.active {
+    background-color: var(--c-black);
+    color: var(--c-bg);
+  }
+
+  .filter-sections .filter-btn {
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-width: 3px;
+    box-shadow: 4px 4px 0 var(--c-black);
+    padding: 0.4rem 1.2rem;
+  }
+
+  .filter-sections .filter-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--c-black);
   }
 
   .archive-grid {
@@ -145,3 +204,69 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
     margin-top: auto;
   }
 </style>
+
+<script define:vars={{ SECTIONS }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const sectionsContainer = document.querySelector('.filter-sections');
+    const issueCards = document.querySelectorAll('.issue-card');
+
+    let currentCategory = 'all';
+    let currentSection = 'all';
+
+    function renderSections(category) {
+      if (category === 'all' || !SECTIONS[category]) {
+        sectionsContainer.style.display = 'none';
+        return;
+      }
+      
+      sectionsContainer.style.display = 'flex';
+      sectionsContainer.innerHTML = `<button class="filter-btn section-btn active" data-section="all">Todas</button>`;
+      
+      SECTIONS[category].forEach(sec => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn section-btn';
+        btn.dataset.section = sec;
+        btn.textContent = sec;
+        sectionsContainer.appendChild(btn);
+      });
+
+      // Bind events to new section buttons
+      document.querySelectorAll('.section-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentSection = e.target.dataset.section;
+          filterCards();
+        });
+      });
+    }
+
+    function filterCards() {
+      issueCards.forEach(card => {
+        const cardCat = card.dataset.category;
+        const cardSec = card.dataset.section;
+
+        const categoryMatch = currentCategory === 'all' || cardCat === currentCategory;
+        const sectionMatch = currentSection === 'all' || cardSec === currentSection;
+
+        if (categoryMatch && sectionMatch) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentCategory = e.target.dataset.category;
+        currentSection = 'all';
+        renderSections(currentCategory);
+        filterCards();
+      });
+    });
+  });
+</script>

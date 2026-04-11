@@ -1,26 +1,35 @@
 ---
-import ConstructLayout from '../layouts/ConstructLayout.astro';
+import ConstructLayout from "../layouts/ConstructLayout.astro";
 ---
 
 <ConstructLayout title="Inicio - Cosmopolitican">
   <div class="hero-section">
     <div class="block-header">NUEVA ERA</div>
-    
+
     <div class="massive-title">
       <div class="bg-shape-1"></div>
-      <div class="black-stripe">LA VOZ</div>
-      <div class="red-stripe">DE LA VANGUARDIA</div>
+      <div class="black-stripe">TU REVISTA</div>
+      <div class="red-stripe">CON CLASE</div>
       <div class="black-stripe offset">COSMOPOLITICAN</div>
     </div>
-    
+
     <p class="hero-text">
-      Arte, Política y Conciencia en el sur del mundo. Explora nuestros manifiestos, crónicas y ensayos más recientes. Nada está escrito en piedra.
+      LO QUE NO PUEDE FALTAR EN LA CARTERA DE LA DAMA NI EL BOLSILLO DEL VARÓN.
+      COSMOPOLITICAN,TU REVISTA CON CLASE.
     </p>
-    
+
     <a href="/revista" class="cta-button">
-      LEER LA REVISTA 
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-left: 10px;">
-        <path d="M5 12h14M12 5l7 7-7 7" />
+      LEER LA REVISTA
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        style="margin-left: 10px;"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
       </svg>
     </a>
   </div>
@@ -36,7 +45,7 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
     position: relative;
     z-index: 10;
   }
-  
+
   .massive-title {
     margin-bottom: 4rem;
     position: relative;
@@ -59,8 +68,9 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
     transform: skew(-15deg);
     border: 8px solid var(--c-black);
   }
-  
-  .black-stripe, .red-stripe {
+
+  .black-stripe,
+  .red-stripe {
     font-size: clamp(3rem, 10vw, 8rem);
     line-height: 0.85;
     padding: 0 1rem;
@@ -68,12 +78,12 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
     width: fit-content;
     text-transform: uppercase;
   }
-  
+
   .black-stripe {
     background-color: var(--c-black);
     color: var(--c-bg);
   }
-  
+
   .red-stripe {
     background-color: var(--c-red);
     color: var(--c-black);
@@ -88,7 +98,7 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
   .offset {
     margin-left: 1rem;
   }
-  
+
   .hero-text {
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     max-width: 650px;
@@ -98,7 +108,7 @@ import ConstructLayout from '../layouts/ConstructLayout.astro';
     box-shadow: 15px 15px 0 var(--c-red);
     margin-bottom: 2rem;
   }
-  
+
   @media (max-width: 768px) {
     .bg-shape-1 {
       display: none;

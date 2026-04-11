@@ -17,4 +17,23 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+const revista = defineCollection({
+	loader: glob({ base: './src/content/revista', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			author: z.string().default('Cosmopolitican'),
+			pubDate: z.coerce.date(),
+			category: z.string().optional(),
+			section: z.string().default('Edición'),
+			tags: z.array(z.string()).default([]),
+			summary: z.string(),
+			slug: z.string().optional(),
+			issueNumber: z.string(),
+			theme: z.enum(['default', 'featured', 'dark']).default('default'),
+			buttonText: z.string().default('LEER AHORA'),
+			customStyles: z.string().optional(),
+		}),
+});
+
+export const collections = { blog, revista };

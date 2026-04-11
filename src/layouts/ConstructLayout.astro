@@ -18,17 +18,17 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
       @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
 
       :root {
-        --c-bg: #eee9dd;
-        --c-red: #da291c;
-        --c-black: #1a1a1a;
+        --c-bg: var(--color-cream);
+        --c-red: var(--color-red);
+        --c-black: var(--color-black);
       }
 
       body {
         margin: 0;
         background-color: var(--c-bg);
         background-image: 
-          radial-gradient(#d3cebe 1px, transparent 1px),
-          radial-gradient(#d3cebe 1px, transparent 1px);
+          radial-gradient(var(--color-cream-dark) 1px, transparent 1px),
+          radial-gradient(var(--color-cream-dark) 1px, transparent 1px);
         background-size: 20px 20px;
         background-position: 0 0, 10px 10px;
         color: var(--c-black);

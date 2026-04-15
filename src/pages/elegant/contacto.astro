@@ -1,0 +1,237 @@
+---
+import ElegantLayout from "../../layouts/ElegantLayout.astro";
+import { SITE_TITLE } from "../../consts";
+---
+
+<ElegantLayout title={`Contacto - ${SITE_TITLE}`}>
+  <div class="contact-container">
+    <span class="label-caps">Comunicado</span>
+
+    <div class="title-block">
+      <span class="t1">Escríbenos</span>
+      <span class="t2">Un mensaje</span>
+    </div>
+
+    <div class="contact-grid">
+      <form
+        class="contact-form"
+        onsubmit="event.preventDefault(); this.querySelector('.success-msg').style.display='block'; this.querySelector('.submit-btn').style.display='none';"
+      >
+        <div class="field">
+          <label class="field-label" for="name">Nombre</label>
+          <input
+            class="field-input"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Su nombre completo"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="email">Correo</label>
+          <input
+            class="field-input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="correo@ejemplo.com"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="message">Mensaje</label>
+          <textarea
+            class="field-input field-textarea"
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Su declaración…"
+            required></textarea>
+        </div>
+
+        <button type="submit" class="cta-button submit-btn">
+          Enviar mensaje
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        <p class="success-msg" style="display:none;">
+          Mensaje enviado. Le responderemos a la brevedad.
+        </p>
+      </form>
+
+      <aside class="info-sidebar">
+        <p class="field-label">Ubicación</p>
+        <p class="info-value"><em>Santiago,</em> Chile<br />América Latina</p>
+
+        <hr class="divider-thin" />
+
+        <p class="field-label">Correo</p>
+        <a href="mailto:org@cosmopolitican.cl" class="info-email">
+          org@cosmopolitican.cl
+        </a>
+
+        <div class="ornament-bg" aria-hidden="true">C</div>
+      </aside>
+    </div>
+  </div>
+</ElegantLayout>
+
+<style>
+  .contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* Título */
+  .title-block {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem 0 3rem;
+  }
+
+  .t1 {
+    font-family: var(--c-font-heading);
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--c-warm);
+    line-height: 0.9;
+  }
+
+  .t2 {
+    font-family: var(--c-font-heading);
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: var(--c-black);
+  }
+
+  /* Grid */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* Formulario */
+  .field {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field-label {
+    font-family: var(--c-font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .field-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--c-border);
+    padding: 0.6rem 0;
+    font-family: var(--c-font-body);
+    font-size: 1.2rem;
+    color: var(--c-black);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .field-input::placeholder {
+    color: var(--c-muted);
+    font-style: italic;
+  }
+
+  .field-input:focus {
+    border-bottom-color: var(--c-black);
+  }
+
+  .field-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .success-msg {
+    font-style: italic;
+    color: var(--c-warm);
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+
+  /* Sidebar */
+  .info-sidebar {
+    padding-top: 0.5rem;
+    position: relative;
+  }
+
+  .info-value {
+    font-family: var(--c-font-heading);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0.4rem 0 1.5rem;
+  }
+
+  .info-value em {
+    font-style: italic;
+    color: var(--c-warm);
+  }
+
+  .info-email {
+    font-family: var(--c-font-heading);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--c-warm);
+    border-bottom: 1px solid var(--c-border);
+    padding-bottom: 0.3rem;
+    display: inline-block;
+    transition: color 0.2s;
+  }
+
+  .info-email:hover {
+    color: var(--c-black);
+    border-bottom-color: var(--c-black);
+  }
+
+  .ornament-bg {
+    font-family: var(--c-font-heading);
+    font-size: clamp(6rem, 14vw, 11rem);
+    font-weight: 900;
+    font-style: italic;
+    color: #ede8e0;
+    line-height: 1;
+    text-align: right;
+    margin-top: 2rem;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .ornament-bg {
+      font-size: 5rem;
+    }
+  }
+</style>

@@ -1,0 +1,218 @@
+---
+import ElegantLayout from "../../layouts/ElegantLayout.astro";
+import { SITE_TITLE } from "../../consts";
+---
+
+<ElegantLayout title={`Quiénes Somos - ${SITE_TITLE}`}>
+  <article class="about-container">
+    <div class="block-header" style="transform: rotate(calc(var(--c-rotate) * 0.5));">
+      EL COLECTIVO
+    </div>
+
+    <div class="manifesto-grid">
+      <div class="manifesto-text">
+        <h1 class="giant-heading">NOSOTROS</h1>
+        <div class="thick-divider"></div>
+
+        <p class="dropcap-paragraph">
+          SOMOS LA EXPRESIÓN de que nos sobraba tiempo y nos faltaba de qué
+          quejarnos. No creemos en el arte por el arte, ni en los lindos
+          ideales. Cosmopolitican es una "fractura del pensamiento hegemónico",
+          ni decimos lo que sabes ni sabemos como hablar.
+        </p>
+
+        <p>
+          Reivindicamos el derecho a la crítica política sin tener que usar
+          palabras de seis sílabas. Nuestra labor es la fina síntesis entre el
+          análisis fundamentado, el descontento popular y las ideas que se
+          puedan robar. Creamos una revista que, si bien no promete nada, ni
+          partido ni postura, al menos deja al <em>sistema</em> en ridículo un rato.
+          Y podemos prometer algo: somos tu revista con clase.
+        </p>
+
+        <blockquote class="construct-quote">
+          <div class="quote-mark">"</div>
+          COSMOPOLITICAN. TU REVISTA CON CLASE.
+        </blockquote>
+      </div>
+
+      <div class="manifesto-sidebar">
+        <div class="geo-panel">
+          <h3>3 PILARES</h3>
+          <ul class="pillar-list">
+            <li><span>1.</span> QUEJA CON ESTILO</li>
+            <li><span>2.</span> CERO PRESUPUESTO</li>
+            <li><span>3.</span> MEMES SUBVERSIVOS</li>
+          </ul>
+        </div>
+        <div class="geo-shape-container">
+          <div class="geo-triangle-big"></div>
+          <div class="geo-circle-small"></div>
+        </div>
+      </div>
+    </div>
+  </article>
+</ElegantLayout>
+
+<style>
+  .about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  .giant-heading {
+    font-size: clamp(4rem, 10vw, 8rem);
+    margin: 0;
+    line-height: 0.8;
+    background-color: var(--c-black);
+    color: var(--c-bg);
+    padding: 1rem;
+    display: inline-block;
+  }
+
+  .thick-divider {
+    height: 12px;
+    background-color: var(--c-red);
+    margin: 2rem 0;
+    width: 60%;
+  }
+
+  :global(.theme-elegant) .thick-divider {
+    height: 2px;
+    width: 100%;
+  }
+
+  .dropcap-paragraph::first-letter {
+    float: left;
+    font-size: 5rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+    font-family: var(--c-font-heading);
+    color: var(--c-red);
+    font-weight: bold;
+  }
+
+  .manifesto-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .construct-quote {
+    position: relative;
+    font-size: 2rem;
+    line-height: 1.2;
+    padding: 3rem;
+    margin: 4rem 0 2rem 0;
+    background-color: var(--c-bg);
+    border: var(--c-brutalist-border);
+    box-shadow: var(--c-brutalist-shadow);
+    font-family: var(--c-font-heading);
+  }
+
+  :global(.theme-elegant) .construct-quote {
+    box-shadow: none;
+    border-width: 1px;
+    background-color: var(--c-bg);
+  }
+
+  .quote-mark {
+    position: absolute;
+    top: -40px;
+    left: 10px;
+    font-size: 8rem;
+    line-height: 1;
+    color: var(--c-red);
+    font-family: "Arial Black", sans-serif;
+  }
+
+  /* Sidebar */
+  .manifesto-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .geo-panel {
+    background-color: var(--c-black);
+    color: var(--c-bg);
+    padding: 2rem;
+    border-left: 12px solid var(--c-red);
+  }
+
+  .geo-panel h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--c-red);
+    border-bottom: 4px solid var(--c-bg);
+    padding-bottom: 0.5rem;
+  }
+
+  .pillar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pillar-list li {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-family: var(--c-font-heading);
+  }
+
+  .pillar-list li span {
+    color: var(--c-red);
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+
+  .geo-shape-container {
+    position: relative;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .geo-triangle-big {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 200px solid var(--c-red);
+    transform: rotate(15deg);
+    position: absolute;
+  }
+
+  .geo-circle-small {
+    width: 80px;
+    height: 80px;
+    background-color: var(--c-black);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  :global(.theme-elegant) .geo-shape-container {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .manifesto-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

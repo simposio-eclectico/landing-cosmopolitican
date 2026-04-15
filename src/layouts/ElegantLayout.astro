@@ -1,0 +1,191 @@
+---
+import BaseHead from "../components/elegant/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import "../styles/elegant.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="theme-elegant">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="/elegant" class="nav-brand">Cosmopolitican</a>
+      <ul class="nav-links">
+        <li>
+          <a
+            href="/elegant/revista"
+            class={Astro.url.pathname.includes("/revista") ? "active" : ""}
+          >
+            Revista
+          </a>
+        </li>
+        <li>
+          <a
+            href="/elegant/quienes-somos"
+            class={Astro.url.pathname.includes("/quienes-somos")
+              ? "active"
+              : ""}
+          >
+            Quiénes somos
+          </a>
+        </li>
+        <li>
+          <a
+            href="/elegant/contacto"
+            class={Astro.url.pathname.includes("/contacto") ? "active" : ""}
+          >
+            Contacto
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="footer-title">Retaguardia</span>
+        <span class="footer-sub label-caps">Latinoamericana</span>
+      </div>
+      <div class="footer-copy label-caps">© {new Date().getFullYear()}</div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /* ── Nav ── */
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-family: var(--c-font-heading);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--c-bg);
+    background: var(--c-black);
+    padding: 1rem 2rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--c-border);
+    transition: opacity 0.2s;
+  }
+
+  .nav-brand:hover {
+    opacity: 0.85;
+  }
+
+  .nav-links {
+    display: flex;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-links li {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 1rem 1.5rem;
+    font-family: var(--c-font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--c-warm);
+    border-right: 1px solid var(--c-border);
+    display: flex;
+    align-items: center;
+    transition:
+      color 0.2s,
+      border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--c-warm);
+    border-bottom-color: var(--c-black);
+  }
+
+  /* ── Main ── */
+  main {
+    flex: 1;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    border-top: 1px solid var(--c-border);
+    background: var(--c-black);
+    color: var(--c-bg);
+    padding: 3rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .footer-title {
+    font-family: var(--c-font-heading);
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .footer-sub,
+  .footer-copy {
+    color: var(--c-muted);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      border-top: 1px solid var(--c-border);
+    }
+    .nav-links a {
+      border-right: none;
+      border-bottom: 1px solid var(--c-border);
+      justify-content: center;
+    }
+    .nav-brand {
+      width: 100%;
+      justify-content: center;
+      border-right: none;
+    }
+  }
+</style>

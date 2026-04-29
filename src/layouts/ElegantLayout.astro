@@ -6,19 +6,33 @@ import "@styles/elegant.css";
 interface Props {
   title?: string;
   description?: string;
+  background?: string;
 }
-
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  background,
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" class="theme-elegant">
+<html lang="es" class="theme-pop">
   <head>
     <BaseHead title={title} description={description} />
   </head>
   <body>
+    <!-- ── Topbar anuncio opcional ── -->
+    <div class="topbar">
+      ★ ¡Nueva edición disponible! &nbsp;·&nbsp; Descúbrela ahora ★
+    </div>
+
     <nav class="site-nav">
-      <a href="/" class="nav-brand">Cosmopolitican</a>
+      <!-- Logo/marca con fuente script -->
+      <a href="/" class="nav-brand">
+        <span class="brand-script">Cosmopolitican</span>
+        <span class="brand-sub">TU REVISTA CON CLASE</span>
+      </a>
+
       <ul class="nav-links">
         <li>
           <a
@@ -47,28 +61,59 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
           </a>
         </li>
       </ul>
+
+      <!-- CTA derecho opcional -->
+      <a href="/suscribirse" class="nav-cta">¡Suscríbete!</a>
     </nav>
 
-    <main>
+<main style={background ? `background-image: ${background}; background-position: center top;` : ""}>
       <slot />
     </main>
 
     <footer class="site-footer">
-      <div class="footer-brand">
-        <span class="footer-title">Retaguardia</span>
-        <span class="footer-sub label-caps">Latinoamericana</span>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand-script" style="font-size:2.2rem; color:#fff"
+            >Cosmopolitican</span
+          >
+          <span class="label-caps" style="color:#aaa; margin-top:0.25rem"
+            >Tu revista con clase</span
+          >
+        </div>
+        <nav class="footer-links">
+          <a href="/revista">Revista</a>
+          <a href="/quienes-somos">Quiénes somos</a>
+          <a href="/contacto">Contacto</a>
+        </nav>
+        <div class="footer-copy">
+          <span class="label-caps" style="color:#666"
+            >© {new Date().getFullYear()} Cosmopolitican</span
+          >
+        </div>
       </div>
-      <div class="footer-copy label-caps">© {new Date().getFullYear()}</div>
     </footer>
   </body>
 </html>
 
 <style>
+  /* ── Topbar ── */
+  .topbar {
+    background: var(--c-hot);
+    color: #fff;
+    text-align: center;
+    font-family: var(--c-font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-bottom: 2px solid var(--c-black);
+  }
+
   /* ── Nav ── */
   .site-nav {
     display: flex;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--c-border);
+    align-items: stretch;
+    border-bottom: var(--c-border-thick);
     background: var(--c-bg);
     position: sticky;
     top: 0;
@@ -76,23 +121,32 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   }
 
   .nav-brand {
-    font-family: var(--c-font-heading);
-    font-size: 1.5rem;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    color: var(--c-bg);
-    background: var(--c-black);
-    padding: 1rem 2rem;
-    flex-shrink: 0;
     display: flex;
-    align-items: center;
-    border-right: 1px solid var(--c-border);
-    transition: opacity 0.2s;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.6rem 1.5rem;
+    background: var(--c-black);
+    border-right: var(--c-border-thick);
+    flex-shrink: 0;
+    gap: 0.1rem;
+    transition: background 0.2s;
+  }
+  .nav-brand:hover {
+    background: var(--c-hot);
   }
 
-  .nav-brand:hover {
-    opacity: 0.85;
+  .brand-script {
+    font-family: var(--c-font-brand);
+    font-size: 1.4rem;
+    color: #fff;
+    line-height: 1;
+  }
+  .brand-sub {
+    font-family: var(--c-font-display);
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--c-yellow);
+    line-height: 1;
   }
 
   .nav-links {
@@ -108,84 +162,121 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   }
 
   .nav-links a {
-    padding: 1rem 1.5rem;
-    font-family: var(--c-font-body);
-    font-size: 0.82rem;
-    letter-spacing: 0.25em;
+    padding: 0 1.25rem;
+    font-family: var(--c-font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--c-warm);
-    border-right: 1px solid var(--c-border);
+    color: var(--c-black);
     display: flex;
     align-items: center;
+    border-right: 2px solid var(--c-black);
+    border-bottom: 4px solid transparent;
     transition:
-      color 0.2s,
-      border-bottom 0.2s;
-    border-bottom: 2px solid transparent;
+      color 0.15s,
+      border-bottom-color 0.15s,
+      background 0.15s;
   }
 
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--c-warm);
+  .nav-links a:hover {
+    background: var(--c-yellow);
     border-bottom-color: var(--c-black);
+  }
+  .nav-links a.active {
+    color: var(--c-hot);
+    border-bottom-color: var(--c-hot);
+    background: #fff0f6;
+  }
+
+  .nav-cta {
+    margin: auto 1rem auto auto;
+    font-family: var(--c-font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--c-hot);
+    color: #fff;
+    padding: 0.5em 1.2em;
+    border: var(--c-border-thick);
+    box-shadow: var(--c-shadow-pop);
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+    white-space: nowrap;
+  }
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--c-black);
   }
 
   /* ── Main ── */
   main {
     flex: 1;
-    padding: 4rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 3rem 2rem;
+    margin: 0;
     width: 100%;
+    height: 100vh;
     box-sizing: border-box;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
+
+
 
   /* ── Footer ── */
   .site-footer {
-    border-top: 1px solid var(--c-border);
+    border-top: var(--c-border-thick);
     background: var(--c-black);
     color: var(--c-bg);
     padding: 3rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
   }
 
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
   }
 
-  .footer-title {
-    font-family: var(--c-font-heading);
-    font-size: 1.8rem;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1;
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
   }
-
-  .footer-sub,
-  .footer-copy {
-    color: var(--c-muted);
+  .footer-links a {
+    font-family: var(--c-font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #aaa;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: var(--c-hot);
   }
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
     .nav-links {
-      flex-direction: column;
-      width: 100%;
-      border-top: 1px solid var(--c-border);
-    }
-    .nav-links a {
-      border-right: none;
-      border-bottom: 1px solid var(--c-border);
-      justify-content: center;
+      display: none; /* colapsar en mobile con hamburger si aplica */
     }
     .nav-brand {
       width: 100%;
-      justify-content: center;
+      align-items: center;
       border-right: none;
+      border-bottom: var(--c-border-thick);
     }
   }
 </style>

@@ -1,49 +1,69 @@
 ---
-import ConstructLayout from '../layouts/ConstructLayout.astro';
-import { getCollection } from 'astro:content';
-import { CATEGORIES, SECTIONS } from '../consts';
+import ElegantLayout from "@layouts/ElegantLayout.astro";
+import { getCollection } from "astro:content";
+import { CATEGORIES, SECTIONS } from "@consts";
 
-const revistas = await getCollection('revista');
-const sortedRevistas = revistas.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const revistas = await getCollection("revista");
+const sortedRevistas = revistas.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
 const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
 ---
 
-<ConstructLayout title="Revista - Cosmopolitican">
+<ElegantLayout title="Revista - Cosmopolitican">
   <div class="revista-header">
-    <div class="block-header" style="transform: rotate(2deg);">ARCHIVOS & EDICIONES</div>
-    
+    <div class="block-header" style="transform: rotate(var(--c-rotate));">
+      ARCHIVOS & EDICIONES
+    </div>
+
     <div class="filter-container">
       <div class="filter-categories">
-        <button class="filter-btn category-btn active" data-category="all">Todos</button>
-        {categoryKeys.map((key) => (
-          <button class="filter-btn category-btn" data-category={CATEGORIES[key]}>{CATEGORIES[key]}</button>
-        ))}
+        <button class="filter-btn category-btn active" data-category="all"
+          >Todos</button
+        >
+        {
+          categoryKeys.map((key) => (
+            <button
+              class="filter-btn category-btn"
+              data-category={CATEGORIES[key]}
+            >
+              {CATEGORIES[key]}
+            </button>
+          ))
+        }
       </div>
-      
+
       <div class="filter-sections" style="display: none;">
         <!-- Sub-sections will be populated by JS when a category is clicked -->
       </div>
     </div>
 
     <div class="archive-grid">
-      {sortedRevistas.map((post) => (
-        <article 
-          class={`issue-card ${post.data.theme !== 'default' ? post.data.theme : ''}`.trim()}
-          data-category={post.data.category || ''}
-          data-section={post.data.section || ''}
-        >
-          <div class="issue-number">{post.data.issueNumber}</div>
-          <h2>{post.data.title}</h2>
-          <p>{post.data.summary}</p>
-          <a href={`/revista/${post.data.slug || post.id}`} style="text-decoration: none; align-self: flex-start; margin-top: auto; display: inline-block;">
-            <button class="cta-button" style={post.data.customStyles}>{post.data.buttonText}</button>
-          </a>
-        </article>
-      ))}
+      {
+        sortedRevistas.map((post) => (
+          <article
+            class={`issue-card ${post.data.theme !== "default" ? post.data.theme : ""}`.trim()}
+            data-category={post.data.category || ""}
+            data-section={post.data.section || ""}
+          >
+            <div class="issue-number">{post.data.issueNumber}</div>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.summary}</p>
+            <a
+              href={`/revista/${post.data.slug || post.id}`}
+              style="text-decoration: none; align-self: flex-start; margin-top: auto; display: inline-block;"
+            >
+              <button class="cta-button" style={post.data.customStyles}>
+                {post.data.buttonText}
+              </button>
+            </a>
+          </article>
+        ))
+      }
     </div>
   </div>
-</ConstructLayout>
+</ElegantLayout>
 
 <style>
   .revista-header {
@@ -59,7 +79,8 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
     align-items: center;
   }
 
-  .filter-categories, .filter-sections {
+  .filter-categories,
+  .filter-sections {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -69,15 +90,20 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
   .filter-btn {
     background: transparent;
     color: var(--c-black);
-    border: 4px solid var(--c-black);
+    border: var(--c-brutalist-border);
     padding: 0.5rem 1.5rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: var(--c-font-heading);
     font-weight: 700;
     font-size: 1.3rem;
     text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 5px 5px 0 var(--c-black);
+    box-shadow: var(--c-brutalist-shadow);
     transition: all 0.2s ease;
+  }
+
+  :global(.theme-elegant) .filter-btn {
+    box-shadow: none;
+    border-width: 1px;
   }
 
   .filter-btn:hover {
@@ -112,18 +138,20 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
 
   .issue-card {
     background-color: var(--c-bg);
-    border: 6px solid var(--c-black);
+    border: var(--c-brutalist-border);
     padding: 2.5rem;
-    box-shadow: 12px 12px 0 var(--c-black);
+    box-shadow: var(--c-brutalist-shadow);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
     position: relative;
     overflow: hidden;
   }
 
   .issue-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20px;
     right: -20px;
@@ -131,7 +159,11 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
     height: 60px;
     background-color: var(--c-red);
     transform: rotate(45deg);
-    border-bottom: 6px solid var(--c-black);
+    border-bottom: var(--c-brutalist-border);
+  }
+
+  :global(.theme-elegant) .issue-card::before {
+    display: none;
   }
 
   .issue-card:hover {
@@ -142,8 +174,15 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
   .issue-card.featured {
     grid-column: 1 / -1;
     background-color: var(--c-red);
-    box-shadow: 15px 15px 0 var(--c-black);
-    border: 8px solid var(--c-black);
+    box-shadow: var(--c-brutalist-shadow);
+    border: var(--c-brutalist-border);
+  }
+
+  :global(.theme-elegant) .issue-card.featured {
+    background-color: var(--c-bg);
+    color: var(--c-black);
+    box-shadow: none;
+    border-width: 1px;
   }
 
   .issue-card.featured::before {
@@ -165,7 +204,7 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
 
   .issue-number {
     font-size: 4rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: var(--c-font-heading);
     color: transparent;
     -webkit-text-stroke: 2px var(--c-black);
     line-height: 1;
@@ -184,7 +223,8 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
   .issue-card h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    border-bottom: 6px solid currentColor;
+    border-bottom: var(--c-brutalist-border);
+    border-width: 2px;
     padding-bottom: 0.5rem;
     line-height: 1.1;
   }
@@ -206,36 +246,38 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
 </style>
 
 <script define:vars={{ SECTIONS }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const sectionsContainer = document.querySelector('.filter-sections');
-    const issueCards = document.querySelectorAll('.issue-card');
+  document.addEventListener("DOMContentLoaded", () => {
+    const categoryBtns = document.querySelectorAll(".category-btn");
+    const sectionsContainer = document.querySelector(".filter-sections");
+    const issueCards = document.querySelectorAll(".issue-card");
 
-    let currentCategory = 'all';
-    let currentSection = 'all';
+    let currentCategory = "all";
+    let currentSection = "all";
 
     function renderSections(category) {
-      if (category === 'all' || !SECTIONS[category]) {
-        sectionsContainer.style.display = 'none';
+      if (category === "all" || !SECTIONS[category]) {
+        sectionsContainer.style.display = "none";
         return;
       }
-      
-      sectionsContainer.style.display = 'flex';
+
+      sectionsContainer.style.display = "flex";
       sectionsContainer.innerHTML = `<button class="filter-btn section-btn active" data-section="all">Todas</button>`;
-      
-      SECTIONS[category].forEach(sec => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn section-btn';
+
+      SECTIONS[category].forEach((sec) => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn section-btn";
         btn.dataset.section = sec;
         btn.textContent = sec;
         sectionsContainer.appendChild(btn);
       });
 
       // Bind events to new section buttons
-      document.querySelectorAll('.section-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
-          e.target.classList.add('active');
+      document.querySelectorAll(".section-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          document
+            .querySelectorAll(".section-btn")
+            .forEach((b) => b.classList.remove("active"));
+          e.target.classList.add("active");
           currentSection = e.target.dataset.section;
           filterCards();
         });
@@ -243,27 +285,31 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
     }
 
     function filterCards() {
-      issueCards.forEach(card => {
+      issueCards.forEach((card) => {
         const cardCat = card.dataset.category;
         const cardSec = card.dataset.section;
 
-        const categoryMatch = currentCategory === 'all' || cardCat === currentCategory;
-        const sectionMatch = currentSection === 'all' || cardSec === currentSection;
+        const categoryMatch =
+          currentCategory === "all" || cardCat === currentCategory;
+        const sectionMatch =
+          currentSection === "all" || cardSec === currentSection;
 
         if (categoryMatch && sectionMatch) {
-          card.style.display = 'flex';
+          card.style.display = "flex";
         } else {
-          card.style.display = 'none';
+          card.style.display = "none";
         }
       });
     }
 
-    categoryBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
+    categoryBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        document
+          .querySelectorAll(".category-btn")
+          .forEach((b) => b.classList.remove("active"));
+        e.target.classList.add("active");
         currentCategory = e.target.dataset.category;
-        currentSection = 'all';
+        currentSection = "all";
         renderSections(currentCategory);
         filterCards();
       });

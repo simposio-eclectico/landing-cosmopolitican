@@ -1,7 +1,7 @@
 ---
-import BaseHead from "../components/elegant/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import "../styles/elegant.css";
+import BaseHead from "@components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@consts";
+import "@styles/elegant.css";
 
 interface Props {
   title?: string;
@@ -18,11 +18,11 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   </head>
   <body>
     <nav class="site-nav">
-      <a href="/elegant" class="nav-brand">Cosmopolitican</a>
+      <a href="/" class="nav-brand">Cosmopolitican</a>
       <ul class="nav-links">
         <li>
           <a
-            href="/elegant/revista"
+            href="/revista"
             class={Astro.url.pathname.includes("/revista") ? "active" : ""}
           >
             Revista
@@ -30,7 +30,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
         </li>
         <li>
           <a
-            href="/elegant/quienes-somos"
+            href="/quienes-somos"
             class={Astro.url.pathname.includes("/quienes-somos")
               ? "active"
               : ""}
@@ -40,7 +40,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
         </li>
         <li>
           <a
-            href="/elegant/contacto"
+            href="/contacto"
             class={Astro.url.pathname.includes("/contacto") ? "active" : ""}
           >
             Contacto

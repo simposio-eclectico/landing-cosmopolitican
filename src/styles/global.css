@@ -143,7 +143,7 @@ pre {
 	border-radius: 8px;
 }
 
-pre>code {
+pre > code {
 	all: unset;
 }
 

@@ -1,20 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap");
 
 :root {
-	/* Paleta */
-	--c-bg: #faf8f4;
-	--c-black: #1a1714;
-	--c-muted: #8a7f72;
-	--c-warm: #5a4f43;
-	--c-border: #c8bfb0;
+	/* Paleta: Base elegante con toques constructivistas arriesgados */
+	--c-bg: #f4eee2; /* Cream/Parchment con un poco más de fuerza */
+	--c-black: #12100e; /* Un negro más profundo e intenso (muy constructivista) */
+	--c-muted: #6e615a; /* Gris cálido sobrio */
+	--c-warm: #a63a33; /* Terracota oscuro/Rojo cálido para elementos secundarios */
+	--c-border: #12100e; /* Borde oscuro firme de alto contraste */
 
 	/* Tipografía */
-	--c-font-heading: 'Playfair Display', Georgia, serif;
-	--c-font-body: 'EB Garamond', Georgia, serif;
+	--c-font-heading: "Playfair Display", Georgia, serif;
+	--c-font-body: "EB Garamond", Georgia, serif;
 
-	--c-red: #1a1714;
-	--c-brutalist-border: 1px solid var(--c-black);
-	--c-brutalist-shadow: none;
+	/* El acento principal rojo, vibrante pero elegante */
+	--c-red: #d92525;
+
+	/* Estilos de bordes y sombras para simular la fuerza del constructivismo de forma sutil */
+	--c-brutalist-border: 2px solid var(--c-black);
+	--c-brutalist-shadow: 4px 4px 0px var(--c-red);
 	--c-rotate: 0deg;
 	--c-skew: 0deg;
 }

@@ -1,10 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content';
-import ConstructLayout from '../../layouts/ConstructLayout.astro';
+import { getCollection, render } from "astro:content";
+import ElegantLayout from "@layouts/ElegantLayout.astro";
 
 export async function getStaticPaths() {
-  const revistas = await getCollection('revista');
-  return revistas.map(post => ({
+  const revistas = await getCollection("revista");
+  return revistas.map((post) => ({
     params: { slug: post.data.slug || post.id },
     props: { post },
   }));
@@ -14,17 +14,25 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<ConstructLayout title={`${post.data.title} - Cosmopolitican`}>
+<ElegantLayout title={`${post.data.title} - Cosmopolitican`}>
   <div class="article-container">
-    <div class="block-header" style="transform: rotate(-1deg); margin-bottom: 2rem;">{post.data.section.toUpperCase()}</div>
-    
+    <div class="block-header">{post.data.section.toUpperCase()}</div>
+
     <header class="article-header">
       <div class="issue-number">{post.data.issueNumber}</div>
       <h1>{post.data.title}</h1>
       <div class="metadata">
         <span>POR {post.data.author.toUpperCase()}</span>
         <span class="separator">/</span>
-        <span>{post.data.pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        <span
+          >{
+            post.data.pubDate.toLocaleDateString("es-ES", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }</span
+        >
       </div>
     </header>
 
@@ -32,7 +40,7 @@ const { Content } = await render(post);
       <Content />
     </div>
   </div>
-</ConstructLayout>
+</ElegantLayout>
 
 <style>
   .article-container {
@@ -49,7 +57,7 @@ const { Content } = await render(post);
 
   .issue-number {
     font-size: 2rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: "Oswald", sans-serif;
     color: var(--c-red);
     margin-bottom: 1rem;
   }
@@ -62,7 +70,7 @@ const { Content } = await render(post);
   }
 
   .metadata {
-    font-family: 'Oswald', sans-serif;
+    font-family: "Oswald", sans-serif;
     font-size: 1.2rem;
     color: var(--c-black);
   }
@@ -77,10 +85,10 @@ const { Content } = await render(post);
     line-height: 1.6;
   }
 
-  .article-content :global(h1), 
-  .article-content :global(h2), 
+  .article-content :global(h1),
+  .article-content :global(h2),
   .article-content :global(h3) {
-    font-family: 'Oswald', sans-serif;
+    font-family: "Oswald", sans-serif;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -89,15 +97,15 @@ const { Content } = await render(post);
   .article-content :global(h1) {
     font-size: 2.5rem;
   }
-  
+
   .article-content :global(h2) {
     font-size: 2rem;
   }
-  
+
   .article-content :global(p) {
     margin-bottom: 1.5rem;
   }
-  
+
   .article-content :global(a) {
     color: var(--c-red);
     text-decoration: underline;

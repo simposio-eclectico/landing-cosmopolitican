@@ -1,10 +1,14 @@
 ---
-import ConstructLayout from "../layouts/ConstructLayout.astro";
+import ElegantLayout from "@layouts/ElegantLayout.astro";
+import { SITE_TITLE } from "@consts";
 ---
 
-<ConstructLayout title="Quiénes Somos - Cosmopolitican">
+<ElegantLayout title={`Quiénes Somos - ${SITE_TITLE}`}>
   <article class="about-container">
-    <div class="block-header" style="transform: rotate(-1deg);">
+    <div
+      class="block-header"
+      style="transform: rotate(calc(var(--c-rotate) * 0.5));"
+    >
       EL COLECTIVO
     </div>
 
@@ -51,7 +55,7 @@ import ConstructLayout from "../layouts/ConstructLayout.astro";
       </div>
     </div>
   </article>
-</ConstructLayout>
+</ElegantLayout>
 
 <style>
   .about-container {
@@ -83,6 +87,11 @@ import ConstructLayout from "../layouts/ConstructLayout.astro";
     width: 60%;
   }
 
+  :global(.theme-elegant) .thick-divider {
+    height: 2px;
+    width: 100%;
+  }
+
   .dropcap-paragraph::first-letter {
     float: left;
     font-size: 5rem;
@@ -90,7 +99,7 @@ import ConstructLayout from "../layouts/ConstructLayout.astro";
     padding-top: 4px;
     padding-right: 8px;
     padding-left: 3px;
-    font-family: "Oswald", sans-serif;
+    font-family: var(--c-font-heading);
     color: var(--c-red);
     font-weight: bold;
   }
@@ -108,9 +117,15 @@ import ConstructLayout from "../layouts/ConstructLayout.astro";
     padding: 3rem;
     margin: 4rem 0 2rem 0;
     background-color: var(--c-bg);
-    border: 8px solid var(--c-black);
-    box-shadow: 15px 15px 0 var(--c-red);
-    font-family: "Oswald", sans-serif;
+    border: var(--c-brutalist-border);
+    box-shadow: var(--c-brutalist-shadow);
+    font-family: var(--c-font-heading);
+  }
+
+  :global(.theme-elegant) .construct-quote {
+    box-shadow: none;
+    border-width: 1px;
+    background-color: var(--c-bg);
   }
 
   .quote-mark {
@@ -157,7 +172,7 @@ import ConstructLayout from "../layouts/ConstructLayout.astro";
     display: flex;
     align-items: center;
     text-transform: uppercase;
-    font-family: "Oswald", sans-serif;
+    font-family: var(--c-font-heading);
   }
 
   .pillar-list li span {
@@ -192,6 +207,10 @@ import ConstructLayout from "../layouts/ConstructLayout.astro";
     position: absolute;
     bottom: 20px;
     left: 20px;
+  }
+
+  :global(.theme-elegant) .geo-shape-container {
+    display: none;
   }
 
   @media (max-width: 900px) {

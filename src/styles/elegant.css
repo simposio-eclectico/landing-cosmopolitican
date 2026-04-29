@@ -1,28 +1,46 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap");
 
 :root {
-	/* Paleta: Base elegante con toques constructivistas arriesgados */
-	--c-bg: #f4eee2; /* Cream/Parchment con un poco más de fuerza */
-	--c-black: #12100e; /* Un negro más profundo e intenso (muy constructivista) */
-	--c-muted: #6e615a; /* Gris cálido sobrio */
-	--c-warm: #a63a33; /* Terracota oscuro/Rojo cálido para elementos secundarios */
-	--c-border: #12100e; /* Borde oscuro firme de alto contraste */
+	/* ── Paleta pop saturada ── */
+	--c-bg: #ffffff;
+	--c-black: #111111;
+	--c-muted: #555555;
 
-	/* Tipografía */
-	--c-font-heading: "Playfair Display", Georgia, serif;
-	--c-font-body: "EB Garamond", Georgia, serif;
+	/* Acento primario: fuchsia/magenta */
+	--c-hot: #e91e8c;
+	--c-hot-dark: #b5146d;
 
-	/* El acento principal rojo, vibrante pero elegante */
-	--c-red: #d92525;
+	/* Acento secundario: amarillo eléctrico */
+	--c-yellow: #ffe600;
 
-	/* Estilos de bordes y sombras para simular la fuerza del constructivismo de forma sutil */
-	--c-brutalist-border: 2px solid var(--c-black);
-	--c-brutalist-shadow: 4px 4px 0px var(--c-red);
-	--c-rotate: 0deg;
-	--c-skew: 0deg;
+	/* Acento terciario: turquesa */
+	--c-teal: #00c8c8;
+
+	/* Acento cuaternario: verde lima (usar con mesura) */
+	--c-lime: #a8e600;
+
+	/* Bordes */
+	--c-border: #111111;
+
+	/* ── Tipografía ── */
+	--c-font-display: "Anton", "Impact", sans-serif;
+	/* Titulares comprimidos */
+	--c-font-brand: "Pacifico", cursive;
+	/* Logo/marca manuscrito */
+	--c-font-body: "Nunito", "Trebuchet MS", sans-serif;
+
+	/* ── Elementos revista ── */
+	--c-banner-radius: 0px;
+	/* Banners rectangulares duros */
+	--c-pill-radius: 999px;
+	/* Tags/pills redondeados */
+	--c-border-thick: 3px solid var(--c-black);
+	--c-shadow-pop: 4px 4px 0px var(--c-black);
+	/* Sombra dura flat */
+	--c-shadow-hot: 4px 4px 0px var(--c-hot);
 }
 
-/* Reset */
+/* ── Reset ── */
 *,
 *::before,
 *::after {
@@ -31,23 +49,27 @@
 
 body {
 	font-family: var(--c-font-body);
-	font-size: 1.125rem;
-	line-height: 1.7;
+	font-size: 1rem;
+	line-height: 1.6;
 	margin: 0;
 	padding: 0;
 	background-color: var(--c-bg);
 	color: var(--c-black);
 }
 
+/* ── Tipografía ── */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-	font-family: var(--c-font-heading);
-	font-weight: 700;
-	line-height: 1.1;
+	font-family: var(--c-font-display);
+	font-weight: 400;
+	/* Anton no tiene variantes de weight */
+	line-height: 1.0;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
 }
 
 a {
@@ -59,19 +81,159 @@ em {
 	font-style: italic;
 }
 
-/* Utilidades tipográficas reutilizables */
+/* ── Utilidades revista ── */
+
+/* Tag/pill de sección — estilo "EXCLUSIVO", "MODA", etc. */
+.tag-pill {
+	display: inline-block;
+	font-family: var(--c-font-display);
+	font-size: 0.7rem;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	background: var(--c-hot);
+	color: #fff;
+	padding: 0.25em 0.9em;
+	border-radius: var(--c-pill-radius);
+	border: 2px solid var(--c-black);
+}
+
+.tag-pill.yellow {
+	background: var(--c-yellow);
+	color: var(--c-black);
+}
+
+.tag-pill.teal {
+	background: var(--c-teal);
+	color: #fff;
+}
+
+/* Banner de sección — franja de color con título */
+.section-banner {
+	font-family: var(--c-font-display);
+	font-size: clamp(1.2rem, 3vw, 1.8rem);
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	background: var(--c-hot);
+	color: #fff;
+	padding: 0.4em 1.2em;
+	display: inline-block;
+	border: var(--c-border-thick);
+	box-shadow: var(--c-shadow-pop);
+}
+
+.section-banner.yellow {
+	background: var(--c-yellow);
+	color: var(--c-black);
+}
+
+.section-banner.teal {
+	background: var(--c-teal);
+	color: #fff;
+}
+
+/* Titular estilo portada */
+.cover-headline {
+	font-family: var(--c-font-display);
+	font-size: clamp(3rem, 10vw, 7rem);
+	line-height: 0.92;
+	text-transform: uppercase;
+	letter-spacing: -0.01em;
+}
+
+.cover-headline .accent {
+	color: var(--c-hot);
+	display: block;
+}
+
+/* Número grande estilo "17 TIPS" */
+.big-number {
+	font-family: var(--c-font-display);
+	font-size: clamp(4rem, 15vw, 10rem);
+	line-height: 1;
+	color: var(--c-hot);
+	-webkit-text-stroke: 2px var(--c-black);
+}
+
+/* Separador estrellita */
+.star-divider {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 1.5rem 0;
+	color: var(--c-hot);
+	font-size: 1.1rem;
+}
+
+.star-divider::before,
+.star-divider::after {
+	content: "★ ★ ★";
+	letter-spacing: 0.3em;
+	color: var(--c-yellow);
+}
+
+/* Caja de "dato exclusivo" con borde de color */
+.exclusive-box {
+	border: var(--c-border-thick);
+	border-left: 6px solid var(--c-hot);
+	padding: 1rem 1.25rem;
+	background: #fff9f0;
+	box-shadow: var(--c-shadow-pop);
+	position: relative;
+}
+
+.exclusive-box::before {
+	content: "★ EXCLUSIVO";
+	font-family: var(--c-font-display);
+	font-size: 0.65rem;
+	letter-spacing: 0.2em;
+	color: var(--c-hot);
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+/* Imagen con borde tipo polaroid */
+.polaroid {
+	border: var(--c-border-thick);
+	box-shadow: var(--c-shadow-pop);
+	display: inline-block;
+	background: #fff;
+	padding: 0.5rem 0.5rem 2rem;
+}
+
+.polaroid img {
+	display: block;
+	width: 100%;
+}
+
+/* Label caps — versión pop */
 .label-caps {
-	font-family: var(--c-font-body);
-	font-size: 0.78rem;
-	letter-spacing: 0.35em;
+	font-family: var(--c-font-display);
+	font-size: 0.72rem;
+	letter-spacing: 0.25em;
 	text-transform: uppercase;
 	color: var(--c-muted);
 }
 
+/* Divider — línea con corazón */
 .divider-thin {
-	width: 80px;
-	height: 1px;
-	background: var(--c-border);
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 	border: none;
 	margin: 2rem 0;
+	color: var(--c-hot);
+}
+
+.divider-thin::before {
+	content: "";
+	flex: 1;
+	height: 2px;
+	background: var(--c-black);
+}
+
+.divider-thin::after {
+	content: "";
+	flex: 1;
+	height: 2px;
+	background: var(--c-black);
 }

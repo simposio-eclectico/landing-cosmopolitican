@@ -29,7 +29,7 @@ const {
     <nav class="site-nav">
       <!-- Logo/marca con fuente script -->
       <a href="/" class="nav-brand">
-        <span class="brand-script">Cosmopolitican</span>
+        <img src="/logo.png" alt="Cosmopolitican" class="brand-logo" />
         <span class="brand-sub">TU REVISTA CON CLASE</span>
       </a>
 
@@ -73,9 +73,7 @@ const {
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <span class="brand-script" style="font-size:2.2rem; color:#fff"
-            >Cosmopolitican</span
-          >
+          <img src="/logo.png" alt="Cosmopolitican" class="brand-logo" />
           <span class="label-caps" style="color:#aaa; margin-top:0.25rem"
             >Tu revista con clase</span
           >
@@ -135,6 +133,13 @@ const {
     background: var(--c-hot);
   }
 
+  .brand-logo {
+    height: auto;
+    max-height: 1.8rem;
+    width: auto;
+    display: block;
+  }
+
   .brand-script {
     font-family: var(--c-font-brand);
     font-size: 1.4rem;
@@ -147,6 +152,7 @@ const {
     letter-spacing: 0.35em;
     color: var(--c-yellow);
     line-height: 1;
+    margin-left: 3px;
   }
 
   .nav-links {

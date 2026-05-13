@@ -16,7 +16,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
 	title = SITE_TITLE,
 	description = SITE_DESCRIPTION,
-	image = "/logo1.jpeg",
+	image = "/og-image.jpeg",
 } = Astro.props;
 
 const imageSrc = typeof image === "string" ? image : image.src;

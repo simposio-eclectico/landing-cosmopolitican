@@ -1,5 +1,5 @@
-export const SITE_TITLE = "Cosmopolitican";
-export const SITE_DESCRIPTION = "Tu revista con clase";
+export const SITE_TITLE = "Cosmopolitican | La Revista Digital con Clase y Estilo";
+export const SITE_DESCRIPTION = "Descubre Cosmopolitican, la revista digital definitiva para la dama y el varón. Moda, cultura, tendencias y estilo de vida con un toque de distinción y clase.";
 export const SHOW_UNDER_CONSTRUCTION = true;
 
 export const CATEGORIES = {

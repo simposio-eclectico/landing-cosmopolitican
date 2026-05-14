@@ -1,6 +1,6 @@
 ---
 import BaseHead from "@components/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@consts";
+import { SITE_SLOGAN, SITE_TITLE, SITE_DESCRIPTION, SITE_NAME } from "@consts";
 import "@styles/elegant.css";
 
 interface Props {
@@ -29,8 +29,8 @@ const {
     <nav class="site-nav">
       <!-- Logo/marca con fuente script -->
       <a href="/" class="nav-brand">
-        <img src="/logo.png" alt="Cosmopolitican" class="brand-logo" />
-        <span class="brand-sub">TU REVISTA CON CLASE</span>
+        <img src="/logo.png" alt={SITE_NAME} class="brand-logo" />
+        <span class="brand-sub">{SITE_SLOGAN}</span>
       </a>
 
       <ul class="nav-links">
@@ -73,10 +73,9 @@ const {
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="/logo.png" alt="Cosmopolitican" class="brand-logo" />
+          <img src="/logo.png" alt={SITE_NAME} class="brand-logo" />
           <span class="label-caps" style="color:#aaa; margin-top:0.25rem"
-            >Tu revista con clase</span
-          >
+            >{SITE_SLOGAN}</span>
         </div>
         <nav class="footer-links">
           <a href="/revista">Revista</a>
@@ -85,7 +84,7 @@ const {
         </nav>
         <div class="footer-copy">
           <span class="label-caps" style="color:#666"
-            >© {new Date().getFullYear()} Cosmopolitican</span
+            >© {new Date().getFullYear()} {SITE_NAME}</span
           >
         </div>
       </div>
@@ -153,6 +152,7 @@ const {
     color: var(--c-yellow);
     line-height: 1;
     margin-left: 3px;
+    text-transform: uppercase;
   }
 
   .nav-links {

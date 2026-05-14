@@ -1,6 +1,6 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
-import { SITE_TITLE } from "@consts";
+import { SITE_MAIL, SITE_TITLE } from "@consts";
 ---
 
 <ElegantLayout title={`Contacto - ${SITE_TITLE}`}>
@@ -77,8 +77,8 @@ import { SITE_TITLE } from "@consts";
         <hr class="divider-thin" />
 
         <p class="field-label">Correo</p>
-        <a href="mailto:org@cosmopolitican.cl" class="info-email">
-          org@cosmopolitican.cl
+        <a href={`mailto:${SITE_MAIL}`} class="info-email">
+          {SITE_MAIL}
         </a>
 
         <div class="ornament-bg" aria-hidden="true">C</div>

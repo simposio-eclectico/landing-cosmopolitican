@@ -5,7 +5,7 @@ import { CATEGORIES, SECTIONS } from "@consts";
 
 const revistas = await getCollection("revista");
 const sortedRevistas = revistas.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
@@ -46,6 +46,9 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
             class={`issue-card ${post.data.theme !== "default" ? post.data.theme : ""}`.trim()}
             data-category={post.data.category || ""}
             data-section={post.data.section || ""}
+            data-issue-slug={post.data.slug || post.id}
+            data-issue-title={post.data.title}
+            data-issue-number={post.data.issueNumber}
           >
             <div class="issue-number">{post.data.issueNumber}</div>
             <h2>{post.data.title}</h2>
@@ -313,6 +316,24 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
         renderSections(currentCategory);
         filterCards();
       });
+    });
+
+    // Intercept card clicks to open the issue menu drawer
+    issueCards.forEach((card) => {
+      const link = card.querySelector("a");
+      if (link) {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const slug = card.dataset.issueSlug;
+          const title = card.dataset.issueTitle;
+          const number = card.dataset.issueNumber;
+          if (window.openRevistaDrawer) {
+            window.openRevistaDrawer(slug, title, number);
+          } else {
+            window.location.href = link.href;
+          }
+        });
+      }
     });
   });
 </script>

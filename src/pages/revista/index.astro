@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+
+const revistas = await getCollection("revista");
+const sortedRevistas = revistas.sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const latestRevista = sortedRevistas[0];
+const slug = latestRevista
+	? latestRevista.data.slug || latestRevista.id
+	: "numeros";
+
+return Astro.redirect(`/revista/${slug}`, 307);
+---

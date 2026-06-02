@@ -67,7 +67,7 @@ h6 {
 	font-family: var(--c-font-display);
 	font-weight: 400;
 	/* Anton no tiene variantes de weight */
-	line-height: 1.0;
+	line-height: 1;
 	letter-spacing: 0.02em;
 	text-transform: uppercase;
 }

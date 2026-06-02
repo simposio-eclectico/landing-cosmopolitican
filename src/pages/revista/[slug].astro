@@ -4,11 +4,11 @@ import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { SITE_NAME } from "@consts";
 
 export async function getStaticPaths() {
-  const revistas = await getCollection("revista");
-  return revistas.map((post) => ({
-    params: { slug: post.data.slug || post.id },
-    props: { post },
-  }));
+	const revistas = await getCollection("revista");
+	return revistas.map((post) => ({
+		params: { slug: post.data.slug || post.id },
+		props: { post },
+	}));
 }
 
 const { post } = Astro.props;

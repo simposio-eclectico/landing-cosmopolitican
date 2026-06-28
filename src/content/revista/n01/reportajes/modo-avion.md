@@ -1,12 +1,13 @@
 ---
 title: "Organizaciones y movimientos sociales en modo avión"
 author: "Cosmopolitican"
-pubDate: 2026-06-02
+pubDate: 2026-05-01
 category: "Contenido narrativo"
-section: "Edición Principal"
-tags: ["manifiesto", "política", "movimientos"]
+section: "Reportajes"
+sectionOrder: 1
+tags: ["manifiesto", "política", "movimientos", "cooptación"]
 summary: "Análisis crítico sobre la instrumentalización de las organizaciones y movimientos sociales durante el gobierno de Boric (2022-2026) y sus implicancias políticas."
-issueNumber: "Nº 02"
+issueNumber: "Nº 01"
 theme: "featured"
 buttonText: "LEER AHORA"
 slug: "modo-avion"

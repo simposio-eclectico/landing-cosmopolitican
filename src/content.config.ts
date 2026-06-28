@@ -27,6 +27,8 @@ const revista = defineCollection({
 			pubDate: z.coerce.date(),
 			category: z.string().optional(),
 			section: z.string().default("Edición"),
+			sectionOrder: z.number().optional(),
+			menuLabel: z.string().optional(),
 			tags: z.array(z.string()).default([]),
 			summary: z.string(),
 			slug: z.string().optional(),

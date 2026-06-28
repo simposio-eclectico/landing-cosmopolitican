@@ -1,12 +1,13 @@
 ---
 title: "La dieta del per cápita: marketing, hashtags y el arte de administrar la escasez"
 author: "Ana Tania Toro"
-pubDate: 2026-06-10
+pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Opinión"
-tags: ["columna", "salud", "política", "aps"]
+sectionOrder: 1
+tags: ["columna", "salud", "política", "aps", "cooptación"]
 summary: "Columna sobre el congelamiento del per cápita en la APS, las movilizaciones de la CONFUSAM y la brecha entre el discurso progresista del gobierno Boric y el financiamiento real de la atención primaria."
-issueNumber: "Nº 02"
+issueNumber: "Nº 01"
 theme: "default"
 buttonText: "LEER COLUMNA"
 slug: "dieta-per-capita"

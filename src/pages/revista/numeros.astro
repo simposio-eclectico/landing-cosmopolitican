@@ -328,7 +328,7 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
           const title = card.dataset.issueTitle;
           const number = card.dataset.issueNumber;
           if (window.openRevistaDrawer) {
-            window.openRevistaDrawer(slug, title, number);
+            window.openRevistaDrawer();
           } else {
             window.location.href = link.href;
           }

@@ -1,12 +1,13 @@
 ---
 title: "La deuda que nos enseñaron a deber"
 author: "Cosmopolitican"
-pubDate: 2026-06-20
+pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Reportajes"
-tags: ["reportaje", "educación", "cae", "deuda", "política"]
+sectionOrder: 2
+tags: ["reportaje", "educación", "cae", "deuda", "política", "cooptación"]
 summary: "Reportaje sobre el CAE como trampa financiera generacional: origen en la Concertación, negocio bancario, límites del movimiento estudiantil de 2011 y los embargos de la TGR en 2026."
-issueNumber: "Nº 03"
+issueNumber: "Nº 01"
 theme: "featured"
 buttonText: "LEER AHORA"
 slug: "deuda-que-nos-ensenaron-a-deber"

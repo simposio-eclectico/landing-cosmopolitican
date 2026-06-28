@@ -1,6 +1,13 @@
 ---
 import BaseHead from "@components/BaseHead.astro";
-import { SITE_SLOGAN, SITE_TITLE, SITE_DESCRIPTION, SITE_NAME } from "@consts";
+import {
+  SITE_SLOGAN,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  CURRENT_ISSUE,
+} from "@consts";
+import { buildDrawerMenu, getLeadArticle } from "@lib/revistaMenu";
 import "@styles/elegant.css";
 import { getCollection } from "astro:content";
 
@@ -16,15 +23,9 @@ const {
 } = Astro.props;
 
 const revistas = await getCollection("revista");
-const sortedRevistas = revistas.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-const latestRevista = sortedRevistas[0];
-const latestSlug = latestRevista
-  ? latestRevista.data.slug || latestRevista.id
-  : "";
-const latestTitle = latestRevista ? latestRevista.data.title : "";
-const latestNumber = latestRevista ? latestRevista.data.issueNumber : "";
+const leadArticle = getLeadArticle(revistas);
+const leadSlug = leadArticle ? leadArticle.data.slug || leadArticle.id : "";
+const drawerMenuItems = buildDrawerMenu(revistas);
 ---
 
 <!doctype html>
@@ -123,59 +124,49 @@ const latestNumber = latestRevista ? latestRevista.data.issueNumber : "";
             >&times;</button
           >
           <div class="drawer-header">
-            <span class="drawer-issue-number" id="drawer-issue-number"
-              >Nº 02</span
-            >
+            <span class="drawer-issue-number" id="drawer-issue-number">
+              {CURRENT_ISSUE.number}
+            </span>
             <h2 class="drawer-issue-title" id="drawer-issue-title">
-              MODO AVIÓN
+              {CURRENT_ISSUE.title}
             </h2>
           </div>
           <nav class="drawer-menu">
-            <div class="menu-section">
-              <a
-                href="#"
-                id="drawer-reportage-link"
-                class="menu-link main-link"
-              >
-                REPORTAJE
-              </a>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-sub-link">
-                ENTREVISTA A ..........
-              </button>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-sub-link">
-                COLUMNA DE ....
-              </button>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-sub-link">
-                COLUMNA DE ....
-              </button>
-            </div>
-            <div class="menu-section">
-              <span class="menu-category">LADO B</span>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-sub-link">
-                ENTREVISTA A ..........
-              </button>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-link">
-                SALDO INSUFICIENTE
-              </button>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-link">
-                11 ORGANIZATE ENTONCES
-              </button>
-            </div>
-            <div class="menu-section">
-              <button class="menu-link placeholder-link"> HOROSCOPO </button>
-            </div>
+            {
+              drawerMenuItems.map((item) => {
+                if (item.type === "heading") {
+                  return (
+                    <div class="menu-section">
+                      <span class="menu-category">{item.label}</span>
+                    </div>
+                  );
+                }
+
+                if (item.type === "article") {
+                  return (
+                    <div class="menu-section">
+                      <a
+                        href={item.href}
+                        class={`menu-link ${item.style === "main" ? "main-link" : "sub-link"}`.trim()}
+                      >
+                        {item.label}
+                      </a>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div class="menu-section">
+                    <button
+                      type="button"
+                      class={`menu-link placeholder-link ${item.style === "sub" ? "placeholder-sub-link" : ""}`.trim()}
+                    >
+                      {item.label}
+                    </button>
+                  </div>
+                );
+              })
+            }
           </nav>
         </div>
       </div>
@@ -186,32 +177,24 @@ const latestNumber = latestRevista ? latestRevista.data.issueNumber : "";
       Sección tentativa - Próximamente en la edición impresa.
     </div>
 
-    <script define:vars={{ latestSlug, latestTitle, latestNumber }}>
+    <script define:vars={{ leadSlug, issueNumber: CURRENT_ISSUE.number, issueTitle: CURRENT_ISSUE.title }}>
       document.addEventListener("DOMContentLoaded", () => {
         const drawer = document.getElementById("revista-drawer");
         const closeBtn = document.getElementById("close-drawer");
         const toast = document.getElementById("brutalist-toast");
 
-        const issueNumEl = document.getElementById("drawer-issue-number");
-        const issueTitleEl = document.getElementById("drawer-issue-title");
-        const reportageLink = document.getElementById("drawer-reportage-link");
-
-        function openDrawer(slug, title, number) {
-          if (!slug) return;
-          issueNumEl.textContent = number;
-          issueTitleEl.textContent = title;
-          reportageLink.href = `/revista/${slug}`;
+        function openDrawer() {
+          if (!leadSlug) return;
 
           drawer.classList.add("active");
-          document.body.style.overflow = "hidden"; // Prevent body scroll
+          document.body.style.overflow = "hidden";
         }
 
         function closeDrawer() {
           drawer.classList.remove("active");
-          document.body.style.overflow = ""; // Restore body scroll
+          document.body.style.overflow = "";
         }
 
-        // Expose open function to window so other pages can use it
         window.openRevistaDrawer = openDrawer;
 
         closeBtn.addEventListener("click", closeDrawer);
@@ -221,29 +204,21 @@ const latestNumber = latestRevista ? latestRevista.data.issueNumber : "";
           }
         });
 
-        // Setup triggers in layout
         const topbar = document.getElementById("topbar-announcement");
         if (topbar) {
-          topbar.addEventListener("click", () => {
-            openDrawer(latestSlug, latestTitle, latestNumber);
-          });
+          topbar.addEventListener("click", openDrawer);
         }
 
         const navBtn = document.getElementById("nav-latest-issue-btn");
         if (navBtn) {
-          navBtn.addEventListener("click", () => {
-            openDrawer(latestSlug, latestTitle, latestNumber);
-          });
+          navBtn.addEventListener("click", openDrawer);
         }
 
         const footerBtn = document.getElementById("footer-latest-issue-btn");
         if (footerBtn) {
-          footerBtn.addEventListener("click", () => {
-            openDrawer(latestSlug, latestTitle, latestNumber);
-          });
+          footerBtn.addEventListener("click", openDrawer);
         }
 
-        // Setup placeholder clicks to show brutalist toast
         const placeholders = drawer.querySelectorAll(
           ".placeholder-link, .placeholder-sub-link",
         );
@@ -631,6 +606,18 @@ const latestNumber = latestRevista ? latestRevista.data.issueNumber : "";
   }
 
   .menu-link.main-link:hover {
+    color: var(--c-hot);
+    transform: translateX(5px);
+  }
+
+  .menu-link.sub-link {
+    font-size: 1.4rem;
+    font-weight: normal;
+    padding-left: 1.5rem;
+    text-decoration: none;
+  }
+
+  .menu-link.sub-link:hover {
     color: var(--c-hot);
     transform: translateX(5px);
   }

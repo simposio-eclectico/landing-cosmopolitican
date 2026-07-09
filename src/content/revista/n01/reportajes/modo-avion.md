@@ -4,16 +4,14 @@ author: "Cosmopolitican"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Reportajes"
-sectionOrder: 1
 tags: ["manifiesto", "política", "movimientos", "cooptación"]
 summary: "Análisis crítico sobre la instrumentalización de las organizaciones y movimientos sociales durante el gobierno de Boric (2022-2026) y sus implicancias políticas."
+image: "/revista/imagenes/modo-avion/marcha-afps.jpg"
+imageAlt: "Marcha contra las AFPs en Santiago"
 issueNumber: "Nº 01"
 theme: "featured"
-buttonText: "LEER AHORA"
 slug: "modo-avion"
 ---
-
-**Organizaciones y movimientos sociales en modo avión**
 
 **El caso Boric (2022-2026)**
 

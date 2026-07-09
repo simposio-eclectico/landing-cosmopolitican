@@ -4,16 +4,14 @@ author: "Cosmopolitican"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Reportajes"
-sectionOrder: 2
 tags: ["reportaje", "educación", "cae", "deuda", "política", "cooptación"]
 summary: "Reportaje sobre el CAE como trampa financiera generacional: origen en la Concertación, negocio bancario, límites del movimiento estudiantil de 2011 y los embargos de la TGR en 2026."
+image: "/revista/imagenes/deuda-cae/paro-estudiantes-cae.jpg"
+imageAlt: "Estudiantes en paro: «Pa' morir de viejos, no de endeudados»"
 issueNumber: "Nº 01"
 theme: "featured"
-buttonText: "LEER AHORA"
 slug: "deuda-que-nos-ensenaron-a-deber"
 ---
-
-**La deuda que nos enseñaron a deber**
 
 **El CAE, la banca y el movimiento estudiantil que nunca llegó a ser**
 

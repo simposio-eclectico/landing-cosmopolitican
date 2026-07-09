@@ -1,7 +1,8 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { getCollection } from "astro:content";
-import { CATEGORIES, SECTIONS } from "@consts";
+import { CATEGORIES } from "@consts";
+import { getSectionsByCategory } from "@lib/revistaMenu";
 
 const revistas = await getCollection("revista");
 const sortedRevistas = revistas.sort(
@@ -9,6 +10,7 @@ const sortedRevistas = revistas.sort(
 );
 
 const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
+const sectionsByCategory = getSectionsByCategory(revistas);
 ---
 
 <ElegantLayout title="Revista - Cosmopolitican">
@@ -50,17 +52,27 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
             data-issue-title={post.data.title}
             data-issue-number={post.data.issueNumber}
           >
-            <div class="issue-number">{post.data.issueNumber}</div>
-            <h2>{post.data.title}</h2>
-            <p>{post.data.summary}</p>
             <a
               href={`/revista/${post.data.slug || post.id}`}
-              style="text-decoration: none; align-self: flex-start; margin-top: auto; display: inline-block;"
+              class="issue-link"
             >
-              <button class="cta-button" style={post.data.customStyles}>
-                {post.data.buttonText}
-              </button>
+              <h2>{post.data.title}</h2>
             </a>
+            <div class="issue-excerpt">
+              {
+                post.data.image && (
+                  <img
+                    src={post.data.image}
+                    alt={post.data.imageAlt ?? post.data.title}
+                    class="issue-image"
+                    loading="lazy"
+                    width="140"
+                    height="140"
+                  />
+                )
+              }
+              <p>{post.data.summary}</p>
+            </div>
           </article>
         ))
       }
@@ -93,14 +105,14 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
   .filter-btn {
     background: transparent;
     color: var(--c-black);
-    border: var(--c-brutalist-border);
+    border: var(--c-border-thick);
     padding: 0.5rem 1.5rem;
-    font-family: var(--c-font-heading);
+    font-family: var(--c-font-display);
     font-weight: 700;
     font-size: 1.3rem;
     text-transform: uppercase;
     cursor: pointer;
-    box-shadow: var(--c-brutalist-shadow);
+    box-shadow: var(--c-shadow-pop);
     transition: all 0.2s ease;
   }
 
@@ -141,9 +153,9 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
 
   .issue-card {
     background-color: var(--c-bg);
-    border: var(--c-brutalist-border);
+    border: var(--c-border-thick);
     padding: 2.5rem;
-    box-shadow: var(--c-brutalist-shadow);
+    box-shadow: var(--c-shadow-pop);
     display: flex;
     flex-direction: column;
     transition:
@@ -153,32 +165,24 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
     overflow: hidden;
   }
 
-  .issue-card::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--c-red);
-    transform: rotate(45deg);
-    border-bottom: var(--c-brutalist-border);
-  }
-
   :global(.theme-elegant) .issue-card::before {
     display: none;
   }
 
   .issue-card:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 16px 16px 0 var(--c-red);
+    box-shadow: 16px 16px 0 var(--c-hot);
+  }
+
+  .issue-card:hover a h2 {
+    transition: .125s color;
+    color: var(--c-hot);
   }
 
   .issue-card.featured {
     grid-column: 1 / -1;
-    background-color: var(--c-red);
-    box-shadow: var(--c-brutalist-shadow);
-    border: var(--c-brutalist-border);
+    box-shadow: var(--c-shadow-pop);
+    border: var(--c-border-thick);
   }
 
   :global(.theme-elegant) .issue-card.featured {
@@ -189,44 +193,32 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
   }
 
   .issue-card.featured::before {
-    background-color: var(--c-bg);
-    width: 100px;
-    height: 100px;
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--c-hot);
+    transform: rotate(45deg);
+    border-bottom: var(--c-border-thick);
   }
 
   .issue-card.dark {
     background-color: var(--c-black);
     color: var(--c-bg);
-    border-color: var(--c-red);
-    box-shadow: 12px 12px 0 var(--c-red);
+    border-color: var(--c-hot);
+    box-shadow: 12px 12px 0 var(--c-hot);
   }
 
   .issue-card.dark::before {
     background-color: var(--c-bg);
   }
 
-  .issue-number {
-    font-size: 4rem;
-    font-family: var(--c-font-heading);
-    color: transparent;
-    -webkit-text-stroke: 2px var(--c-black);
-    line-height: 1;
-    margin-bottom: 1rem;
-    letter-spacing: -0.05em;
-  }
-
-  .issue-card.featured .issue-number {
-    font-size: 6rem;
-  }
-
-  .issue-card.dark .issue-number {
-    -webkit-text-stroke: 2px var(--c-bg);
-  }
-
   .issue-card h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    border-bottom: var(--c-brutalist-border);
+    border-bottom: var(--c-border-thick);
     border-width: 2px;
     padding-bottom: 0.5rem;
     line-height: 1.1;
@@ -236,19 +228,50 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
     font-size: 4rem;
   }
 
-  .issue-card p {
+  .issue-excerpt {
+    display: flex;
+    gap: 1.25rem;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .issue-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: var(--c-border-thick);
+    box-shadow: var(--c-shadow-pop);
+    flex-shrink: 0;
+  }
+
+  :global(.theme-elegant) .issue-image {
+    box-shadow: none;
+    border-width: 1px;
+  }
+
+  .issue-excerpt p {
     flex: 1;
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin: 0;
+  }
+
+  .issue-card.featured .issue-image {
+    width: 200px;
+    height: 200px;
   }
 
   .issue-card .cta-button {
     align-self: flex-start;
     margin-top: auto;
   }
+
+  .issue-link {
+    transition: .125s color;
+    text-decoration: none; align-self: flex-start; margin-top: auto; display: inline-block;
+  }
 </style>
 
-<script define:vars={{ SECTIONS }}>
+<script define:vars={{ sectionsByCategory }}>
   document.addEventListener("DOMContentLoaded", () => {
     const categoryBtns = document.querySelectorAll(".category-btn");
     const sectionsContainer = document.querySelector(".filter-sections");
@@ -258,7 +281,9 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
     let currentSection = "all";
 
     function renderSections(category) {
-      if (category === "all" || !SECTIONS[category]) {
+      const sections = sectionsByCategory[category];
+
+      if (category === "all" || !sections?.length) {
         sectionsContainer.style.display = "none";
         return;
       }
@@ -266,7 +291,7 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
       sectionsContainer.style.display = "flex";
       sectionsContainer.innerHTML = `<button class="filter-btn section-btn active" data-section="all">Todas</button>`;
 
-      SECTIONS[category].forEach((sec) => {
+      sections.forEach((sec) => {
         const btn = document.createElement("button");
         btn.className = "filter-btn section-btn";
         btn.dataset.section = sec;
@@ -316,24 +341,6 @@ const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
         renderSections(currentCategory);
         filterCards();
       });
-    });
-
-    // Intercept card clicks to open the issue menu drawer
-    issueCards.forEach((card) => {
-      const link = card.querySelector("a");
-      if (link) {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          const slug = card.dataset.issueSlug;
-          const title = card.dataset.issueTitle;
-          const number = card.dataset.issueNumber;
-          if (window.openRevistaDrawer) {
-            window.openRevistaDrawer();
-          } else {
-            window.location.href = link.href;
-          }
-        });
-      }
     });
   });
 </script>

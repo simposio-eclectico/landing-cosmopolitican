@@ -38,6 +38,9 @@
 	--c-shadow-pop: 4px 4px 0px var(--c-black);
 	/* Sombra dura flat */
 	--c-shadow-hot: 4px 4px 0px var(--c-hot);
+
+	/* Utilidades decorativas */
+	--c-rotate: -2deg;
 }
 
 /* ── Reset ── */

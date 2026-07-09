@@ -4,16 +4,14 @@ author: "Ana Tania Toro"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Opinión"
-sectionOrder: 1
 tags: ["columna", "salud", "política", "aps", "cooptación"]
 summary: "Columna sobre el congelamiento del per cápita en la APS, las movilizaciones de la CONFUSAM y la brecha entre el discurso progresista del gobierno Boric y el financiamiento real de la atención primaria."
+image: "/revista/imagenes/dieta-per-capita/suenos-de-micro.png"
+imageAlt: "Madre e hijo durmiendo en el metro de Santiago"
 issueNumber: "Nº 01"
-theme: "default"
-buttonText: "LEER COLUMNA"
+theme: "featured"
 slug: "dieta-per-capita"
 ---
-
-**La Dieta del Per Cápita: Marketing, Hashtags y el Arte de Administrar la Escasez**
 
 En Chile, la salud primaria es como esa relación tóxica que te promete el cielo mientras te revisa el saldo de la Cuenta RUT, pero sin el periodo de la luna de miel. Tras las movilizaciones de la CONFUSAM a fines de 2025, producto del congelamiento del pér capita en el presupuesto 2026 y recorte de programas, ha quedado claro que el enfoque de derechos del Gobierno del "progresista" Boric es, en realidad, un derecho y con suerte, al pataleo; porque a la hora de soltar los fondos, la billetera fiscal sufre de una parálisis severa que ni el mejor kinesiólogue del sistema público podría rehabilitar.
 

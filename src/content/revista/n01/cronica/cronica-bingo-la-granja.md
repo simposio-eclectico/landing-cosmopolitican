@@ -8,7 +8,6 @@ tags: ["cultura", "cumbia", "bolero", "bingo"]
 summary: "Recién salida de una operación, curcuma recorre Santiago para cantar en una picada centenaria y luego en un bingo solidario."
 issueNumber: "Nº 01"
 theme: "featured"
-buttonText: "LEER AHORA"
 slug: "la-cumbia-siempre-gana"
 ---
 

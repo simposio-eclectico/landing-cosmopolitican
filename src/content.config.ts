@@ -35,7 +35,6 @@ const revista = defineCollection({
 			slug: z.string().optional(),
 			issueNumber: z.string(),
 			theme: z.enum(["default", "featured", "dark"]).default("default"),
-			buttonText: z.string().default("LEER AHORA"),
 			customStyles: z.string().optional(),
 		}),
 });

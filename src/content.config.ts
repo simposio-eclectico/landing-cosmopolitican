@@ -18,6 +18,11 @@ const blog = defineCollection({
 		}),
 });
 
+const transcriptionFragmentSchema = z.object({
+	time: z.string(),
+	text: z.string(),
+});
+
 const revista = defineCollection({
 	loader: glob({ base: "./src/content/revista", pattern: "**/*.{md,mdx}" }),
 	schema: () =>
@@ -35,6 +40,12 @@ const revista = defineCollection({
 			slug: z.string().optional(),
 			issueNumber: z.string(),
 			theme: z.enum(["default", "featured", "dark"]).default("default"),
+			format: z.enum(["article", "video"]).default("article"),
+			duration: z.string().optional(),
+			videoUrl: z.string().optional(),
+			transcriptionFragments: z
+				.array(transcriptionFragmentSchema)
+				.default([]),
 			customStyles: z.string().optional(),
 		}),
 });

@@ -1,0 +1,114 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	articles: CollectionEntry<"revista">[];
+	heading?: string;
+}
+
+const { articles, heading = "Más artículos que te pueden interesar" } = Astro.props;
+---
+
+{
+	articles.length > 0 && (
+		<section class="relacionados">
+			<h2 class="relacionados__titulo">{heading}</h2>
+			<div class="relacionados__grid">
+				{articles.map((article) => {
+					const href = `/revista/${article.data.slug ?? article.id}`;
+					return (
+						<article class="relacionados__card">
+							<a href={href} class="relacionados__link">
+								{article.data.image && (
+									<img
+										src={article.data.image}
+										alt={article.data.imageAlt ?? article.data.title}
+										class="relacionados__image"
+										loading="lazy"
+										width="320"
+										height="200"
+									/>
+								)}
+								<div class="relacionados__body">
+									<p class="relacionados__section">{article.data.section}</p>
+									<h3 class="relacionados__card-title">{article.data.title}</h3>
+								</div>
+							</a>
+						</article>
+					);
+				})}
+			</div>
+		</section>
+	)
+}
+
+<style>
+	.relacionados {
+		margin-top: 4rem;
+		padding-top: 3rem;
+		border-top: 1px solid var(--color-separador);
+	}
+
+	.relacionados__titulo {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-gris-txt);
+		margin-bottom: 1.5rem;
+	}
+
+	.relacionados__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--gap-cards);
+	}
+
+	.relacionados__link {
+		display: block;
+	}
+
+	.relacionados__image {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		display: block;
+	}
+
+	.relacionados__body {
+		margin-top: 10px;
+	}
+
+	.relacionados__section {
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--color-magenta);
+		margin: 0 0 6px;
+	}
+
+	.relacionados__card-title {
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 1.3;
+		color: var(--color-magenta);
+		transition: color 0.15s ease;
+	}
+
+	.relacionados__link:hover .relacionados__card-title {
+		color: var(--color-magenta-hover);
+	}
+
+	@media (max-width: 1024px) {
+		.relacionados__grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.relacionados__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

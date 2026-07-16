@@ -1,0 +1,135 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	article: CollectionEntry<"revista">;
+}
+
+const { article } = Astro.props;
+const { title, section, summary, image, imageAlt } = article.data;
+const href = `/revista/${article.data.slug ?? article.id}`;
+const eyebrow = section.toUpperCase();
+---
+
+<section class="hero-especial">
+	<div class="hero-especial__imagen">
+		{
+			image ? (
+				<img
+					src={image}
+					alt={imageAlt ?? title}
+					class="hero-especial__foto"
+					width="600"
+					height="600"
+				/>
+			) : (
+				<div class="hero-especial__foto hero-especial__foto--placeholder" />
+			)
+		}
+	</div>
+	<div class="hero-especial__contenido">
+		<p class="hero-especial__eyebrow">{eyebrow}</p>
+		<div class="hero-especial__bloque">
+			<h1 class="hero-especial__titulo">{title}</h1>
+		</div>
+		<p class="hero-especial__bajada">{summary}</p>
+		<a href={href} class="hero-especial__cta">
+			<span class="icono-circulo" aria-hidden="true" />
+			Leer especial completo
+		</a>
+	</div>
+</section>
+
+<style>
+	.hero-especial {
+		display: grid;
+		grid-template-columns: 55fr 45fr;
+		gap: 0;
+		align-items: center;
+		padding: 0;
+	}
+
+	.hero-especial__imagen {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.hero-especial__foto {
+		width: 100%;
+		max-width: 520px;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: var(--radio-hero);
+		overflow: hidden;
+	}
+
+	.hero-especial__foto--placeholder {
+		background: var(--color-gris-borde);
+	}
+
+	.hero-especial__contenido {
+		padding-left: 2rem;
+	}
+
+	.hero-especial__eyebrow {
+		font-size: var(--size-eyebrow);
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-magenta);
+		margin: 0 0 16px;
+	}
+
+	.hero-especial__bloque {
+		display: inline-block;
+		background: var(--color-magenta);
+		padding: 24px 28px;
+		margin-bottom: 16px;
+	}
+
+	.hero-especial__titulo {
+		font-size: var(--size-h1-especial);
+		font-weight: 900;
+		line-height: 1.1;
+		color: var(--color-blanco);
+	}
+
+	.hero-especial__bajada {
+		font-size: 16px;
+		line-height: 1.6;
+		color: var(--color-texto);
+		margin: 0 0 20px;
+		max-width: 480px;
+	}
+
+	.hero-especial__cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 13px;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-magenta);
+		transition: opacity 0.15s ease;
+	}
+
+	.hero-especial__cta:hover {
+		opacity: 0.75;
+	}
+
+	@media (max-width: 768px) {
+		.hero-especial {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.hero-especial__contenido {
+			padding-left: 0;
+		}
+
+		.hero-especial__foto {
+			max-width: 100%;
+		}
+	}
+</style>

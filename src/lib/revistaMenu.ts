@@ -127,11 +127,42 @@ export const getLeadArticle = (
 	issueNumber: string = CURRENT_ISSUE.number,
 ) => {
 	const issueArticles = getIssueArticles(articles, issueNumber);
+	const sorted = [...issueArticles].sort(compareArticles);
 
 	return (
-		issueArticles.find((article) => article.data.theme === "featured") ??
-		issueArticles[0]
+		sorted.find(
+			(article) => article.data.theme === "featured" && article.data.image,
+		) ??
+		sorted.find((article) => article.data.image) ??
+		sorted[0]
 	);
+};
+
+export const getCoverCardArticles = (
+	articles: CollectionEntry<"revista">[],
+	leadArticle: CollectionEntry<"revista"> | undefined,
+	issueNumber: string = CURRENT_ISSUE.number,
+) => {
+	const issueArticles = getIssueArticles(articles, issueNumber);
+	const leadId = leadArticle?.id;
+
+	return issueArticles
+		.filter((article) => article.id !== leadId)
+		.sort(compareArticles);
+};
+
+export const getRelatedArticles = (
+	articles: CollectionEntry<"revista">[],
+	currentArticleId: string,
+	issueNumber: string = CURRENT_ISSUE.number,
+	limit = 3,
+) => {
+	const issueArticles = getIssueArticles(articles, issueNumber);
+
+	return issueArticles
+		.filter((article) => article.id !== currentArticleId)
+		.sort(compareArticles)
+		.slice(0, limit);
 };
 
 export const buildDrawerMenu = (
@@ -139,21 +170,11 @@ export const buildDrawerMenu = (
 	issueNumber: string = CURRENT_ISSUE.number,
 ): DrawerMenuItem[] => {
 	const issueArticles = getIssueArticles(articles, issueNumber);
-	const sections = getIssueSections(articles, issueNumber);
-	const items: DrawerMenuItem[] = [];
 
-	for (const section of sections) {
-		const sectionArticles = getSectionArticles(issueArticles, section);
-
-		for (const article of sectionArticles) {
-			items.push({
-				type: "article",
-				label: article.data.menuLabel ?? article.data.title,
-				href: `/revista/${article.data.slug ?? article.id}`,
-				style: getMenuStyle(article.data.theme),
-			});
-		}
-	}
-
-	return items;
+	return [...issueArticles].sort(compareArticles).map((article) => ({
+		type: "article" as const,
+		label: article.data.menuLabel ?? article.data.title,
+		href: `/revista/${article.data.slug ?? article.id}`,
+		style: getMenuStyle(article.data.theme),
+	}));
 };

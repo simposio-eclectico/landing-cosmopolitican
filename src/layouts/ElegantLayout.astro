@@ -1,674 +1,620 @@
 ---
 import BaseHead from "@components/BaseHead.astro";
 import {
-  SITE_SLOGAN,
-  SITE_TITLE,
-  SITE_DESCRIPTION,
-  SITE_NAME,
-  CURRENT_ISSUE,
+	SITE_SLOGAN,
+	SITE_TITLE,
+	SITE_DESCRIPTION,
+	SITE_NAME,
+	CURRENT_ISSUE,
 } from "@consts";
 import { buildDrawerMenu, getLeadArticle } from "@lib/revistaMenu";
 import "@styles/elegant.css";
 import { getCollection } from "astro:content";
 
 interface Props {
-  title?: string;
-  description?: string;
-  background?: string;
+	title?: string;
+	description?: string;
+	bare?: boolean;
 }
+
 const {
-  title = SITE_TITLE,
-  description = SITE_DESCRIPTION,
-  background,
+	title = SITE_TITLE,
+	description = SITE_DESCRIPTION,
+	bare = false,
 } = Astro.props;
 
 const revistas = await getCollection("revista");
 const leadArticle = getLeadArticle(revistas);
 const leadSlug = leadArticle ? leadArticle.data.slug || leadArticle.id : "";
 const drawerMenuItems = buildDrawerMenu(revistas);
+
+const navLinks = [
+	{ label: "Inicio", href: "/", match: (path: string) => path === "/" },
+	{ label: "Reportajes", href: "/revista/numeros" },
+	{ label: "Columnas", href: "/revista/numeros" },
+	{ label: "Entrevistas", href: "/revista/numeros" },
+	{ label: "Reels", href: "/revista/numeros" },
+	{ label: "Podcast", href: "/revista/numeros" },
+	{ label: "Somos", href: "/quienes-somos", match: (path: string) => path.includes("/quienes-somos") },
+	{ label: "Contacto", href: "/contacto", match: (path: string) => path.includes("/contacto") },
+];
+
+const currentPath = Astro.url.pathname;
+
+const isNavActive = (href: string, match?: (path: string) => boolean) => {
+	if (match) {
+		return match(currentPath);
+	}
+
+	return currentPath === href || currentPath.startsWith(`${href}/`);
+};
 ---
 
 <!doctype html>
-<html lang="es" class="theme-pop">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-  <body>
-    <!-- ── Topbar anuncio opcional ── -->
-    <div class="topbar" id="topbar-announcement" style="cursor: pointer;">
-      ★ ¡Nueva edición disponible! &nbsp;·&nbsp; Descúbrela ahora ★
-    </div>
+<html lang="es">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<header class="site-header">
+			<nav class="site-nav contenedor" aria-label="Principal">
+				<a href="/" class="nav-brand">
+					<span class="nav-brand__circulo" aria-hidden="true">
+						<span class="nav-brand__nombre">{SITE_NAME}</span>
+					</span>
+					<span class="nav-brand__tagline">{SITE_SLOGAN}</span>
+				</a>
 
-    <nav class="site-nav">
-      <!-- Logo/marca con fuente script -->
-      <a href="/" class="nav-brand">
-        <img src="/logo.png" alt={SITE_NAME} class="brand-logo" />
-      </a>
+				<ul class="nav-links">
+					{
+						navLinks.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									class:list={[
+										"nav-link",
+										{ "nav-link--active": isNavActive(link.href, link.match) },
+									]}
+								>
+									{link.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
 
-      <ul class="nav-links">
-        <li>
-          <a
-            href="/revista/numeros"
-            class={Astro.url.pathname.includes("/revista") ? "active" : ""}
-          >
-            Números
-          </a>
-        </li>
-        <li>
-          <button id="nav-latest-issue-btn" class="nav-btn-link">
-            Último número
-          </button>
-        </li>
-        <li>
-          <a
-            href="/quienes-somos"
-            class={Astro.url.pathname.includes("/quienes-somos")
-              ? "active"
-              : ""}
-          >
-            Quiénes somos
-          </a>
-        </li>
-        <li>
-          <a
-            href="/contacto"
-            class={Astro.url.pathname.includes("/contacto") ? "active" : ""}
-          >
-            Contacto
-          </a>
-        </li>
-      </ul>
+				<div class="nav-utils">
+					<span class="nav-separador" aria-hidden="true" />
+					<button
+						type="button"
+						class="nav-icon-btn"
+						aria-label="Buscar"
+						id="nav-search-btn"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+							<path d="M20 20L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+						</svg>
+					</button>
+					<a
+						href="https://www.facebook.com/cosmopolitican"
+						class="nav-icon-btn"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Facebook"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
+						</svg>
+					</a>
+					<a
+						href="https://www.instagram.com/cosmopolitican"
+						class="nav-icon-btn"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Instagram"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+						</svg>
+					</a>
+					<a
+						href="https://www.youtube.com/@cosmopolitican"
+						class="nav-icon-btn"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="YouTube"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+						</svg>
+					</a>
+				</div>
 
-      <!-- CTA derecho opcional -->
-      <a href="/suscribirse" class="nav-cta">¡Suscríbete!</a>
-    </nav>
+				<button
+					type="button"
+					class="nav-hamburger"
+					id="nav-hamburger"
+					aria-label="Abrir menú"
+					aria-expanded="false"
+				>
+					<span />
+					<span />
+					<span />
+				</button>
+			</nav>
+		</header>
 
-    <main
-      style={background
-        ? `background-image: ${background}; background-position: center top;`
-        : ""}
-    >
-      <slot />
-    </main>
+		<main class:list={["site-main", { "site-main--bare": bare }]}>
+			<div class:list={["site-main__inner", { contenedor: bare }]}>
+				<slot />
+			</div>
+		</main>
 
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <img src="/logo.png" alt={SITE_NAME} class="brand-logo" />
-          <span class="label-caps" style="color:#aaa; margin-top:0.25rem"
-            >{SITE_SLOGAN}</span
-          >
-        </div>
-        <nav class="footer-links">
-          <a href="/revista/numeros">Números</a>
-          <button id="footer-latest-issue-btn" class="footer-btn-link">
-            Último número
-          </button>
-          <a href="/quienes-somos">Quiénes somos</a>
-          <a href="/contacto">Contacto</a>
-        </nav>
-        <div class="footer-copy">
-          <span class="label-caps" style="color:#666"
-            >© {new Date().getFullYear()} {SITE_NAME}</span
-          >
-        </div>
-      </div>
-    </footer>
+		<footer class="site-footer">
+			<div class="site-footer__inner contenedor">
+				<div class="site-footer__brand">
+					<span class="nav-brand__circulo nav-brand__circulo--small">
+						<span class="nav-brand__nombre">{SITE_NAME}</span>
+					</span>
+					<span class="site-footer__tagline">{SITE_SLOGAN}</span>
+				</div>
+				<nav class="site-footer__links" aria-label="Pie de página">
+					<a href="/">Inicio</a>
+					<button type="button" id="footer-latest-issue-btn" class="site-footer__btn">
+						Último número
+					</button>
+					<a href="/revista/numeros">Archivo</a>
+					<a href="/quienes-somos">Somos</a>
+					<a href="/contacto">Contacto</a>
+				</nav>
+				<p class="site-footer__copy">
+					© {new Date().getFullYear()} {SITE_NAME}
+				</p>
+			</div>
+		</footer>
 
-    <!-- Revista Menu Drawer -->
-    <div id="revista-drawer" class="drawer-overlay">
-      <div class="drawer-container">
-        <div class="drawer-left-bar"></div>
-        <div class="drawer-content">
-          <button id="close-drawer" class="close-btn" aria-label="Cerrar"
-            >&times;</button
-          >
-          <div class="drawer-header">
-            <span class="drawer-issue-number" id="drawer-issue-number">
-              {CURRENT_ISSUE.number}
-            </span>
-            <h2 class="drawer-issue-title" id="drawer-issue-title">
-              {CURRENT_ISSUE.title}
-            </h2>
-          </div>
-          <nav class="drawer-menu">
-            {
-              drawerMenuItems.map((item) => {
-                if (item.type === "heading") {
-                  return (
-                    <div class="menu-section">
-                      <span class="menu-category">{item.label}</span>
-                    </div>
-                  );
-                }
+		<div id="revista-drawer" class="drawer-overlay" role="dialog" aria-modal="true" aria-label="Menú del número">
+			<div class="drawer-container">
+				<div class="drawer-content">
+					<button id="close-drawer" class="close-btn" aria-label="Cerrar">
+						&times;
+					</button>
+					<div class="drawer-header">
+						<span class="drawer-issue-number">{CURRENT_ISSUE.number}</span>
+						<h2 class="drawer-issue-title">{CURRENT_ISSUE.title}</h2>
+					</div>
+					<nav class="drawer-menu">
+						{
+							drawerMenuItems.map((item) => {
+								if (item.type !== "article") {
+									return null;
+								}
 
-                if (item.type === "article") {
-                  return (
-                    <div class="menu-section">
-                      <a
-                        href={item.href}
-                        class={`menu-link ${item.style === "main" ? "main-link" : "sub-link"}`.trim()}
-                      >
-                        {item.label}
-                      </a>
-                    </div>
-                  );
-                }
+								return (
+									<a
+										href={item.href}
+										class:list={[
+											"drawer-menu-link",
+											{ "drawer-menu-link--main": item.style === "main" },
+										]}
+									>
+										{item.label}
+									</a>
+								);
+							})
+						}
+					</nav>
+				</div>
+			</div>
+		</div>
 
-                return (
-                  <div class="menu-section">
-                    <button
-                      type="button"
-                      class={`menu-link placeholder-link ${item.style === "sub" ? "placeholder-sub-link" : ""}`.trim()}
-                    >
-                      {item.label}
-                    </button>
-                  </div>
-                );
-              })
-            }
-          </nav>
-        </div>
-      </div>
-    </div>
+		<script define:vars={{ leadSlug }}>
+			document.addEventListener("DOMContentLoaded", () => {
+				const drawer = document.getElementById("revista-drawer");
+				const closeBtn = document.getElementById("close-drawer");
+				const hamburger = document.getElementById("nav-hamburger");
+				const navLinks = document.querySelector(".nav-links");
 
-    <!-- Brutalist Toast Notification -->
-    <div id="brutalist-toast" class="brutalist-toast">
-      Sección tentativa - Próximamente en la edición impresa.
-    </div>
+				function openDrawer() {
+					if (!leadSlug || !drawer) {
+						return;
+					}
 
-    <script define:vars={{ leadSlug, issueNumber: CURRENT_ISSUE.number, issueTitle: CURRENT_ISSUE.title }}>
-      document.addEventListener("DOMContentLoaded", () => {
-        const drawer = document.getElementById("revista-drawer");
-        const closeBtn = document.getElementById("close-drawer");
-        const toast = document.getElementById("brutalist-toast");
+					drawer.classList.add("active");
+					document.body.style.overflow = "hidden";
+				}
 
-        function openDrawer() {
-          if (!leadSlug) return;
+				function closeDrawer() {
+					if (!drawer) {
+						return;
+					}
 
-          drawer.classList.add("active");
-          document.body.style.overflow = "hidden";
-        }
+					drawer.classList.remove("active");
+					document.body.style.overflow = "";
+				}
 
-        function closeDrawer() {
-          drawer.classList.remove("active");
-          document.body.style.overflow = "";
-        }
+				window.openRevistaDrawer = openDrawer;
 
-        window.openRevistaDrawer = openDrawer;
+				closeBtn?.addEventListener("click", closeDrawer);
+				drawer?.addEventListener("click", (event) => {
+					if (event.target === drawer) {
+						closeDrawer();
+					}
+				});
 
-        closeBtn.addEventListener("click", closeDrawer);
-        drawer.addEventListener("click", (e) => {
-          if (e.target === drawer) {
-            closeDrawer();
-          }
-        });
+				document
+					.getElementById("footer-latest-issue-btn")
+					?.addEventListener("click", openDrawer);
 
-        const topbar = document.getElementById("topbar-announcement");
-        if (topbar) {
-          topbar.addEventListener("click", openDrawer);
-        }
-
-        const navBtn = document.getElementById("nav-latest-issue-btn");
-        if (navBtn) {
-          navBtn.addEventListener("click", openDrawer);
-        }
-
-        const footerBtn = document.getElementById("footer-latest-issue-btn");
-        if (footerBtn) {
-          footerBtn.addEventListener("click", openDrawer);
-        }
-
-        const placeholders = drawer.querySelectorAll(
-          ".placeholder-link, .placeholder-sub-link",
-        );
-        placeholders.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            toast.classList.add("show");
-            setTimeout(() => {
-              toast.classList.remove("show");
-            }, 3000);
-          });
-        });
-      });
-    </script>
-  </body>
+				hamburger?.addEventListener("click", () => {
+					const isOpen = navLinks?.classList.toggle("nav-links--open");
+					hamburger.setAttribute(
+						"aria-expanded",
+						isOpen ? "true" : "false",
+					);
+				});
+			});
+		</script>
+	</body>
 </html>
 
 <style>
-  /* ── Topbar ── */
-  .topbar {
-    background: var(--c-hot);
-    color: #fff;
-    text-align: center;
-    font-family: var(--c-font-display);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    border-bottom: 2px solid var(--c-black);
-  }
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: var(--color-blanco);
+		border-bottom: 1px solid var(--color-gris-borde);
+	}
 
-  /* ── Nav ── */
-  .site-nav {
-    display: flex;
-    align-items: stretch;
-    border-bottom: var(--c-border-thick);
-    background: var(--c-bg);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+	.site-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 72px;
+		gap: 1.5rem;
+	}
 
-  .nav-brand {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0.6rem 1.5rem;
-    background: var(--c-black);
-    border-right: var(--c-border-thick);
-    flex-shrink: 0;
-    gap: 0.1rem;
-    transition: background 0.2s;
-  }
-  .nav-brand:hover {
-    background: var(--c-hot);
-  }
+	.nav-brand {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		flex-shrink: 0;
+	}
 
-  .brand-logo {
-    height: auto;
-    max-height: 1.8rem;
-    width: auto;
-    display: block;
-  }
+	.nav-brand__circulo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--size-logo);
+		height: var(--size-logo);
+		background: var(--color-negro);
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
 
-  .brand-script {
-    font-family: var(--c-font-brand);
-    font-size: 1.4rem;
-    color: #fff;
-    line-height: 1;
-  }
-  .brand-sub {
-    font-family: var(--c-font-display);
-    font-size: 0.6rem;
-    letter-spacing: 0.35em;
-    color: var(--c-yellow);
-    line-height: 1;
-    margin-left: 3px;
-    text-transform: uppercase;
-  }
+	.nav-brand__circulo--small {
+		width: 40px;
+		height: 40px;
+	}
 
-  .nav-links {
-    display: flex;
-    flex: 1;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+	.nav-brand__nombre {
+		font-size: 7px;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--color-blanco);
+		text-align: center;
+		line-height: 1.2;
+		max-width: 38px;
+	}
 
-  .nav-links li {
-    display: flex;
-  }
+	.nav-brand__circulo--small .nav-brand__nombre {
+		font-size: 5px;
+		max-width: 30px;
+	}
 
-  .nav-links a {
-    padding: 0 1.25rem;
-    font-family: var(--c-font-display);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--c-black);
-    display: flex;
-    align-items: center;
-    border-right: 2px solid var(--c-black);
-    border-bottom: 4px solid transparent;
-    transition:
-      color 0.15s,
-      border-bottom-color 0.15s,
-      background 0.15s;
-  }
+	.nav-brand__tagline {
+		font-size: 12px;
+		color: var(--color-gris-txt);
+		white-space: nowrap;
+	}
 
-  .nav-links a:hover {
-    background: var(--c-yellow);
-    border-bottom-color: var(--c-black);
-  }
-  .nav-links a.active {
-    color: var(--c-hot);
-    border-bottom-color: var(--c-hot);
-    background: #fff0f6;
-  }
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 0;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		flex: 1;
+		justify-content: center;
+	}
 
-  .nav-cta {
-    margin: auto 1rem auto auto;
-    font-family: var(--c-font-display);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--c-hot);
-    color: #fff;
-    padding: 0.5em 1.2em;
-    border: var(--c-border-thick);
-    box-shadow: var(--c-shadow-pop);
-    transition:
-      transform 0.15s,
-      box-shadow 0.15s;
-    white-space: nowrap;
-  }
-  body {
-    margin: 0;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  .nav-cta:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px var(--c-black);
-  }
+	.nav-links li {
+		display: flex;
+	}
 
-  /* ── Main ── */
-  main {
-    flex: 1;
-    padding: 3rem 2rem;
-    margin: 0;
-    width: 100%;
-    box-sizing: border-box;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+	.nav-link {
+		padding: 0 12px;
+		font-size: var(--size-nav-link);
+		color: var(--color-nav-link);
+		line-height: 72px;
+		white-space: nowrap;
+		transition: color 0.15s ease;
+	}
 
-  /* ── Footer ── */
-  .site-footer {
-    border-top: var(--c-border-thick);
-    background: var(--c-black);
-    color: var(--c-bg);
-    padding: 3rem 2rem;
-  }
+	.nav-link:hover {
+		color: var(--color-magenta);
+	}
 
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-  }
+	.nav-link--active {
+		color: var(--color-nav-activo);
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
 
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-  }
+	.nav-utils {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		flex-shrink: 0;
+	}
 
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .footer-links a {
-    font-family: var(--c-font-display);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #aaa;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover {
-    color: var(--c-hot);
-  }
+	.nav-separador {
+		width: 1px;
+		height: 24px;
+		background: var(--color-gris-borde);
+	}
 
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none; /* colapsar en mobile con hamburger si aplica */
-    }
-    .nav-brand {
-      width: 100%;
-      align-items: center;
-      border-right: none;
-      border-bottom: var(--c-border-thick);
-    }
-  }
-  /* ── Latest Issue Nav/Footer Buttons ── */
-  .nav-btn-link {
-    background: none;
-    border: none;
-    padding: 0 1.25rem;
-    font-family: var(--c-font-display);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--c-black);
-    display: flex;
-    align-items: center;
-    border-right: 2px solid var(--c-black);
-    border-bottom: 4px solid transparent;
-    transition:
-      color 0.15s,
-      border-bottom-color 0.15s,
-      background 0.15s;
-    cursor: pointer;
-    height: 100%;
-  }
+	.nav-icon-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border: none;
+		background: none;
+		color: var(--color-nav-link);
+		cursor: pointer;
+		transition: color 0.15s ease;
+	}
 
-  .nav-btn-link:hover {
-    background: var(--c-yellow);
-    border-bottom-color: var(--c-black);
-  }
+	.nav-icon-btn:hover {
+		color: var(--color-magenta);
+	}
 
-  .footer-btn-link {
-    background: none;
-    border: none;
-    padding: 0;
-    font-family: var(--c-font-display);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #aaa;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-  .footer-btn-link:hover {
-    color: var(--c-hot);
-  }
+	.nav-hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+	}
 
-  /* ── Drawer Overlay ── */
-  .drawer-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-    display: flex;
-    justify-content: flex-start;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
+	.nav-hamburger span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: var(--color-negro);
+	}
 
-  .drawer-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
+	.site-main {
+		flex: 1;
+		padding: 3rem 0;
+	}
 
-  /* Drawer Container */
-  .drawer-container {
-    width: 100%;
-    max-width: 480px;
-    height: 100%;
-    background-color: var(--c-bg);
-    border-right: var(--c-border-thick);
-    box-shadow: 10px 0 0 var(--c-black);
-    display: flex;
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+	.site-main--bare {
+		padding: 0;
+	}
 
-  .drawer-overlay.active .drawer-container {
-    transform: translateX(0);
-  }
+	body {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		overflow-x: hidden;
+	}
 
-  /* Left black bar */
-  .drawer-left-bar {
-    width: 32px;
-    background-color: var(--c-black);
-    flex-shrink: 0;
-  }
+	.site-footer {
+		background: var(--color-negro);
+		color: var(--color-blanco);
+		padding: 2.5rem 0;
+		margin-top: auto;
+	}
 
-  /* Drawer Content */
-  .drawer-content {
-    flex: 1;
-    padding: 3rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow-y: auto;
-  }
+	.site-footer__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+	}
 
-  /* Close button */
-  .close-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    font-size: 2.5rem;
-    font-weight: 300;
-    cursor: pointer;
-    color: var(--c-black);
-    transition: color 0.2s;
-  }
+	.site-footer__brand {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
 
-  .close-btn:hover {
-    color: var(--c-hot);
-  }
+	.site-footer__tagline {
+		font-size: 12px;
+		color: #aaaaaa;
+	}
 
-  /* Header */
-  .drawer-header {
-    margin-top: 1.5rem;
-    margin-bottom: 2.5rem;
-  }
+	.site-footer__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.25rem;
+	}
 
-  .drawer-issue-number {
-    font-family: var(--c-font-display);
-    font-size: 2rem;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--c-black);
-    letter-spacing: -0.05em;
-    display: block;
-  }
+	.site-footer__links a,
+	.site-footer__btn {
+		font-size: 12px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #aaaaaa;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		transition: color 0.15s ease;
+	}
 
-  .drawer-issue-title {
-    font-family: var(--c-font-display);
-    font-size: 3rem;
-    line-height: 1.1;
-    margin: 0.25rem 0 0;
-    color: var(--c-black);
-    text-transform: uppercase;
-  }
+	.site-footer__links a:hover,
+	.site-footer__btn:hover {
+		color: var(--color-magenta);
+	}
 
-  /* Menu navigation */
-  .drawer-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    align-items: flex-start;
-  }
+	.site-footer__copy {
+		font-size: 12px;
+		color: #666666;
+		margin: 0;
+	}
 
-  .menu-section {
-    width: 100%;
-  }
+	.drawer-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 1000;
+		display: flex;
+		justify-content: flex-start;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
 
-  .menu-link {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-family: var(--c-font-display), sans-serif;
-    text-align: left;
-    text-transform: uppercase;
-    cursor: pointer;
-    color: var(--c-black);
-    display: block;
-    transition:
-      color 0.15s,
-      transform 0.15s;
-    width: 100%;
-  }
+	.drawer-overlay.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
 
-  .menu-link.main-link {
-    color: var(--c-black);
-    font-size: 2.2rem;
-    font-weight: bold;
-  }
+	.drawer-container {
+		width: 100%;
+		max-width: 420px;
+		height: 100%;
+		background: var(--color-blanco);
+		border-right: 1px solid var(--color-gris-borde);
+		transform: translateX(-100%);
+		transition: transform 0.3s ease;
+	}
 
-  .menu-link.main-link:hover {
-    color: var(--c-hot);
-    transform: translateX(5px);
-  }
+	.drawer-overlay.active .drawer-container {
+		transform: translateX(0);
+	}
 
-  .menu-link.sub-link {
-    font-size: 1.4rem;
-    font-weight: normal;
-    padding-left: 1.5rem;
-    text-decoration: none;
-  }
+	.drawer-content {
+		padding: 3rem 2rem;
+		position: relative;
+		overflow-y: auto;
+		height: 100%;
+	}
 
-  .menu-link.sub-link:hover {
-    color: var(--c-hot);
-    transform: translateX(5px);
-  }
+	.close-btn {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		font-size: 2rem;
+		cursor: pointer;
+		color: var(--color-negro);
+		line-height: 1;
+	}
 
-  .menu-link.placeholder-link {
-    font-size: 2.2rem;
-    font-weight: bold;
-  }
+	.drawer-issue-number {
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--color-magenta);
+	}
 
-  .menu-link.placeholder-sub-link {
-    font-size: 1.4rem;
-    font-weight: normal;
-    padding-left: 1.5rem;
-    color: var(--c-muted);
-  }
+	.drawer-issue-title {
+		font-size: 28px;
+		font-weight: 700;
+		margin: 8px 0 0;
+		color: var(--color-negro);
+	}
 
-  .menu-link.placeholder-link:hover,
-  .menu-link.placeholder-sub-link:hover {
-    color: var(--c-hot);
-    transform: translateX(5px);
-  }
+	.drawer-menu {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 2rem;
+	}
 
-  .menu-category {
-    font-family: var(--c-font-display), sans-serif;
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: var(--c-black);
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.2rem;
-    text-transform: uppercase;
-  }
+	.drawer-menu-link {
+		font-size: 16px;
+		color: var(--color-texto);
+		transition: color 0.15s ease;
+	}
 
-  /* Brutalist Toast */
-  .brutalist-toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background-color: var(--c-yellow);
-    color: var(--c-black);
-    border: var(--c-border-thick);
-    box-shadow: var(--c-shadow-pop);
-    padding: 1rem 1.5rem;
-    font-family: var(--c-font-body);
-    font-weight: bold;
-    z-index: 1100;
-    transform: translateY(150%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+	.drawer-menu-link--main {
+		font-size: 20px;
+		font-weight: 700;
+		color: var(--color-magenta);
+	}
 
-  .brutalist-toast.show {
-    transform: translateY(0);
-  }
+	.drawer-menu-link:hover {
+		color: var(--color-magenta);
+	}
+
+	@media (max-width: 1024px) {
+		.nav-brand__tagline {
+			display: none;
+		}
+
+		.nav-link {
+			padding: 0 8px;
+			font-size: 13px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.nav-links {
+			display: none;
+			position: absolute;
+			top: 72px;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			background: var(--color-blanco);
+			border-bottom: 1px solid var(--color-gris-borde);
+			padding: 1rem 0;
+		}
+
+		.nav-links--open {
+			display: flex;
+		}
+
+		.nav-links li {
+			width: 100%;
+		}
+
+		.nav-link {
+			line-height: 2.5;
+			padding: 0 var(--padding-lateral);
+			width: 100%;
+		}
+
+		.nav-utils {
+			display: none;
+		}
+
+		.nav-hamburger {
+			display: flex;
+		}
+
+		.site-nav {
+			position: relative;
+		}
+	}
 </style>

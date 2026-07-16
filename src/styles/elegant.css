@@ -1,49 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap");
-
 :root {
-	/* ── Paleta pop saturada ── */
-	--c-bg: #ffffff;
-	--c-black: #111111;
-	--c-muted: #555555;
+	--color-magenta: #e8327a;
+	--color-magenta-hover: #c4275f;
+	--color-negro: #1a1a1a;
+	--color-blanco: #ffffff;
+	--color-fondo: #f5f5f5;
+	--color-gris-txt: #555555;
+	--color-gris-fecha: #888888;
+	--color-gris-borde: #cccccc;
+	--color-nav-activo: #2a5c9a;
+	--color-nav-link: #333333;
+	--color-texto: #333333;
+	--color-separador: #eeeeee;
 
-	/* Acento primario: fuchsia/magenta */
-	--c-hot: #e91e8c;
-	--c-hot-dark: #b5146d;
+	--font-principal: "Helvetica Neue", Arial, sans-serif;
 
-	/* Acento secundario: amarillo eléctrico */
-	--c-yellow: #ffe600;
+	--size-logo: 52px;
+	--size-h1-especial: clamp(40px, 4.5vw, 60px);
+	--size-card-titulo: clamp(18px, 1.5vw, 22px);
+	--size-nav-link: 14px;
+	--size-eyebrow: 11px;
+	--size-fecha: 12px;
 
-	/* Acento terciario: turquesa */
-	--c-teal: #00c8c8;
+	--radio-hero: 50%;
+	--contenedor-max: 1440px;
+	--padding-lateral: 80px;
+	--gap-cards: 24px;
 
-	/* Acento cuaternario: verde lima (usar con mesura) */
-	--c-lime: #a8e600;
-
-	/* Bordes */
-	--c-border: #111111;
-
-	/* ── Tipografía ── */
-	--c-font-display: "Anton", "Impact", sans-serif;
-	/* Titulares comprimidos */
-	--c-font-brand: "Pacifico", cursive;
-	/* Logo/marca manuscrito */
-	--c-font-body: "Nunito", "Trebuchet MS", sans-serif;
-
-	/* ── Elementos revista ── */
-	--c-banner-radius: 0px;
-	/* Banners rectangulares duros */
-	--c-pill-radius: 999px;
-	/* Tags/pills redondeados */
-	--c-border-thick: 3px solid var(--c-black);
-	--c-shadow-pop: 4px 4px 0px var(--c-black);
-	/* Sombra dura flat */
-	--c-shadow-hot: 4px 4px 0px var(--c-hot);
-
-	/* Utilidades decorativas */
+	--c-bg: var(--color-blanco);
+	--c-black: var(--color-negro);
+	--c-hot: var(--color-magenta);
+	--c-hot-dark: var(--color-magenta-hover);
+	--c-muted: var(--color-gris-txt);
+	--c-border: var(--color-gris-borde);
+	--c-font-display: var(--font-principal);
+	--c-font-body: var(--font-principal);
+	--c-font-brand: var(--font-principal);
+	--c-border-thick: 1px solid var(--color-gris-borde);
+	--c-shadow-pop: none;
 	--c-rotate: -2deg;
+	--c-yellow: var(--color-magenta);
+	--c-teal: var(--color-nav-activo);
+	--c-lime: var(--color-gris-borde);
 }
 
-/* ── Reset ── */
 *,
 *::before,
 *::after {
@@ -51,28 +50,25 @@
 }
 
 body {
-	font-family: var(--c-font-body);
+	font-family: var(--font-principal);
 	font-size: 1rem;
 	line-height: 1.6;
 	margin: 0;
 	padding: 0;
-	background-color: var(--c-bg);
-	color: var(--c-black);
+	background-color: var(--color-fondo);
+	color: var(--color-texto);
 }
 
-/* ── Tipografía ── */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-	font-family: var(--c-font-display);
-	font-weight: 400;
-	/* Anton no tiene variantes de weight */
-	line-height: 1;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
+	font-family: var(--font-principal);
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0;
 }
 
 a {
@@ -84,159 +80,63 @@ em {
 	font-style: italic;
 }
 
-/* ── Utilidades revista ── */
-
-/* Tag/pill de sección — estilo "EXCLUSIVO", "MODA", etc. */
-.tag-pill {
-	display: inline-block;
-	font-family: var(--c-font-display);
-	font-size: 0.7rem;
-	letter-spacing: 0.15em;
-	text-transform: uppercase;
-	background: var(--c-hot);
-	color: #fff;
-	padding: 0.25em 0.9em;
-	border-radius: var(--c-pill-radius);
-	border: 2px solid var(--c-black);
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
 }
 
-.tag-pill.yellow {
-	background: var(--c-yellow);
-	color: var(--c-black);
+.contenedor {
+	max-width: var(--contenedor-max);
+	margin: 0 auto;
+	padding: 0 var(--padding-lateral);
 }
 
-.tag-pill.teal {
-	background: var(--c-teal);
-	color: #fff;
-}
-
-/* Banner de sección — franja de color con título */
-.section-banner {
-	font-family: var(--c-font-display);
-	font-size: clamp(1.2rem, 3vw, 1.8rem);
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
-	background: var(--c-hot);
-	color: #fff;
-	padding: 0.4em 1.2em;
-	display: inline-block;
-	border: var(--c-border-thick);
-	box-shadow: var(--c-shadow-pop);
-}
-
-.section-banner.yellow {
-	background: var(--c-yellow);
-	color: var(--c-black);
-}
-
-.section-banner.teal {
-	background: var(--c-teal);
-	color: #fff;
-}
-
-/* Titular estilo portada */
-.cover-headline {
-	font-family: var(--c-font-display);
-	font-size: clamp(3rem, 10vw, 7rem);
-	line-height: 0.92;
-	text-transform: uppercase;
-	letter-spacing: -0.01em;
-}
-
-.cover-headline .accent {
-	color: var(--c-hot);
-	display: block;
-}
-
-/* Número grande estilo "17 TIPS" */
-.big-number {
-	font-family: var(--c-font-display);
-	font-size: clamp(4rem, 15vw, 10rem);
-	line-height: 1;
-	color: var(--c-hot);
-	-webkit-text-stroke: 2px var(--c-black);
-}
-
-/* Separador estrellita */
-.star-divider {
-	display: flex;
+.icono-circulo {
+	display: inline-flex;
 	align-items: center;
-	gap: 0.75rem;
-	margin: 1.5rem 0;
-	color: var(--c-hot);
-	font-size: 1.1rem;
-}
-
-.star-divider::before,
-.star-divider::after {
-	content: "★ ★ ★";
-	letter-spacing: 0.3em;
-	color: var(--c-yellow);
-}
-
-/* Caja de "dato exclusivo" con borde de color */
-.exclusive-box {
-	border: var(--c-border-thick);
-	border-left: 6px solid var(--c-hot);
-	padding: 1rem 1.25rem;
-	background: #fff9f0;
-	box-shadow: var(--c-shadow-pop);
+	justify-content: center;
+	width: 14px;
+	height: 14px;
+	border: 1.5px solid var(--color-magenta);
+	border-radius: 50%;
 	position: relative;
+	flex-shrink: 0;
 }
 
-.exclusive-box::before {
-	content: "★ EXCLUSIVO";
-	font-family: var(--c-font-display);
-	font-size: 0.65rem;
+.icono-circulo::after {
+	content: "";
+	width: 4px;
+	height: 4px;
+	background: var(--color-magenta);
+	border-radius: 50%;
+}
+
+@media (max-width: 1024px) {
+	:root {
+		--padding-lateral: 32px;
+	}
+}
+
+.block-header {
+	font-size: var(--size-eyebrow);
+	font-weight: 700;
 	letter-spacing: 0.2em;
-	color: var(--c-hot);
-	display: block;
-	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	color: var(--color-magenta);
 }
 
-/* Imagen con borde tipo polaroid */
-.polaroid {
-	border: var(--c-border-thick);
-	box-shadow: var(--c-shadow-pop);
-	display: inline-block;
-	background: #fff;
-	padding: 0.5rem 0.5rem 2rem;
-}
-
-.polaroid img {
-	display: block;
-	width: 100%;
-}
-
-/* Label caps — versión pop */
 .label-caps {
-	font-family: var(--c-font-display);
-	font-size: 0.72rem;
+	font-size: 10px;
+	font-weight: 700;
 	letter-spacing: 0.25em;
 	text-transform: uppercase;
-	color: var(--c-muted);
+	color: var(--color-gris-txt);
 }
 
-/* Divider — línea con corazón */
-.divider-thin {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	border: none;
-	margin: 2rem 0;
-	color: var(--c-hot);
-}
-
-.divider-thin::before {
-	content: "";
-	flex: 1;
-	height: 2px;
-	background: var(--c-black);
-}
-
-.divider-thin::after {
-	content: "";
-	flex: 1;
-	height: 2px;
-	background: var(--c-black);
-}

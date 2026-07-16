@@ -1,346 +1,134 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { getCollection } from "astro:content";
-import { CATEGORIES } from "@consts";
-import { getSectionsByCategory } from "@lib/revistaMenu";
 
 const revistas = await getCollection("revista");
-const sortedRevistas = revistas.sort(
+const sortedRevistas = [...revistas].sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-const categoryKeys = Object.keys(CATEGORIES) as Array<keyof typeof CATEGORIES>;
-const sectionsByCategory = getSectionsByCategory(revistas);
 ---
 
-<ElegantLayout title="Revista - Cosmopolitican">
-  <div class="revista-header">
-    <div class="block-header" style="transform: rotate(var(--c-rotate));">
-      ARCHIVOS & EDICIONES
-    </div>
-
-    <div class="filter-container">
-      <div class="filter-categories">
-        <button class="filter-btn category-btn active" data-category="all"
-          >Todos</button
-        >
-        {
-          categoryKeys.map((key) => (
-            <button
-              class="filter-btn category-btn"
-              data-category={CATEGORIES[key]}
-            >
-              {CATEGORIES[key]}
-            </button>
-          ))
-        }
-      </div>
-
-      <div class="filter-sections" style="display: none;">
-        <!-- Sub-sections will be populated by JS when a category is clicked -->
-      </div>
-    </div>
-
-    <div class="archive-grid">
-      {
-        sortedRevistas.map((post) => (
-          <article
-            class={`issue-card ${post.data.theme !== "default" ? post.data.theme : ""}`.trim()}
-            data-category={post.data.category || ""}
-            data-section={post.data.section || ""}
-            data-issue-slug={post.data.slug || post.id}
-            data-issue-title={post.data.title}
-            data-issue-number={post.data.issueNumber}
-          >
-            <a
-              href={`/revista/${post.data.slug || post.id}`}
-              class="issue-link"
-            >
-              <h2>{post.data.title}</h2>
-            </a>
-            <div class="issue-excerpt">
-              {
-                post.data.image && (
-                  <img
-                    src={post.data.image}
-                    alt={post.data.imageAlt ?? post.data.title}
-                    class="issue-image"
-                    loading="lazy"
-                    width="140"
-                    height="140"
-                  />
-                )
-              }
-              <p>{post.data.summary}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+<ElegantLayout title="Archivo — Cosmopolitican">
+	<div class="archivo">
+		<div class="archivo__grid">
+			{
+				sortedRevistas.map((post) => (
+					<article class="archivo__card">
+						<a href={`/revista/${post.data.slug || post.id}`} class="archivo__card-link">
+							{
+								post.data.image && (
+									<img
+										src={post.data.image}
+										alt={post.data.imageAlt ?? post.data.title}
+										class="archivo__card-image"
+										loading="lazy"
+										width="400"
+										height="250"
+									/>
+								)
+							}
+							<div class="archivo__card-body">
+								<time
+									class="archivo__card-date"
+									datetime={post.data.pubDate.toISOString()}
+								>
+									{
+										post.data.pubDate.toLocaleDateString("es-ES", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})
+									}
+								</time>
+								<h2 class="archivo__card-title">{post.data.title}</h2>
+								<p class="archivo__card-author">
+									por <em>{post.data.author}</em>
+								</p>
+								<p class="archivo__card-summary">{post.data.summary}</p>
+							</div>
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</div>
 </ElegantLayout>
 
 <style>
-  .revista-header {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+	.archivo {
+		max-width: var(--contenedor-max);
+		margin: 0 auto;
+		padding: 0 var(--padding-lateral);
+	}
 
-  .filter-container {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
+	.archivo__header {
+		margin-bottom: 3rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--color-separador);
+	}
 
-  .filter-categories,
-  .filter-sections {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
+	.archivo__titulo {
+		font-size: clamp(28px, 4vw, 40px);
+		font-weight: 900;
+		color: var(--color-magenta);
+		margin-bottom: 0.5rem;
+	}
 
-  .filter-btn {
-    background: transparent;
-    color: var(--c-black);
-    border: var(--c-border-thick);
-    padding: 0.5rem 1.5rem;
-    font-family: var(--c-font-display);
-    font-weight: 700;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: var(--c-shadow-pop);
-    transition: all 0.2s ease;
-  }
+	.archivo__bajada {
+		font-size: 16px;
+		color: var(--color-gris-txt);
+		margin: 0;
+	}
 
-  :global(.theme-elegant) .filter-btn {
-    box-shadow: none;
-    border-width: 1px;
-  }
+	.archivo__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--gap-cards);
+	}
 
-  .filter-btn:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0 var(--c-black);
-  }
+	.archivo__card-link {
+		display: block;
+	}
 
-  .filter-btn.active {
-    background-color: var(--c-black);
-    color: var(--c-bg);
-  }
+	.archivo__card-image {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		display: block;
+	}
 
-  .filter-sections .filter-btn {
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-width: 3px;
-    box-shadow: 4px 4px 0 var(--c-black);
-    padding: 0.4rem 1.2rem;
-  }
+	.archivo__card-body {
+		margin-top: 12px;
+	}
 
-  .filter-sections .filter-btn:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--c-black);
-  }
+	.archivo__card-date {
+		display: block;
+		font-size: var(--size-fecha);
+		color: var(--color-gris-fecha);
+		margin-bottom: 6px;
+	}
 
-  .archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 3rem;
-    margin-top: 3rem;
-  }
+	.archivo__card-title {
+		font-size: var(--size-card-titulo);
+		font-weight: 700;
+		line-height: 1.25;
+		color: var(--color-magenta);
+		margin-bottom: 6px;
+		transition: color 0.15s ease;
+	}
 
-  .issue-card {
-    background-color: var(--c-bg);
-    border: var(--c-border-thick);
-    padding: 2.5rem;
-    box-shadow: var(--c-shadow-pop);
-    display: flex;
-    flex-direction: column;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+	.archivo__card-link:hover .archivo__card-title {
+		color: var(--color-magenta-hover);
+	}
 
-  :global(.theme-elegant) .issue-card::before {
-    display: none;
-  }
+	.archivo__card-author {
+		font-size: 13px;
+		margin: 0 0 8px;
+	}
 
-  .issue-card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 16px 16px 0 var(--c-hot);
-  }
-
-  .issue-card:hover a h2 {
-    transition: .125s color;
-    color: var(--c-hot);
-  }
-
-  .issue-card.featured {
-    grid-column: 1 / -1;
-    box-shadow: var(--c-shadow-pop);
-    border: var(--c-border-thick);
-  }
-
-  :global(.theme-elegant) .issue-card.featured {
-    background-color: var(--c-bg);
-    color: var(--c-black);
-    box-shadow: none;
-    border-width: 1px;
-  }
-
-  .issue-card.featured::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--c-hot);
-    transform: rotate(45deg);
-    border-bottom: var(--c-border-thick);
-  }
-
-  .issue-card.dark {
-    background-color: var(--c-black);
-    color: var(--c-bg);
-    border-color: var(--c-hot);
-    box-shadow: 12px 12px 0 var(--c-hot);
-  }
-
-  .issue-card.dark::before {
-    background-color: var(--c-bg);
-  }
-
-  .issue-card h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    border-bottom: var(--c-border-thick);
-    border-width: 2px;
-    padding-bottom: 0.5rem;
-    line-height: 1.1;
-  }
-
-  .issue-card.featured h2 {
-    font-size: 4rem;
-  }
-
-  .issue-excerpt {
-    display: flex;
-    gap: 1.25rem;
-    flex: 1;
-    align-items: flex-start;
-  }
-
-  .issue-image {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border: var(--c-border-thick);
-    box-shadow: var(--c-shadow-pop);
-    flex-shrink: 0;
-  }
-
-  :global(.theme-elegant) .issue-image {
-    box-shadow: none;
-    border-width: 1px;
-  }
-
-  .issue-excerpt p {
-    flex: 1;
-    font-size: 1.2rem;
-    margin: 0;
-  }
-
-  .issue-card.featured .issue-image {
-    width: 200px;
-    height: 200px;
-  }
-
-  .issue-card .cta-button {
-    align-self: flex-start;
-    margin-top: auto;
-  }
-
-  .issue-link {
-    transition: .125s color;
-    text-decoration: none; align-self: flex-start; margin-top: auto; display: inline-block;
-  }
+	.archivo__card-summary {
+		font-size: 14px;
+		line-height: 1.6;
+		margin: 0;
+	}
 </style>
-
-<script define:vars={{ sectionsByCategory }}>
-  document.addEventListener("DOMContentLoaded", () => {
-    const categoryBtns = document.querySelectorAll(".category-btn");
-    const sectionsContainer = document.querySelector(".filter-sections");
-    const issueCards = document.querySelectorAll(".issue-card");
-
-    let currentCategory = "all";
-    let currentSection = "all";
-
-    function renderSections(category) {
-      const sections = sectionsByCategory[category];
-
-      if (category === "all" || !sections?.length) {
-        sectionsContainer.style.display = "none";
-        return;
-      }
-
-      sectionsContainer.style.display = "flex";
-      sectionsContainer.innerHTML = `<button class="filter-btn section-btn active" data-section="all">Todas</button>`;
-
-      sections.forEach((sec) => {
-        const btn = document.createElement("button");
-        btn.className = "filter-btn section-btn";
-        btn.dataset.section = sec;
-        btn.textContent = sec;
-        sectionsContainer.appendChild(btn);
-      });
-
-      // Bind events to new section buttons
-      document.querySelectorAll(".section-btn").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          document
-            .querySelectorAll(".section-btn")
-            .forEach((b) => b.classList.remove("active"));
-          e.target.classList.add("active");
-          currentSection = e.target.dataset.section;
-          filterCards();
-        });
-      });
-    }
-
-    function filterCards() {
-      issueCards.forEach((card) => {
-        const cardCat = card.dataset.category;
-        const cardSec = card.dataset.section;
-
-        const categoryMatch =
-          currentCategory === "all" || cardCat === currentCategory;
-        const sectionMatch =
-          currentSection === "all" || cardSec === currentSection;
-
-        if (categoryMatch && sectionMatch) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    }
-
-    categoryBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        document
-          .querySelectorAll(".category-btn")
-          .forEach((b) => b.classList.remove("active"));
-        e.target.classList.add("active");
-        currentCategory = e.target.dataset.category;
-        currentSection = "all";
-        renderSections(currentCategory);
-        filterCards();
-      });
-    });
-  });
-</script>

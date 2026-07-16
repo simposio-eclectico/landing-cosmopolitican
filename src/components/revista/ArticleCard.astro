@@ -1,0 +1,111 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	article: CollectionEntry<"revista">;
+}
+
+const { article } = Astro.props;
+const { title, author, pubDate, summary, image, imageAlt } = article.data;
+const href = `/revista/${article.data.slug ?? article.id}`;
+const formattedDate = pubDate.toLocaleDateString("es-ES", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+---
+
+<article class="article-card">
+	<a href={href} class="article-card__image-link">
+		{
+			image ? (
+				<img
+					src={image}
+					alt={imageAlt ?? title}
+					class="article-card__image"
+					loading="lazy"
+					width="400"
+					height="250"
+				/>
+			) : (
+				<div class="article-card__image article-card__image--placeholder" />
+			)
+		}
+	</a>
+	<div class="article-card__body">
+		<time class="article-card__date" datetime={pubDate.toISOString()}>
+			{formattedDate}
+		</time>
+		<h2 class="article-card__title">
+			<a href={href}>{title}</a>
+		</h2>
+		<p class="article-card__author">
+			por <em>{author}</em>
+		</p>
+		<p class="article-card__summary">{summary}</p>
+	</div>
+</article>
+
+<style>
+	.article-card__image-link {
+		display: block;
+		overflow: hidden;
+	}
+
+	.article-card__image {
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		border-radius: 0;
+	}
+
+	.article-card__image--placeholder {
+		background: var(--color-gris-borde);
+	}
+
+	.article-card__image-link:hover .article-card__image {
+		transform: scale(1.03);
+		transition: transform 0.3s ease;
+	}
+
+	.article-card__body {
+		margin-top: 12px;
+	}
+
+	.article-card__date {
+		display: block;
+		font-size: var(--size-fecha);
+		color: var(--color-gris-fecha);
+		margin-bottom: 6px;
+	}
+
+	.article-card__title {
+		font-size: var(--size-card-titulo);
+		font-weight: 700;
+		line-height: 1.25;
+		margin-bottom: 6px;
+	}
+
+	.article-card__title a {
+		color: var(--color-magenta);
+		transition: color 0.15s ease;
+	}
+
+	.article-card__title a:hover {
+		color: var(--color-magenta-hover);
+	}
+
+	.article-card__author {
+		font-size: 13px;
+		color: var(--color-texto);
+		margin: 0 0 8px;
+	}
+
+	.article-card__summary {
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--color-texto);
+		margin: 0;
+	}
+</style>

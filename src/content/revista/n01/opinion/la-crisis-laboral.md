@@ -1,0 +1,19 @@
+---
+title: "La crisis laboral: hacia la construcción de parias letrados"
+author: "Francisco Tapia"
+pubDate: 2026-05-01
+category: "Contenido narrativo"
+section: "Opinión"
+tags: ["columna", "trabajadores", "política", "para", "cooptación"]
+summary: "Sobre la crisis laboral estructural en Chile, la obsolescencia de la fuerza de trabajo calificada y la emergencia del «paria letrado» ante el desempleo y la automatización."
+image: "/revista/imagenes/dieta-per-capita/suenos-de-micro.png"
+imageAlt: "Madre e hijo durmiendo en el metro de Santiago"
+issueNumber: "Nº 01"
+theme: "featured"
+slug: "la-crisis-laboral"
+---
+
+En la construcción simbólica de la realidad, se ha constituido históricamente al marginal como un analfabeto desdentado y de arrebato constante, habitante y poseedor de la violencia; aquel que mora en rucos, constructor de herramientas filosas para asaltar; encaramado hurtador de cables que roba para vender el cobre de su interior, obtenido a través de la quema del plástico que protege los filamentos; fumador de cera barata, la última destilación de la cocaína amplificada con diversos químicos. Sin embargo, esta demonización teatralizada del paria se diluye poco a poco ante la emergencia de un nuevo margen, más amplio y cotidiano. En este escenario, el paria ya no es un alienígena subnormal, sino justamente lo contrario: un sujeto normado.
+Este desplazamiento de la construcción simbólica de la realidad también es material, No asistimos al nacimiento de una nueva clase social, sino a la lumpen proletarización del trabajador intelectual, quien ahora es despojado del control sobre sus condiciones de producción. Esto cobra sentido al observar la actual crisis del empleo en Chile, la cual ya no es un fenómeno transitorio, sino una característica estructural y permanente del capitalismo contemporáneo. La cesantía no opera como un error o una falla del sistema que deba solucionarse para mejorar la vida de las personas; al contrario, es una realidad construida por el propio diseño sistémico, donde ya no se trata de constituir un “ejército industrial de reserva”, sino de cómo el capital busca resolver el problema de gestionar el “excedente humano”, el obsoleto que él mismo produce. 
+
+Es en este engranaje donde se solidifica el nuevo margen: hoy en Chile, uno de cada cuatro desempleados tiene estudios universitarios, una cifra que tiende a agudizarse de manera irreversible. Obligado a la supervivencia, este paria buscará refugio en el trabajo informal de las aplicaciones de plataformas, donde la sobre calificación carece de relevancia; allí, el trabajador se despoja de su condición jurídica para transformarse en un mero usuario que ofrece un servicio a otro usuario que paga por el tiempo de uso. Probablemente este paria no consuma pasta base, pero sí internaliza la violencia del sistema mediante el consumo de ansiolíticos y antidepresivos. Nos enfrentamos, entonces, a un margen de personas letradas cuyo conocimiento, ante el desarrollo de la automatización y el despliegue de la Inteligencia Artificial, está destinado a la obsolescencia. El nuevo “paria” normado y educado no es la anomalía del sistema, sino su producto más sofisticado. 

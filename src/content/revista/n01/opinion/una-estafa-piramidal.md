@@ -1,13 +1,13 @@
 ---
-title: "Una estafa piramidadl llamada Universidad"
+title: "Una estafa piramidal llamada Universidad"
 author: "Nico Castañeda"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Opinión"
 tags: ["columna", "estudiantes", "política", "universidad", "cooptación"]
 summary: "La deuda educativa y el CAE como esquema piramidal: la mercantilización de la universidad, la precarización estudiantil y los embargos del gobierno de José Kast."
-image: "/revista/imagenes/dieta-per-capita/suenos-de-micro.png"
-imageAlt: "Madre e hijo durmiendo en el metro de Santiago"
+image: "/revista/imagenes/estafa-piramidal/5888396717_f38d0f09f9_o.jpg"
+imageAlt: "Manifestación estudiantil con cartel «CREDITO»"
 issueNumber: "Nº 01"
 theme: "featured"
 slug: "una-estafa-piramidal-llamada-universidad"
@@ -16,9 +16,21 @@ _"¿Qué diferencia hay entre una mera obligación, el sentimiento de que uno de
 
 **_David Graeber. En Deuda_**
 
+![Manifestación estudiantil con cartel «CREDITO»](/revista/imagenes/estafa-piramidal/5888396717_f38d0f09f9_o.jpg)
+
+*Marcha estudiantil en las calles de Santiago. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
+
 Hace un par de décadas se consolidó el mito de la meritocracia y la movilidad social de las _"clases medias"_, una narrativa que presentaba a la educación universitaria como la vía individualizada por excelencia para superar la precariedad material. Esta promesa ocultaba cómo la educación superior, bajo el capitalismo tardío, no es una herramienta de movilidad social (ni mucho menos de emancipación), sino, que entre muchos otros aspectos, un mecanismo más de valorización, en donde el estudiante se ve forzado a producir y refinar su propia fuerza de trabajo como una mercancía altamente calificada, asumiendo individualmente el costo de su propia reproducción a través del endeudamiento.
-x
+
+![Mural: figura encadenada por un esquema financiero](/revista/imagenes/estafa-piramidal/3109463170_083ced74a9_o.jpg)
+
+*El endeudamiento como trampa: la deuda encadena el futuro laboral del estudiante. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
+
 Hoy, esta narrativa se ha desmoronado ante la terca realidad de la crisis estructural. La ilusión del ascenso social ha dado paso a la precarización profesional y a la asfixia financiera vía deuda. Este fenómeno se agudiza drásticamente bajo el gobierno de José Kast, cuyas políticas económicas ilustran a la perfección lo que David Harvey denomina acumulación por desposesión, en la cual ante el estancamiento de los mecanismos tradicionales de acumulación, el capitalismo contemporáneo recurre a la privatización y mercantilización de los bienes comunes, naturales y culturales para mantener sus tasas de ganancias. Al implementar el embargo de sueldos, cuentas bancarias y retenciones de devolución de impuestos a los deudores educativos, el Estado despoja de su máscara "civilizada" al contrato mercantil (Más de 1.500 personas habían sido embargadas al 8 de junio de 2026).
+
+![Manifestantes frente a carros lanza aguas en Santiago](/revista/imagenes/estafa-piramidal/5888641553_e2a316b76e_o.jpg)
+
+*Contra el cobro coercitivo: la respuesta en la calle. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
 Aquí el estudio superior y el crédito educativo para financiarlo este, revela su verdadera naturaleza: no es un vehículo de ascenso y movilidad social, sino una cadena de capital ficticio que subsume el trabajo futuro de la clase trabajadora. El Estado interviene activamente como el brazo coercitivo del capital para garantizar la extracción de plusvalía y la transferencia de riqueza desde los ingresos salariales de los trabajadores precarizados hacia las arcas del sector financiero, demostrando que en el capitalismo, la legalidad y el despojo son dos caras de la misma moneda. En otras palabras el sistema financiero revela su esencia de esquema Ponzi, el cual sobrevive mediante la emisión constante de nueva deuda para pagar obligaciones anteriores. Este modelo exige un crecimiento perpetuo e infinito que resulta estructuralmente insostenible a largo plazo.
 
@@ -33,5 +45,9 @@ Esta lógica corporativa es funcional a un sistema de acreditación que opera co
 Sin una formación de un proyecto de desarrollo social, la precarización del empleo a escala global no es un accidente o una anomalía, sino una estrategia deliberada del capital para contrarrestar la tendencia decreciente de la tasa de ganancia. Bajo los eufemismos ideológicos de «fomento», «flexibilización» o «regímenes de excepción», el Estado burgués fragmenta a la clase trabajadora (segmentándola por género, edad o cualificación) para devaluar sistemáticamente el valor de la fuerza de trabajo. Al institucionalizar la inestabilidad de los jóvenes, mujeres y profesionales recién egresados, el capital reduce sus costos de reproducción y maximiza la extracción de plusvalía absoluta, despojando al trabajo de sus conquistas históricas en favor de una explotación más intensiva.
 
 La deuda educativa dista de ser un mecanismo financiero neutral; constituye un dispositivo estructural de coerción invisible que precariza activamente la existencia de la clase trabajadora. Su mayor triunfo ha sido la hegemonía ideológica: disciplinar el sentido común para que la sociedad cuestione la moralidad del impago, mientras naturaliza la inmoralidad sistémica de condicionar los derechos sociales al endeudamiento privado.
+
+![Manifestantes con máscaras de figuras políticas](/revista/imagenes/estafa-piramidal/2761186189_82702a1670_o.jpg)
+
+*La máscara del «acceso»: cuando el crédito educativo oculta el despojo. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
 El embargo no es un mero trámite administrativo de cobro, sino la manifestación explícita de la violencia latente y coercitiva ya inscrita en la génesis de la deuda. Cuando el capital financiero adquiere el poder legal de confiscar el salario, intervenir cuentas bancarias y subordinar las decisiones futuras del deudor, se desmorona la máscara benefactora del Estado y el mercado. Lo que la doctrina oficial maquilla como una "oportunidad" de acceso, se revela como la subsunción y enajenación de la vida misma a través de la usura. Ellos saben que su estafa piramidal cae a pedazos y solo pueden sostenerla con la violencia y el engaño.

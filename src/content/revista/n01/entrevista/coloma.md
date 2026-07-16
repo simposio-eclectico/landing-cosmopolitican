@@ -4,6 +4,7 @@ author: "Jaime Coloma"
 pubDate: 2026-07-03
 category: "Contenido audiovisual"
 section: "Entrevistas"
+menuSection: "entrevistas"
 tags: ["entrevista", "video", "retail", "sindical", "lider"]
 summary: "Jaime Coloma entrevista a Natalia Duque, presidenta de la Federación Nacional de los Trabajadores del Lider, sobre su trayectoria y las condiciones laborales en el retail."
 image: "/revista/imagenes/entrevista/coloma-poster.png"

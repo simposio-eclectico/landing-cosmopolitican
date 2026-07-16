@@ -1,0 +1,165 @@
+---
+import ElegantLayout from "@layouts/ElegantLayout.astro";
+import { getCollection } from "astro:content";
+import {
+	MENU_SECTION_LABELS,
+	MENU_SECTIONS,
+	SITE_NAME,
+	type MenuSection,
+} from "@consts";
+import { getArticlesByMenuSection } from "@lib/revistaMenu";
+
+export async function getStaticPaths() {
+	return MENU_SECTIONS.map((menuSection) => ({
+		params: { menuSection },
+	}));
+}
+
+const { menuSection } = Astro.params as { menuSection: MenuSection };
+const revistas = await getCollection("revista");
+const sectionArticles = getArticlesByMenuSection(revistas, menuSection);
+const sectionLabel = MENU_SECTION_LABELS[menuSection];
+---
+
+<ElegantLayout title={`${sectionLabel} — ${SITE_NAME}`}>
+	<div class="archivo">
+		<header class="archivo__header">
+			<h1 class="archivo__titulo">{sectionLabel}</h1>
+			<p class="archivo__bajada">
+				{
+					sectionArticles.length === 0
+						? "Pronto habrá contenido en esta sección."
+						: `${sectionArticles.length} ${sectionArticles.length === 1 ? "pieza publicada" : "piezas publicadas"}.`
+				}
+			</p>
+		</header>
+
+		{
+			sectionArticles.length > 0 && (
+				<div class="archivo__grid">
+					{
+						sectionArticles.map((post) => (
+							<article class="archivo__card">
+								<a
+									href={`/revista/${post.data.slug || post.id}`}
+									class="archivo__card-link"
+								>
+									{
+										post.data.image && (
+											<img
+												src={post.data.image}
+												alt={post.data.imageAlt ?? post.data.title}
+												class="archivo__card-image"
+												loading="lazy"
+												width="400"
+												height="250"
+											/>
+										)
+									}
+									<div class="archivo__card-body">
+										<time
+											class="archivo__card-date"
+											datetime={post.data.pubDate.toISOString()}
+										>
+											{
+												post.data.pubDate.toLocaleDateString("es-ES", {
+													year: "numeric",
+													month: "long",
+													day: "numeric",
+												})
+											}
+										</time>
+										<h2 class="archivo__card-title">{post.data.title}</h2>
+										<p class="archivo__card-author">
+											por <em>{post.data.author}</em>
+										</p>
+										<p class="archivo__card-summary">{post.data.summary}</p>
+									</div>
+								</a>
+							</article>
+						))
+					}
+				</div>
+			)
+		}
+	</div>
+</ElegantLayout>
+
+<style>
+	.archivo {
+		max-width: var(--contenedor-max);
+		margin: 0 auto;
+		padding: 0 var(--padding-lateral);
+	}
+
+	.archivo__header {
+		margin-bottom: 3rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--color-separador);
+	}
+
+	.archivo__titulo {
+		font-size: clamp(28px, 4vw, 40px);
+		font-weight: 900;
+		color: var(--color-magenta);
+		margin-bottom: 0.5rem;
+	}
+
+	.archivo__bajada {
+		font-size: 16px;
+		color: var(--color-gris-txt);
+		margin: 0;
+	}
+
+	.archivo__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--gap-cards);
+	}
+
+	.archivo__card-link {
+		display: block;
+	}
+
+	.archivo__card-image {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		display: block;
+	}
+
+	.archivo__card-body {
+		margin-top: 12px;
+	}
+
+	.archivo__card-date {
+		display: block;
+		font-size: var(--size-fecha);
+		color: var(--color-gris-fecha);
+		margin-bottom: 6px;
+	}
+
+	.archivo__card-title {
+		font-size: var(--size-card-titulo);
+		font-weight: 700;
+		line-height: 1.25;
+		color: var(--color-magenta);
+		margin-bottom: 6px;
+		transition: color 0.15s ease;
+	}
+
+	.archivo__card-link:hover .archivo__card-title {
+		color: var(--color-magenta-hover);
+	}
+
+	.archivo__card-author {
+		font-size: 13px;
+		margin: 0 0 8px;
+	}
+
+	.archivo__card-summary {
+		font-size: 14px;
+		line-height: 1.6;
+		margin: 0;
+	}
+</style>

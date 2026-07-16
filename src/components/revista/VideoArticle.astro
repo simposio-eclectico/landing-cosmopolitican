@@ -4,6 +4,7 @@ import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import RelatedArticlesSidebar from "@components/revista/RelatedArticlesSidebar.astro";
 import VideoPlayer from "@components/revista/VideoPlayer.astro";
 import { formatDurationLabel, getVideoSeekUrl } from "@lib/videoArticle";
+import { MENU_SECTION_LABELS } from "@consts";
 import "@styles/articulo-video.css";
 
 interface Props {
@@ -16,7 +17,6 @@ const {
 	title,
 	author,
 	summary,
-	section,
 	image,
 	imageAlt,
 	duration = "",
@@ -30,7 +30,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 	day: "numeric",
 });
 
-const sideLabel = section.toUpperCase();
+const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
 const durationLabel = duration ? formatDurationLabel(duration) : "";
 ---
 

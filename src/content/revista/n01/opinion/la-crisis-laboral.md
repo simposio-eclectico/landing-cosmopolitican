@@ -4,6 +4,7 @@ author: "Francisco Tapia"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Opinión"
+menuSection: "columnas"
 tags: ["columna", "trabajadores", "política", "para", "cooptación"]
 summary: "Sobre la crisis laboral estructural en Chile, la obsolescencia de la fuerza de trabajo calificada y la emergencia del «paria letrado» ante el desempleo y la automatización."
 image: "/revista/imagenes/dieta-per-capita/suenos-de-micro.png"

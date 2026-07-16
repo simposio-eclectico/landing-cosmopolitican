@@ -11,6 +11,30 @@ export const CATEGORIES = {
 	AUDIOVISUAL: "Contenido audiovisual",
 } as const;
 
+export const MENU_SECTIONS = [
+	"reportajes",
+	"columnas",
+	"entrevistas",
+	"reels",
+	"podcast",
+] as const;
+
+export type MenuSection = (typeof MENU_SECTIONS)[number];
+
+export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
+	reportajes: "Reportajes",
+	columnas: "Columnas",
+	entrevistas: "Entrevistas",
+	reels: "Reels",
+	podcast: "Podcast",
+};
+
+export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.map((section) => ({
+	slug: section,
+	label: MENU_SECTION_LABELS[section],
+	href: `/revista/seccion/${section}`,
+}));
+
 export const CURRENT_ISSUE = {
 	number: "Nº 01",
 	title: "Cooptación",

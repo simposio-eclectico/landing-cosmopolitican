@@ -4,6 +4,7 @@ author: "Nico Castañeda"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Opinión"
+menuSection: "columnas"
 tags: ["columna", "estudiantes", "política", "universidad", "cooptación"]
 summary: "La deuda educativa y el CAE como esquema piramidal: la mercantilización de la universidad, la precarización estudiantil y los embargos del gobierno de José Kast."
 image: "/revista/imagenes/estafa-piramidal/5888396717_f38d0f09f9_o.jpg"

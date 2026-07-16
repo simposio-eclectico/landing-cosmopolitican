@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import { MENU_SECTION_LABELS } from "@consts";
+
 interface Props {
 	articles: CollectionEntry<"revista">[];
 	heading?: string;
@@ -30,7 +32,9 @@ const { articles, heading = "Más artículos que te pueden interesar" } = Astro.
 									/>
 								)}
 								<div class="relacionados__body">
-									<p class="relacionados__section">{article.data.section}</p>
+									<p class="relacionados__section">
+										{MENU_SECTION_LABELS[article.data.menuSection]}
+									</p>
 									<h3 class="relacionados__card-title">{article.data.title}</h3>
 								</div>
 							</a>

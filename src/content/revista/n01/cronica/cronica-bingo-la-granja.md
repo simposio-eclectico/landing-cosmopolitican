@@ -4,6 +4,7 @@ author: "Simposio Ecléctico"
 pubDate: 2026-05-01
 category: "Crónica"
 section: "Crónica"
+menuSection: "columnas"
 tags: ["cultura", "cumbia", "bolero", "bingo"]
 summary: "Recién salida de una operación, curcuma recorre Santiago para cantar en una picada centenaria y luego en un bingo solidario."
 image: "/revista/imagenes/bingo-la-granja/IMG-20260713-WA0017.jpg"

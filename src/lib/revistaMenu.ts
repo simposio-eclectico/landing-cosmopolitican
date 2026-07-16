@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
-import { CURRENT_ISSUE, type DrawerLinkStyle } from "@consts";
+import { CURRENT_ISSUE, type DrawerLinkStyle, type MenuSection } from "@consts";
 
 type RevistaTheme = CollectionEntry<"revista">["data"]["theme"];
 
@@ -83,6 +83,14 @@ export const getIssueArticles = (
 		.filter((article) => article.data.issueNumber === issueNumber)
 		.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
+export const getArticlesByMenuSection = (
+	articles: CollectionEntry<"revista">[],
+	menuSection: MenuSection,
+) =>
+	[...articles]
+		.filter((article) => article.data.menuSection === menuSection)
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
 export const getIssueSections = (
 	articles: CollectionEntry<"revista">[],
 	issueNumber: string = CURRENT_ISSUE.number,
@@ -157,10 +165,22 @@ export const getRelatedArticles = (
 	issueNumber: string = CURRENT_ISSUE.number,
 	limit = 3,
 ) => {
+	const currentArticle = articles.find((article) => article.id === currentArticleId);
 	const issueArticles = getIssueArticles(articles, issueNumber);
+	const sameMenuSection = issueArticles.filter(
+		(article) =>
+			article.id !== currentArticleId &&
+			article.data.menuSection === currentArticle?.data.menuSection,
+	);
+	const fallbackArticles = issueArticles.filter(
+		(article) => article.id !== currentArticleId,
+	);
 
-	return issueArticles
-		.filter((article) => article.id !== currentArticleId)
+	return [...sameMenuSection, ...fallbackArticles]
+		.filter(
+			(article, index, list) =>
+				list.findIndex((candidate) => candidate.id === article.id) === index,
+		)
 		.sort(compareArticles)
 		.slice(0, limit);
 };

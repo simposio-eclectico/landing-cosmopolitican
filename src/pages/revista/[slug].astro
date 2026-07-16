@@ -4,7 +4,7 @@ import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import VideoArticle from "@components/revista/VideoArticle.astro";
 import RelatedArticles from "@components/revista/RelatedArticles.astro";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
-import { SITE_NAME } from "@consts";
+import { SITE_NAME, MENU_SECTION_LABELS } from "@consts";
 import { formatWordCount, getReadingMeta } from "@lib/articuloMeta";
 import { getRelatedArticles } from "@lib/revistaMenu";
 import "@styles/articulo.css";
@@ -29,8 +29,8 @@ const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 	day: "numeric",
 });
 
-const sideLabel = post.data.section.toUpperCase();
-const relatedHeading = `Más ${post.data.section.toLowerCase()} que te pueden interesar`;
+const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
+const relatedHeading = `Más ${MENU_SECTION_LABELS[post.data.menuSection].toLowerCase()} que te pueden interesar`;
 const isVideoArticle = post.data.format === "video";
 ---
 

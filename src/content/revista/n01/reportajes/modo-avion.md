@@ -4,6 +4,7 @@ author: "Cosmopolitican"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Reportajes"
+menuSection: "reportajes"
 tags: ["manifiesto", "política", "movimientos", "cooptación"]
 summary: "Análisis crítico sobre la instrumentalización de las organizaciones y movimientos sociales durante el gobierno de Boric (2022-2026) y sus implicancias políticas."
 image: "/revista/imagenes/modo-avion/marcha-afps.jpg"

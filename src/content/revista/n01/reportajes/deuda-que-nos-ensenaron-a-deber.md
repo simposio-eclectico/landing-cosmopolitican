@@ -4,6 +4,7 @@ author: "Cosmopolitican"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Reportajes"
+menuSection: "reportajes"
 tags: ["reportaje", "educación", "cae", "deuda", "política", "cooptación"]
 summary: "Reportaje sobre el CAE como trampa financiera generacional: origen en la Concertación, negocio bancario, límites del movimiento estudiantil de 2011 y los embargos de la TGR en 2026."
 image: "/revista/imagenes/deuda-cae/paro-estudiantes-cae.jpg"

@@ -1,4 +1,4 @@
-import { SITE_NAME } from "@consts";
+import { MENU_SECTIONS, SITE_NAME } from "@consts";
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
@@ -32,6 +32,7 @@ const revista = defineCollection({
 			pubDate: z.coerce.date(),
 			category: z.string().optional(),
 			section: z.string().default("Edición"),
+			menuSection: z.enum(MENU_SECTIONS),
 			menuLabel: z.string().optional(),
 			tags: z.array(z.string()).default([]),
 			summary: z.string(),

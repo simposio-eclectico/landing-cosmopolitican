@@ -4,6 +4,7 @@ author: "Ana Tania Toro"
 pubDate: 2026-05-01
 category: "Contenido narrativo"
 section: "Opinión"
+menuSection: "columnas"
 tags: ["columna", "salud", "política", "aps", "cooptación"]
 summary: "Columna sobre el congelamiento del per cápita en la APS, las movilizaciones de la CONFUSAM y la brecha entre el discurso progresista del gobierno Boric y el financiamiento real de la atención primaria."
 image: "/revista/imagenes/dieta-per-capita/suenos-de-micro.png"

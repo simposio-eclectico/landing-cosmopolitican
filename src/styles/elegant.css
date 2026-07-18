@@ -50,7 +50,11 @@
 	--articulo-hero-altura: min(78vh, 640px);
 	--articulo-columna-ancho: 1240px;
 	--articulo-columna-padding: 40px;
-	--articulo-margen-ancho: 48px;
+	--video-articulo-fondo: #f6f3ec;
+	--video-articulo-texto: #1c1c1c;
+	--video-articulo-titulo-azul: #1f2d55;
+	--video-articulo-max-ancho: 1580px;
+	--video-articulo-padding: clamp(20px, 3vw, 56px);
 
 	--size-logo: 52px;
 	--size-h1-especial: clamp(40px, 4.5vw, 60px);

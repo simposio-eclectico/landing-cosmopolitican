@@ -7,12 +7,50 @@
 	--color-gris-txt: #555555;
 	--color-gris-fecha: #888888;
 	--color-gris-borde: #cccccc;
-	--color-nav-activo: #2a5c9a;
+	--color-nav-activo: #c4275f;
 	--color-nav-link: #333333;
 	--color-texto: #333333;
 	--color-separador: #eeeeee;
 
 	--font-principal: "Helvetica Neue", Arial, sans-serif;
+	--font-serif: "Lora", "Bodoni Moda", Georgia, serif;
+
+	--articulo-fondo: oklch(98% 0.006 80);
+	--articulo-texto: oklch(22% 0.02 260);
+	--articulo-cita-fondo: oklch(97% 0.008 80);
+	--articulo-cita-texto: oklch(24% 0.02 260);
+	--articulo-cita-borde: oklch(55% 0.19 350);
+	--articulo-cita-autor: oklch(45% 0.01 80);
+	--articulo-cita-columna-azul: oklch(35% 0.08 260);
+	--articulo-aside-fondo: oklch(96% 0.025 350);
+	--articulo-aside-borde: oklch(90% 0.03 350);
+	--articulo-aside-texto: oklch(30% 0.05 350);
+	--articulo-aside-autor: oklch(45% 0.05 350);
+	--articulo-tabla-borde: oklch(88% 0.01 80);
+	--articulo-tabla-head: oklch(96% 0.025 350);
+	--articulo-tabla-head-texto: oklch(30% 0.05 350);
+	--articulo-tabla-fila-borde: oklch(92% 0.01 80);
+	--articulo-tabla-celda-texto: oklch(32% 0.02 260);
+	--articulo-stat-fondo: oklch(99% 0.004 80);
+	--articulo-cierre-fondo: oklch(20% 0.03 350);
+	--articulo-cierre-texto: oklch(97% 0.02 350);
+	--articulo-hero-overlay: linear-gradient(
+		0deg,
+		oklch(10% 0 0 / 0.86) 0%,
+		oklch(10% 0 0 / 0.35) 45%,
+		oklch(10% 0 0 / 0) 72%
+	);
+	--articulo-hero-eyebrow: oklch(78% 0.19 350);
+	--articulo-hero-fecha: oklch(88% 0.01 80);
+	--articulo-hero-titulo: oklch(99% 0.004 80);
+	--articulo-hero-subtitulo: oklch(90% 0.02 350);
+	--articulo-hero-bajada: oklch(92% 0.006 80);
+	--articulo-hero-meta: oklch(82% 0.01 80);
+	--articulo-hero-autor: oklch(90% 0.03 350);
+	--articulo-hero-altura: min(78vh, 640px);
+	--articulo-columna-ancho: 1240px;
+	--articulo-columna-padding: 40px;
+	--articulo-margen-ancho: 48px;
 
 	--size-logo: 52px;
 	--size-h1-especial: clamp(40px, 4.5vw, 60px);

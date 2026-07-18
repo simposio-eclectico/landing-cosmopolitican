@@ -30,8 +30,10 @@ const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 });
 
 const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
+const marginLabel = `Sección de ${MENU_SECTION_LABELS[post.data.menuSection]}`;
 const relatedHeading = `Más ${MENU_SECTION_LABELS[post.data.menuSection].toLowerCase()} que te pueden interesar`;
 const isVideoArticle = post.data.format === "video";
+const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image);
 ---
 
 <ElegantLayout title={`${post.data.title} - ${SITE_NAME}`} bare>
@@ -42,73 +44,147 @@ const isVideoArticle = post.data.format === "video";
 			</VideoArticle>
 		) : (
 			<>
-				<ArticleSideLabel label={sideLabel} />
+				<article class:list={["articulo", { "articulo--portada": isFeaturedHero }]}>
+					<div class="articulo__layout">
+						<ArticleSideLabel label={marginLabel} />
 
-				<article class="articulo">
-					<div class="articulo__contenedor contenedor">
-						<header class="articulo__hero">
-							<div
-								class:list={[
-									"articulo__hero-grid",
-									{ "articulo__hero-grid--sin-imagen": !post.data.image },
-								]}
-							>
-								{
-									post.data.image && (
-										<figure class="articulo__hero-imagen">
-											<img
-												src={post.data.image}
-												alt={post.data.imageAlt ?? post.data.title}
-												width="560"
-												height="420"
-											/>
-										</figure>
-									)
-								}
+						<div class="articulo__columna">
+							{
+								isFeaturedHero && (
+									<header class="articulo__hero articulo__hero--portada">
+										<img
+											class="articulo__hero-portada-imagen"
+											src={post.data.image}
+											alt={post.data.imageAlt ?? post.data.title}
+											width="1440"
+											height="640"
+										/>
+										<div class="articulo__hero-portada-overlay" aria-hidden="true" />
+										<div class="articulo__hero-portada-contenido">
+											<div class="articulo__rubro articulo__rubro--portada">
+												<p class="articulo__eyebrow articulo__eyebrow--portada">{sideLabel}</p>
+												<span class="articulo__rubro-punto" aria-hidden="true">•</span>
+												<time
+													class="articulo__fecha articulo__fecha--portada"
+													datetime={post.data.pubDate.toISOString()}
+												>
+													{formattedDate}
+												</time>
+											</div>
 
-								<div class="articulo__hero-cabecera">
-									<div class="articulo__rubro">
-										<p class="articulo__eyebrow">{sideLabel}</p>
-										<span class="articulo__rubro-separador" aria-hidden="true" />
-										<time
-											class="articulo__fecha"
-											datetime={post.data.pubDate.toISOString()}
-										>
-											{formattedDate}
-										</time>
+											<h1 class="articulo__titulo articulo__titulo--portada">{post.data.title}</h1>
+											{
+												post.data.subtitle && (
+													<p class="articulo__subtitulo">{post.data.subtitle}</p>
+												)
+											}
+											<p class="articulo__bajada articulo__bajada--portada">{post.data.summary}</p>
+
+											<div class="articulo__meta articulo__meta--portada">
+												<span class="articulo__autor articulo__autor--portada">
+													por <em>{post.data.author}</em>
+												</span>
+												<span class="articulo__stat articulo__stat--portada" aria-label="Tiempo de lectura">
+													<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+														<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+														<path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+													</svg>
+													{minutes} min de lectura
+												</span>
+												<span class="articulo__stat articulo__stat--portada" aria-label="Cantidad de palabras">
+													<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+														<path d="M5 5h14v14H5z" stroke="currentColor" stroke-width="2" />
+														<path d="M9 9h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+													</svg>
+													{formatWordCount(words)} palabras aprox.
+												</span>
+											</div>
+										</div>
+									</header>
+								)
+							}
+
+							<div class="articulo__contenedor">
+						{
+							post.data.imageCaption && isFeaturedHero && (
+								<p class="articulo__hero-caption">{post.data.imageCaption}</p>
+							)
+						}
+
+						{
+							!isFeaturedHero && (
+								<header class="articulo__hero">
+									<div
+										class:list={[
+											"articulo__hero-grid",
+											{ "articulo__hero-grid--sin-imagen": !post.data.image },
+										]}
+									>
+										{
+											post.data.image && (
+												<figure class="articulo__hero-imagen">
+													<img
+														src={post.data.image}
+														alt={post.data.imageAlt ?? post.data.title}
+														width="560"
+														height="420"
+													/>
+												</figure>
+											)
+										}
+
+										<div class="articulo__hero-cabecera">
+											<div class="articulo__rubro">
+												<p class="articulo__eyebrow">{sideLabel}</p>
+												<span class="articulo__rubro-separador" aria-hidden="true" />
+												<time
+													class="articulo__fecha"
+													datetime={post.data.pubDate.toISOString()}
+												>
+													{formattedDate}
+												</time>
+											</div>
+
+											<h1 class="articulo__titulo">{post.data.title}</h1>
+											{
+												post.data.subtitle && (
+													<p class="articulo__subtitulo articulo__subtitulo--compacto">
+														{post.data.subtitle}
+													</p>
+												)
+											}
+											<p class="articulo__bajada">{post.data.summary}</p>
+
+											<div class="articulo__meta">
+												<span class="articulo__autor">
+													por <em>{post.data.author}</em>
+												</span>
+												<span class="articulo__stat" aria-label="Tiempo de lectura">
+													<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+														<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+														<path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+													</svg>
+													{minutes} min de lectura
+												</span>
+												<span class="articulo__stat" aria-label="Cantidad de palabras">
+													<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+														<path d="M5 5h14v14H5z" stroke="currentColor" stroke-width="2" />
+														<path d="M9 9h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+													</svg>
+													{formatWordCount(words)} palabras aprox.
+												</span>
+											</div>
+										</div>
+
+										<div class="articulo__deco" aria-hidden="true">
+											<span class="articulo__deco-circulo" />
+											<span class="articulo__deco-circulo" />
+											<span class="articulo__deco-circulo" />
+										</div>
 									</div>
-
-									<h1 class="articulo__titulo">{post.data.title}</h1>
-									<p class="articulo__bajada">{post.data.summary}</p>
-
-									<div class="articulo__meta">
-										<span class="articulo__autor">
-											por <em>{post.data.author}</em>
-										</span>
-										<span class="articulo__stat" aria-label="Tiempo de lectura">
-											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-												<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
-												<path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-											</svg>
-											{minutes} min de lectura
-										</span>
-										<span class="articulo__stat" aria-label="Cantidad de palabras">
-											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-												<path d="M5 5h14v14H5z" stroke="currentColor" stroke-width="2" />
-												<path d="M9 9h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-											</svg>
-											{formatWordCount(words)} palabras aprox.
-										</span>
-									</div>
-								</div>
-
-								<div class="articulo__deco" aria-hidden="true">
-									<span class="articulo__deco-circulo" />
-									<span class="articulo__deco-circulo" />
-									<span class="articulo__deco-circulo" />
-								</div>
-							</div>
-						</header>
+								</header>
+							)
+						}
 
 						<div class="articulo__cuerpo">
 							<div class="articulo__contenido">
@@ -120,6 +196,8 @@ const isVideoArticle = post.data.format === "video";
 							articles={relatedArticles}
 							heading={relatedHeading}
 						/>
+							</div>
+						</div>
 					</div>
 				</article>
 			</>

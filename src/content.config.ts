@@ -36,6 +36,8 @@ const revista = defineCollection({
 			menuLabel: z.string().optional(),
 			tags: z.array(z.string()).default([]),
 			summary: z.string(),
+			titleLead: z.string().optional(),
+			titleHighlight: z.string().optional(),
 			subtitle: z.string().optional(),
 			image: z.string().optional(),
 			imageAlt: z.string().optional(),

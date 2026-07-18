@@ -1,10 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import RelatedArticlesSidebar from "@components/revista/RelatedArticlesSidebar.astro";
 import VideoPlayer from "@components/revista/VideoPlayer.astro";
 import { formatDurationLabel, getVideoSeekUrl } from "@lib/videoArticle";
-import { MENU_SECTION_LABELS } from "@consts";
+import { MENU_SECTION_LABELS, SITE_NAME } from "@consts";
 import "@styles/articulo-video.css";
 
 interface Props {
@@ -15,6 +14,8 @@ interface Props {
 const { post, relatedArticles } = Astro.props;
 const {
 	title,
+	titleLead,
+	titleHighlight,
 	author,
 	summary,
 	image,
@@ -32,42 +33,113 @@ const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 
 const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
 const durationLabel = duration ? formatDurationLabel(duration) : "";
+const hasSplitTitle = Boolean(titleLead && titleHighlight);
 ---
 
-<ArticleSideLabel label={sideLabel} />
-
 <article class="video-articulo">
-	<div class="video-articulo__contenedor contenedor">
-		<header class="video-articulo__hero">
-			<div class="video-articulo__hero-grid">
-				<div class="video-articulo__media">
-					<p class="video-articulo__tipo">
-						<span class="icono-circulo" aria-hidden="true" />
-						Entrevista audiovisual
-					</p>
+	<div class="video-articulo__layout">
+		<aside class="video-articulo__rail" aria-hidden="true">
+			<div class="video-articulo__rail-sticky">
+				<span class="icono-circulo video-articulo__rail-icono" />
+				<div class="video-articulo__rail-linea" />
+				<span class="video-articulo__rail-texto">CRÓNICAS &amp; REPORTAJES</span>
+				<div class="video-articulo__rail-linea" />
+				<span class="video-articulo__rail-texto video-articulo__rail-texto--muted">FECHAS DE SENTIDO</span>
+			</div>
+		</aside>
+
+		<div class="video-articulo__columna">
+			<div class="video-articulo__tipo">
+				<span class="icono-circulo" aria-hidden="true" />
+				<span>Entrevista</span>
+			</div>
+
+			<div class="video-articulo__grid">
+				<div class="video-articulo__media-col">
 					<VideoPlayer
 						videoUrl={videoUrl}
 						poster={image}
 						posterAlt={imageAlt ?? title}
 						duration={durationLabel}
 					/>
+
+					{
+						transcriptionFragments.length > 0 && (
+							<section
+								class="video-articulo__fragmentos"
+								aria-labelledby="fragmentos-titulo"
+							>
+								<div class="video-articulo__fragmentos-cabecera">
+									<h2 id="fragmentos-titulo" class="video-articulo__fragmentos-titulo">
+										Fragmentos de la transcripción
+									</h2>
+								</div>
+
+								<div class="video-articulo__fragmentos-grid">
+									{
+										transcriptionFragments.map((fragment) => {
+											const seekUrl = getVideoSeekUrl(videoUrl, fragment.time);
+
+											return (
+												<article class="video-articulo__fragmento">
+													{
+														seekUrl ? (
+															<a href={seekUrl} class="video-articulo__fragmento-trigger">
+																<span class="video-articulo__fragmento-play" aria-hidden="true" />
+																<span class="video-articulo__fragmento-tiempo">
+																	{fragment.time}
+																</span>
+															</a>
+														) : (
+															<div class="video-articulo__fragmento-trigger">
+																<span class="video-articulo__fragmento-play" aria-hidden="true" />
+																<span class="video-articulo__fragmento-tiempo">
+																	{fragment.time}
+																</span>
+															</div>
+														)
+													}
+													<p class="video-articulo__fragmento-texto">
+														&ldquo;{fragment.text}&rdquo;
+													</p>
+												</article>
+											);
+										})
+									}
+								</div>
+							</section>
+						)
+					}
 				</div>
 
-				<div class="video-articulo__cabecera">
+				<div class="video-articulo__info-col">
+					<img
+						class="video-articulo__deco"
+						src="/revista/imagenes/cosmocan.png"
+						alt=""
+						width="180"
+						height="180"
+					/>
+
 					<div class="video-articulo__rubro">
-						<p class="video-articulo__eyebrow">{sideLabel}</p>
-						<span class="video-articulo__rubro-icono" aria-hidden="true">
-							<span class="icono-circulo" />
-						</span>
-						<time
-							class="video-articulo__fecha"
-							datetime={post.data.pubDate.toISOString()}
-						>
-							{formattedDate}
-						</time>
+						<span>{sideLabel}</span>
+						<span class="icono-circulo" aria-hidden="true" />
+						<time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
 					</div>
 
-					<h1 class="video-articulo__titulo">{title}</h1>
+					<h1 class="video-articulo__titulo">
+						{
+							hasSplitTitle ? (
+								<>
+									<span class="video-articulo__titulo-lead">{titleLead} </span>
+									<span class="video-articulo__titulo-highlight">{titleHighlight}</span>
+								</>
+							) : (
+								title
+							)
+						}
+					</h1>
+
 					<p class="video-articulo__bajada">{summary}</p>
 
 					<div class="video-articulo__meta">
@@ -77,78 +149,42 @@ const durationLabel = duration ? formatDurationLabel(duration) : "";
 						{
 							durationLabel && (
 								<>
-									<span class="video-articulo__meta-separador" aria-hidden="true" />
-									<span class="video-articulo__stat">
-										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-											<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
-											<path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-										</svg>
-										{durationLabel}
-									</span>
+									<span class="video-articulo__meta-separador" aria-hidden="true">|</span>
+									<span class="video-articulo__stat">{durationLabel}</span>
 								</>
 							)
 						}
 					</div>
 
+					<div class="video-articulo__separador" aria-hidden="true" />
+
 					<div class="video-articulo__intro">
 						<slot />
 					</div>
+
+					<RelatedArticlesSidebar
+						articles={relatedArticles}
+						heading="Más historias que te pueden interesar"
+					/>
 				</div>
 			</div>
-		</header>
 
-		<div class="video-articulo__cuerpo">
-			<section class="video-articulo__fragmentos" aria-labelledby="fragmentos-titulo">
-				<h2 id="fragmentos-titulo" class="video-articulo__fragmentos-titulo">
-					Fragmentos de la transcripción
-				</h2>
-
-				<div class="video-articulo__fragmentos-grid">
-					{
-						transcriptionFragments.map((fragment) => {
-							const seekUrl = getVideoSeekUrl(videoUrl, fragment.time);
-
-							return (
-								<article class="video-articulo__fragmento">
-									{
-										seekUrl ? (
-											<a href={seekUrl} class="video-articulo__fragmento-trigger">
-												<span class="video-articulo__fragmento-play" aria-hidden="true">
-													<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-														<path d="M8 5v14l11-7z" />
-													</svg>
-												</span>
-												<span class="video-articulo__fragmento-tiempo">
-													{fragment.time}
-												</span>
-											</a>
-										) : (
-											<div class="video-articulo__fragmento-trigger">
-												<span class="video-articulo__fragmento-play" aria-hidden="true">
-													<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-														<path d="M8 5v14l11-7z" />
-													</svg>
-												</span>
-												<span class="video-articulo__fragmento-tiempo">
-													{fragment.time}
-												</span>
-											</div>
-										)
-									}
-									<p class="video-articulo__fragmento-texto">{fragment.text}</p>
-								</article>
-							);
-						})
-					}
+			<footer class="video-articulo__pie">
+				<div class="video-articulo__pie-separador" aria-hidden="true" />
+				<div class="video-articulo__pie-grid">
+					<p class="video-articulo__pie-texto">
+						<span class="video-articulo__pie-marca">
+							<span class="icono-circulo" aria-hidden="true" />
+							{SITE_NAME.toUpperCase()}
+						</span>
+						es una revista independiente que apuesta por el periodismo de barrio, la memoria y las historias que importan.
+						<em>Si te gustó esta entrevista, compartila y leé más en nuestras Entrevistas.</em>
+					</p>
+					<a href="/revista/seccion/entrevistas" class="video-articulo__pie-cta">
+						→ Seguí viendo — Más entrevistas
+					</a>
 				</div>
-			</section>
-
-			<RelatedArticlesSidebar
-				articles={relatedArticles}
-				heading="Más historias que te pueden interesar"
-				archiveHref="/revista/numeros"
-				archiveLabel="Más entrevistas audiovisuales"
-			/>
+			</footer>
 		</div>
 	</div>
 </article>

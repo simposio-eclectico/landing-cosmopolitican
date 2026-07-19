@@ -50,6 +50,7 @@
 	--articulo-hero-altura: min(78vh, 640px);
 	--articulo-columna-ancho: 1240px;
 	--articulo-columna-padding: 40px;
+	--articulo-margen-ancho: 56px;
 	--video-articulo-fondo: #f6f3ec;
 	--video-articulo-texto: #1c1c1c;
 	--video-articulo-titulo-azul: #1f2d55;

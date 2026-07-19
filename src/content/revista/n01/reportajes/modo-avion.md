@@ -18,6 +18,11 @@ slug: "modo-avion"
 
 <div class="articulo__intro-grid">
 
+<aside class="articulo__aside">
+<p class="articulo__aside__cita">"Somos parte de una gran historia de luchas sociales que con nosotros no empieza ni termina."</p>
+<p class="articulo__aside__autor">Gabriel Boric, expresidente</p>
+</aside>
+
 <div class="articulo__intro-text">
 
 "A recuperar la FECH" fue uno de los llamados del entonces presidente Gabriel Boric (FA) en el marco de su visita a la Facultad de Derecho de la Universidad de Chile, a poco tiempo de dejar La Moneda. Días anteriores, en el cierre del Congreso Internacional de Negociación Ramal de la CUT, reivindicó las luchas laborales y, al mismo tiempo, distanciándose de sí mismo, afirmó: _"Somos parte de una gran historia de luchas sociales que con nosotros no empieza ni termina"_.
@@ -28,26 +33,11 @@ No haremos una larga historia, sino una fotografía móvil de estos últimos cua
 
 </div>
 
-<aside class="articulo__aside">
-<p>"Somos parte de una gran historia de luchas sociales que con nosotros no empieza ni termina."</p>
-<p>Gabriel Boric, expresidente</p>
-</aside>
-
 </div>
 
 ## Los pasos de Jara: el baile del retroceso
 
 <div class="articulo__side-row articulo__side-row--right">
-
-<div class="articulo__side-text">
-
-En abril del 2024 Jeanette Jara (PC), exministra del Trabajo, bailaba cumbia, junto a Camila Vallejos (PC), para celebrar la promulgación de la **Ley de 40 horas (ley 21.561)**. En TikTok e Instagram se viralizaron los pasos de lo que para el oficialismo fue un gran triunfo, cargado de emotividad. Sin embargo, el jolgorio no logró hacer desaparecer lo regresivo de esta política, identificado por varios análisis.
-
-Tomemos por caso lo expuesto por Fundación SOL: la reducción formal de la jornada, en realidad, disfraza de flexibilidad el control empresarial sobre los tiempos de trabajo, que permite intensificar semanas laborales y desplazar la negociación hacia "acuerdos" profundamente asimétricos entre empleadores y trabajadores. A ello se suma la posibilidad de compensar horas extraordinarias sin el recargo correspondiente. Tampoco es una medida capaz de abordar la persistente "pobreza de tiempo", que recae especialmente en mujeres.
-
-Más que una ampliación de los derechos laborales, la reforma reconfigura las condiciones de la negociación laboral, debilitando la posición de los trabajadores, bajo la apariencia de un avance. Como enuncia Andrea Sato en una columna en _Cooperativa_: "en un contexto donde sólo el 13% de las trabajadoras y trabajadores negocia colectivamente, esta ley otorga más control a los empleadores en términos de organización de la jornada"<sup>[\[1\]](#footnote-1)</sup>. Lo curioso es que ni los movimientos sociales ni las organizaciones de trabajadores ofrecieron resistencia.
-
-</div>
 
 <figure class="articulo__side-img">
 
@@ -61,6 +51,16 @@ Más que una ampliación de los derechos laborales, la reforma reconfigura las c
 </div>
 
 </figure>
+
+<div class="articulo__side-text">
+
+En abril del 2024 Jeanette Jara (PC), exministra del Trabajo, bailaba cumbia, junto a Camila Vallejos (PC), para celebrar la promulgación de la **Ley de 40 horas (ley 21.561)**. En TikTok e Instagram se viralizaron los pasos de lo que para el oficialismo fue un gran triunfo, cargado de emotividad. Sin embargo, el jolgorio no logró hacer desaparecer lo regresivo de esta política, identificado por varios análisis.
+
+Tomemos por caso lo expuesto por Fundación SOL: la reducción formal de la jornada, en realidad, disfraza de flexibilidad el control empresarial sobre los tiempos de trabajo, que permite intensificar semanas laborales y desplazar la negociación hacia "acuerdos" profundamente asimétricos entre empleadores y trabajadores. A ello se suma la posibilidad de compensar horas extraordinarias sin el recargo correspondiente. Tampoco es una medida capaz de abordar la persistente "pobreza de tiempo", que recae especialmente en mujeres.
+
+Más que una ampliación de los derechos laborales, la reforma reconfigura las condiciones de la negociación laboral, debilitando la posición de los trabajadores, bajo la apariencia de un avance. Como enuncia Andrea Sato en una columna en _Cooperativa_: "en un contexto donde sólo el 13% de las trabajadoras y trabajadores negocia colectivamente, esta ley otorga más control a los empleadores en términos de organización de la jornada"<sup>[\[1\]](#footnote-1)</sup>. Lo curioso es que ni los movimientos sociales ni las organizaciones de trabajadores ofrecieron resistencia.
+
+</div>
 
 </div>
 
@@ -146,14 +146,6 @@ Durante 2024 la situación no fue distinta. Durante el paro nacional de los día
 
 <div class="articulo__side-row articulo__side-row--right">
 
-<div class="articulo__side-text">
-
-Esto ha sucedido también frente a las crisis terminales en educación, como la huelga de hambre y el paro de meses de los profesores en el Servicio Local de Educación Pública (SLEP) de Atacama (2023-2024) o las recientes protestas por sueldos impagos en el SLEP Marga Marga (abril 2026). Algunas de estas movilizaciones fueron apoyadas por el Colegio de Profesores, como la situación de la escuela en Puerto Saavedra, que fue tomada por apoderados debido a las condiciones de infraestructura del establecimiento.
-
-Asimismo, la organización dirigida por el profesor Carlos Díaz Marchant (PH) inició el 2023 un paro indefinido en los meses de julio-agosto basado en diversas demandas (pago de la Deuda Histórica, pago de bonos de retiro atrasados, cambio al modelo de financiamiento de la educación, revisión de la Jornada Escolar Completa, entre otras). Las movilizaciones se reanudaron en 2024 a causa de bonos impagos y, en marzo, se convocó a un paro nacional. Un mes después, _El Mercurio_ se quejaba del quinto llamado a paralización del año<sup>[\[7\]](#footnote-7)</sup>, lo que se repitió en agosto. Para 2025, pese a la situación crítica, solo hubo un "paro nacional de advertencia" el 15 de mayo, y, luego, el 4 y 5 de junio, una huelga nacional que duró 48 horas.
-
-</div>
-
 <figure class="articulo__side-img">
 
 ![Funcionarias de la Ajunji marchan con pancarta](/revista/imagenes/modo-avion/chiquillas-ajunji.jpg)
@@ -161,6 +153,14 @@ Asimismo, la organización dirigida por el profesor Carlos Díaz Marchant (PH) i
 <figcaption>Funcionarias de la Junta Nacional de Jardines Infantiles (Ajunji) marchan por sus demandas gremiales. Foto: Christian c, <a href="https://creativecommons.org/licenses/by-nc/2.0/">CC BY-NC 2.0</a>.</figcaption>
 
 </figure>
+
+<div class="articulo__side-text">
+
+Esto ha sucedido también frente a las crisis terminales en educación, como la huelga de hambre y el paro de meses de los profesores en el Servicio Local de Educación Pública (SLEP) de Atacama (2023-2024) o las recientes protestas por sueldos impagos en el SLEP Marga Marga (abril 2026). Algunas de estas movilizaciones fueron apoyadas por el Colegio de Profesores, como la situación de la escuela en Puerto Saavedra, que fue tomada por apoderados debido a las condiciones de infraestructura del establecimiento.
+
+Asimismo, la organización dirigida por el profesor Carlos Díaz Marchant (PH) inició el 2023 un paro indefinido en los meses de julio-agosto basado en diversas demandas (pago de la Deuda Histórica, pago de bonos de retiro atrasados, cambio al modelo de financiamiento de la educación, revisión de la Jornada Escolar Completa, entre otras). Las movilizaciones se reanudaron en 2024 a causa de bonos impagos y, en marzo, se convocó a un paro nacional. Un mes después, _El Mercurio_ se quejaba del quinto llamado a paralización del año<sup>[\[7\]](#footnote-7)</sup>, lo que se repitió en agosto. Para 2025, pese a la situación crítica, solo hubo un "paro nacional de advertencia" el 15 de mayo, y, luego, el 4 y 5 de junio, una huelga nacional que duró 48 horas.
+
+</div>
 
 </div>
 

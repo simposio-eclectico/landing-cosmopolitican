@@ -48,7 +48,3 @@ Al final, la estrategia es clara: mantener la APS en estado de desnutrición, mi
 <blockquote class="articulo__cita articulo__cita--columna articulo__cita--columna-invertida">
 <p>"El Gobierno pone los hashtags y sus logos, mientras el Chile real sigue esperando que la prioridad se traduzca en pesos."</p>
 </blockquote>
-
-<div class="articulo__firma">
-<p>Escrito por <strong>Ana Tania Toro</strong> para Cosmopolitican, tu revista con clase.</p>
-</div>

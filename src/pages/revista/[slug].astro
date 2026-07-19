@@ -30,7 +30,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 });
 
 const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
-const marginLabel = `Sección de ${MENU_SECTION_LABELS[post.data.menuSection]}`;
+const marginLabel = `${MENU_SECTION_LABELS[post.data.menuSection]}`;
 const relatedHeading = `Más ${MENU_SECTION_LABELS[post.data.menuSection].toLowerCase()} que te pueden interesar`;
 const isVideoArticle = post.data.format === "video";
 const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image);
@@ -189,6 +189,9 @@ const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image
 						<div class="articulo__cuerpo">
 							<div class="articulo__contenido">
 								<Content />
+							</div>
+							<div class="articulo__firma">
+								<p>Escrito por <strong>{post.data.author}</strong> para Cosmopolitican, tu revista con clase.</p>
 							</div>
 						</div>
 

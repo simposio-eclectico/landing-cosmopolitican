@@ -27,7 +27,17 @@ Hace un par de décadas se consolidó el mito de la meritocracia y la movilidad 
 
 *El endeudamiento como trampa: la deuda encadena el futuro laboral del estudiante. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
-Hoy, esta narrativa se ha desmoronado ante la terca realidad de la crisis estructural. La ilusión del ascenso social ha dado paso a la precarización profesional y a la asfixia financiera vía deuda. Este fenómeno se agudiza drásticamente bajo el gobierno de José Kast, cuyas políticas económicas ilustran a la perfección lo que David Harvey denomina acumulación por desposesión, en la cual ante el estancamiento de los mecanismos tradicionales de acumulación, el capitalismo contemporáneo recurre a la privatización y mercantilización de los bienes comunes, naturales y culturales para mantener sus tasas de ganancias. Al implementar el embargo de sueldos, cuentas bancarias y retenciones de devolución de impuestos a los deudores educativos, el Estado despoja de su máscara "civilizada" al contrato mercantil (Más de 1.500 personas habían sido embargadas al 8 de junio de 2026).
+<aside class="articulo__aside">
+
+<p class="articulo__aside__label">El dato</p>
+
+<p class="articulo__aside__num">Más de 1.500</p>
+
+<p class="articulo__aside__texto">personas habían sido embargadas por deuda educativa al 8 de junio de 2026.</p>
+
+</aside>
+
+Hoy, esta narrativa se ha desmoronado ante la terca realidad de la crisis estructural. La ilusión del ascenso social ha dado paso a la precarización profesional y a la asfixia financiera vía deuda. Este fenómeno se agudiza drásticamente bajo el gobierno de José Kast, cuyas políticas económicas ilustran a la perfección lo que David Harvey denomina acumulación por desposesión, en la cual ante el estancamiento de los mecanismos tradicionales de acumulación, el capitalismo contemporáneo recurre a la privatización y mercantilización de los bienes comunes, naturales y culturales para mantener sus tasas de ganancias. Al implementar el embargo de sueldos, cuentas bancarias y retenciones de devolución de impuestos a los deudores educativos, el Estado despoja de su máscara "civilizada" al contrato mercantil.
 
 ![Manifestantes frente a carros lanza aguas en Santiago](/revista/imagenes/estafa-piramidal/5888641553_e2a316b76e_o.jpg)
 

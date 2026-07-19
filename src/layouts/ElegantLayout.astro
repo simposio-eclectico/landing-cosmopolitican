@@ -168,15 +168,6 @@ const isNavActive = (href: string, match?: (path: string) => boolean) => {
 					/>
 					<span class="site-footer__tagline">{SITE_SLOGAN}</span>
 				</div>
-				<nav class="site-footer__links" aria-label="Pie de página">
-					<a href="/">Inicio</a>
-					<button type="button" id="footer-latest-issue-btn" class="site-footer__btn">
-						Último número
-					</button>
-					<a href="/revista/numeros">Archivo</a>
-					<a href="/quienes-somos">Somos</a>
-					<a href="/contacto">Contacto</a>
-				</nav>
 				<p class="site-footer__copy">
 					© {new Date().getFullYear()} {SITE_NAME}
 				</p>
@@ -437,36 +428,6 @@ const isNavActive = (href: string, match?: (path: string) => boolean) => {
 	.site-footer__tagline {
 		font-size: 12px;
 		color: #aaaaaa;
-	}
-
-	.site-footer__links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1.25rem;
-	}
-
-	.site-footer__links a,
-	.site-footer__btn {
-		font-size: 12px;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: #aaaaaa;
-		background: none;
-		border: none;
-		padding: 0;
-		cursor: pointer;
-		transition: color 0.15s ease;
-	}
-
-	.site-footer__links a:hover,
-	.site-footer__btn:hover {
-		color: var(--color-magenta);
-	}
-
-	.site-footer__copy {
-		font-size: 12px;
-		color: #666666;
-		margin: 0;
 	}
 
 	.drawer-overlay {

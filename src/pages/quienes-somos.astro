@@ -1,221 +1,206 @@
 ---
+import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
-import { SITE_TITLE } from "@consts";
+import { SITE_NAME, SITE_SLOGAN, SITE_TITLE } from "@consts";
+import "@styles/articulo.css";
+
+const heroImage = "/revista/imagenes/somos/nino-y-ventana.jpg";
+const heroImageAlt =
+	"Un niño se asoma por la ventana de una construcción de ladrillo a medio terminar";
 ---
 
-<ElegantLayout title={`Quiénes Somos - ${SITE_TITLE}`}>
-  <article class="about-container">
-    <div
-      class="block-header"
-      style="transform: rotate(calc(var(--c-rotate) * 0.5));"
-    >
-      EL COLECTIVO
-    </div>
+<ElegantLayout title={`Somos - ${SITE_TITLE}`} bare>
+	<article class="articulo articulo--portada somos">
+		<div class="articulo__layout">
+			<ArticleSideLabel label="Somos" />
 
-    <div class="manifesto-grid">
-      <div class="manifesto-text">
-        <h1 class="giant-heading">NOSOTROS</h1>
-        <div class="thick-divider"></div>
+			<div class="articulo__columna">
+				<header class="articulo__hero articulo__hero--portada">
+					<img
+						class="articulo__hero-portada-imagen somos__hero-imagen"
+						src={heroImage}
+						alt={heroImageAlt}
+						width="1440"
+						height="680"
+					/>
+					<div class="articulo__hero-portada-overlay" aria-hidden="true" />
+					<img
+						class="somos__mascota"
+						src="/revista/imagenes/cosmocan.png"
+						alt=""
+						width="150"
+						height="150"
+						aria-hidden="true"
+					/>
+					<div class="articulo__hero-portada-contenido">
+						<div class="articulo__rubro articulo__rubro--portada">
+							<p class="articulo__eyebrow articulo__eyebrow--portada">Editorial</p>
+							<span class="articulo__rubro-punto" aria-hidden="true">•</span>
+							<span class="articulo__fecha articulo__fecha--portada">Quiénes somos</span>
+						</div>
+						<h1 class="articulo__titulo articulo__titulo--portada">Somos</h1>
+					</div>
+				</header>
 
-        <p class="dropcap-paragraph">
-          SOMOS LA EXPRESIÓN de que nos sobraba tiempo y nos faltaba de qué
-          quejarnos. No creemos en el arte por el arte, ni en los lindos
-          ideales. Cosmopolitican es una "fractura del pensamiento hegemónico",
-          ni decimos lo que sabes ni sabemos como hablar.
-        </p>
+				<div class="articulo__contenedor">
+					<div class="articulo__cuerpo somos__cuerpo">
+						<div class="articulo__contenido">
+							<p>
+								Cosmopolitican es una revista, o algo parecido: reportajes, entrevistas y
+								crónicas a la antigua, pero también memes, reels y otros intentos por no
+								volvernos anticuados.
+							</p>
 
-        <p>
-          Reivindicamos el derecho a la crítica política sin tener que usar
-          palabras de seis sílabas. Nuestra labor es la fina síntesis entre el
-          análisis fundamentado, el descontento popular y las ideas que se
-          puedan robar. Creamos una revista que, si bien no promete nada, ni
-          partido ni postura, al menos deja al <em>sistema</em> en ridículo un rato.
-          Y podemos prometer algo: somos tu revista con clase.
-        </p>
+							<p>
+								Nacimos porque nos sobraba algo de tiempo y nos faltaban espacios donde
+								quejarnos. Pero hay algo más que la queja: pensar la posibilidad de que las
+								cosas sean distintas.
+							</p>
 
-        <blockquote class="construct-quote">
-          <div class="quote-mark">"</div>
-          COSMOPOLITICAN. TU REVISTA CON CLASE.
-        </blockquote>
-      </div>
+							<blockquote class="articulo__cita articulo__cita--columna">
+								<p>
+									Una voluntad cruza todas estas palabras e imágenes: llevar a escena el
+									único glamour posible, el glamour de clase.
+								</p>
+							</blockquote>
 
-      <div class="manifesto-sidebar">
-        <div class="geo-panel">
-          <h3>3 PILARES</h3>
-          <ul class="pillar-list">
-            <li><span>1.</span> QUEJA CON ESTILO</li>
-            <li><span>2.</span> CERO PRESUPUESTO</li>
-            <li><span>3.</span> MEMES SUBVERSIVOS</li>
-          </ul>
-        </div>
-        <div class="geo-shape-container">
-          <div class="geo-triangle-big"></div>
-          <div class="geo-circle-small"></div>
-        </div>
-      </div>
-    </div>
-  </article>
+							<p>
+								El de quienes trabajan, se endeudan, esperan la micro, cargan bolsas,
+								responden correos y llevan la vida sobre los hombros.
+							</p>
+
+							<figure class="articulo__figura">
+								<img
+									src="/revista/imagenes/somos/sillon-cara.jpg"
+									alt="Un sillón con una cara pintada, frente a un muro con un mural, en blanco y negro"
+									width="820"
+									height="460"
+								/>
+								<figcaption>
+									El sillón nos mira igual que nosotros a la ciudad.
+								</figcaption>
+							</figure>
+
+							<p>
+								Mientras las imágenes del mundo insisten en mostrarnos paisajes irreales,
+								cuerpos perfectos y la riqueza de unos pocos, acá buscamos otro brillo: el
+								de la vida cotidiana, con sus contradicciones y cansancios, pero también con
+								la oscuridad de las injusticias que no se cuentan.
+							</p>
+
+							<div class="articulo__fig-grid">
+								<figure class="articulo__figura">
+									<img
+										src="/revista/imagenes/somos/gato-tele.jpg"
+										alt="Un gato callejero junto a un televisor en desuso, en una calle de barrio"
+										width="520"
+										height="340"
+									/>
+									<figcaption>
+										La vida cotidiana también mira de reojo.
+									</figcaption>
+								</figure>
+								<figure class="articulo__figura">
+									<img
+										src="/revista/imagenes/somos/nino-en-su-vola.jpg"
+										alt="Un niño gesticulando frente a un muro con grafitis"
+										width="520"
+										height="340"
+									/>
+									<figcaption>
+										Reivindicamos el derecho a la crítica sin palabras de seis sílabas.
+									</figcaption>
+								</figure>
+							</div>
+
+							<p>
+								Reivindicamos el derecho a la crítica política sin tener que usar palabras
+								de seis sílabas. Nuestra labor es una síntesis —no siempre fina— entre el
+								análisis fundamentado, el descontento popular, el humor y las ideas que se
+								puedan tomar prestadas, como casi todo.
+							</p>
+
+							<blockquote
+								class="articulo__cita articulo__cita--columna articulo__cita--columna-invertida"
+							>
+								<p>
+									Anunciamos: esto es un ensayo, pero podemos prometer una cosa: somos una
+									revista con clase.
+								</p>
+							</blockquote>
+
+							<div class="somos__cierre">
+								<img
+									src="/logo.png"
+									alt={SITE_NAME}
+									width="34"
+									height="34"
+								/>
+								<p>{SITE_NAME}, {SITE_SLOGAN.toLowerCase()}.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
 </ElegantLayout>
 
 <style>
-  .about-container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+	.somos__hero-imagen {
+		filter: grayscale(15%) contrast(1.08) saturate(1.05) brightness(0.94);
+	}
 
-  .manifesto-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
-    margin-top: 2rem;
-  }
+	.somos__mascota {
+		position: absolute;
+		right: 18px;
+		top: 14px;
+		z-index: 2;
+		width: clamp(90px, 12vw, 150px);
+		height: auto;
+		opacity: 0.85;
+		transform: rotate(4deg);
+		filter: brightness(0) invert(1);
+		pointer-events: none;
+	}
 
-  .giant-heading {
-    font-size: clamp(4rem, 10vw, 8rem);
-    margin: 0;
-    line-height: 0.8;
-    background-color: var(--c-black);
-    color: var(--c-bg);
-    padding: 1rem;
-    display: inline-block;
-  }
+	.somos .articulo__titulo--portada {
+		font-size: clamp(3rem, 9vw, 7rem);
+		line-height: 0.95;
+		text-shadow: 0 2px 18px oklch(0% 0 0 / 0.35);
+	}
 
-  .thick-divider {
-    height: 12px;
-    background-color: var(--c-hot);
-    margin: 2rem 0;
-    width: 60%;
-  }
+	.somos__cuerpo {
+		margin: 0 auto;
+		max-width: 820px;
+	}
 
-  :global(.theme-elegant) .thick-divider {
-    height: 2px;
-    width: 100%;
-  }
+	.somos__cierre {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin: 3.5rem 0 2.5rem;
+		font-size: 0.82rem;
+		line-height: 1.5;
+		color: var(--color-gris-txt);
+	}
 
-  .dropcap-paragraph::first-letter {
-    float: left;
-    font-size: 5rem;
-    line-height: 0.8;
-    padding-top: 4px;
-    padding-right: 8px;
-    padding-left: 3px;
-    font-family: var(--c-font-display);
-    color: var(--c-hot);
-    font-weight: bold;
-  }
+	.somos__cierre img {
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		flex-shrink: 0;
+		object-fit: cover;
+	}
 
-  .manifesto-text p {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
+	.somos__cierre p {
+		margin: 0;
+	}
 
-  .construct-quote {
-    position: relative;
-    font-size: 2rem;
-    line-height: 1.2;
-    padding: 3rem;
-    margin: 4rem 0 2rem 0;
-    background-color: var(--c-bg);
-    border: var(--c-border-thick);
-    box-shadow: var(--c-shadow-pop);
-    font-family: var(--c-font-display);
-  }
-
-  :global(.theme-elegant) .construct-quote {
-    box-shadow: none;
-    border-width: 1px;
-    background-color: var(--c-bg);
-  }
-
-  .quote-mark {
-    position: absolute;
-    top: -40px;
-    left: 10px;
-    font-size: 8rem;
-    line-height: 1;
-    color: var(--c-hot);
-    font-family: "Arial Black", sans-serif;
-  }
-
-  /* Sidebar */
-  .manifesto-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .geo-panel {
-    background-color: var(--c-black);
-    color: var(--c-bg);
-    padding: 2rem;
-    border-left: 12px solid var(--c-hot);
-  }
-
-  .geo-panel h3 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--c-hot);
-    border-bottom: 4px solid var(--c-bg);
-    padding-bottom: 0.5rem;
-  }
-
-  .pillar-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .pillar-list li {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    text-transform: uppercase;
-    font-family: var(--c-font-display);
-  }
-
-  .pillar-list li span {
-    color: var(--c-hot);
-    font-size: 2rem;
-    margin-right: 1rem;
-  }
-
-  .geo-shape-container {
-    position: relative;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .geo-triangle-big {
-    width: 0;
-    height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 200px solid var(--c-hot);
-    transform: rotate(15deg);
-    position: absolute;
-  }
-
-  .geo-circle-small {
-    width: 80px;
-    height: 80px;
-    background-color: var(--c-black);
-    border-radius: 50%;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-  }
-
-  :global(.theme-elegant) .geo-shape-container {
-    display: none;
-  }
-
-  @media (max-width: 900px) {
-    .manifesto-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+	@media (max-width: 620px) {
+		.somos .articulo__hero--portada {
+			margin-left: calc(-1 * var(--articulo-columna-padding));
+			margin-right: calc(-1 * var(--articulo-columna-padding));
+		}
+	}
 </style>

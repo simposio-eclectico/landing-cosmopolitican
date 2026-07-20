@@ -14,7 +14,7 @@ theme: "featured"
 slug: "deuda-que-nos-ensenaron-a-deber"
 ---
 
-**El CAE, la banca y el movimiento estudiantil que nunca llegó a ser**
+### El CAE, la banca y el movimiento estudiantil que nunca llegó a ser
 
 _Un instrumento creado por la Concertación, aplaudido en silencio por la izquierda emergente y convertido en la mayor trampa financiera de una generación entera de jóvenes chilenos._
 
@@ -22,7 +22,7 @@ _Un instrumento creado por la Concertación, aplaudido en silencio por la izquie
 
 *«Pa' morir de viejos no de endeudados. + Estado — Mercado.» Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
-**El precio del título**
+### El precio del título
 
 Camila tiene 38 años y trabaja como diseñadora gráfica en una agencia de Santiago. Terminó su carrera hace seis años en una universidad privada de tamaño mediano, la misma que le prometió movilidad social, empleabilidad y un futuro a la altura de su esfuerzo. Hoy debe algo más de ocho millones de pesos por el Crédito con Aval del Estado (CAE) que tomó para financiar su título. En los últimos dos años ha caído en mora. Hace unas semanas, revisó su cuenta bancaria y no había nada. La Tesorería General de la República había ejecutado una retención. No fue avisada. No tuvo tiempo de prepararse. El arriendo del mes quedó impago.
 
@@ -36,7 +36,7 @@ Para entender cómo se llegó a esto, hay que retroceder veinte años y mirar co
 
 *El costo invisible del endeudamiento: la vida cotidiana sigue corriendo mientras la deuda consume. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
-**El origen: la Concertación como continuidad disfrazada**
+## El origen: la Concertación como continuidad disfrazada
 
 El CAE nació en 2005, durante el segundo mandato de Ricardo Lagos, con Sergio Bitar como ministro de Educación. La Ley 20.027, que le dio forma, fue presentada como una solución al problema del acceso: miles de jóvenes querían estudiar en la educación superior pero no tenían recursos para pagar los aranceles. El Estado, se argumentó, no contaba con fondos suficientes para financiarlos directamente. La solución fue externalizar ese financiamiento: los bancos privados prestarían el dinero, el Estado avalaría los créditos y los estudiantes pagarían de vuelta una vez egresados.
 
@@ -48,7 +48,7 @@ Según el análisis de Fundación SOL, en 1990 el Aporte Fiscal Directo a las un
 
 Como describe Fundación SOL en su informe de 2024: _«Con la creación del CAE el año 2005, en el gobierno de Ricardo Lagos, con Sergio Bitar como Ministro de Educación, se estructura la estocada final a la gobernanza del sistema de educación superior chileno y se consolida el endeudamiento como el medio para acceder al soñado título universitario o técnico»_.
 
-**El negocio de los bancos: riesgo cero, ganancia asegurada**
+### El negocio de los bancos: riesgo cero, ganancia asegurada
 
 El diseño del CAE es, desde el punto de vista financiero, casi perfecto para la banca. Y casi perfecto en sentido contrario para el estudiante.
 
@@ -58,7 +58,7 @@ El resultado es transparente en los números: entre 2006 y 2023, el Estado chile
 
 La paradoja es reveladora: en la discusión sobre condonar las deudas estudiantiles, uno de los principales acreedores ya no es la banca privada -que sistemáticamente ha ido vendiendo su cartera al Estado- sino el propio fisco. El Estado ha comprado los créditos, se ha convertido en acreedor, y aun así mantiene el mecanismo que le obliga a seguir haciéndolo.
 
-**Endeudar para privatizar: el CAE como motor del negocio educativo**
+### Endeudar para privatizar: el CAE como motor del negocio educativo
 
 El CAE no solo endeudó a los estudiantes. También remodeló el mapa de la educación superior chilena, acelerando su privatización de un modo que ningún gobierno anterior había logrado.
 
@@ -74,7 +74,7 @@ La gratuidad implementada desde 2016 bajo el segundo gobierno de Bachelet no des
 
 *La continuidad institucional que la gratuidad no interrumpió. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
-**La generación de los rehenes**
+### La generación de los rehenes
 
 El costo humano de este experimento no está en los balances bancarios. Está en las trayectorias de vida de cientos de miles de personas jóvenes que creyeron en la promesa del título como ascensor social.
 
@@ -84,7 +84,7 @@ La morosidad ha alcanzado niveles que el propio diseño del instrumento hacía p
 
 El endeudamiento estudiantil no es solo un problema financiero. Es, como señala Fundación SOL, un _«mecanismo subjetivo de sujeción»_: genera culpa, angustia, y la sensación de que el fracaso es individual. El deudor moroso no experimenta su situación como el resultado de una política pública fallida, sino como una derrota personal. Esa es, precisamente, la función ideológica de la deuda en un sistema que convirtió la educación en bien de consumo.
 
-**2011: la gran rebelión y sus límites**
+### 2011: la gran rebelión y sus límites
 
 ![Estudiantes en las calles de Valparaíso](/revista/imagenes/deuda-cae/estudiantes-valparaiso.jpg)
 
@@ -106,7 +106,7 @@ La jornada del 25 y 26 de agosto fue la más masiva del ciclo. Debería haber si
 
 *La alianza obrera-estudiantil que el movimiento prometió y no logró sostener. Foto: Christian c, [CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/).*
 
-**De la marcha a la lista parlamentaria: el Frente Amplio como heredero incómodo**
+### De la marcha a la lista parlamentaria: el Frente Amplio como heredero incómodo
 
 El trayecto desde las marchas de 2011 hasta La Moneda fue más corto de lo que muchos esperaban, y más cómodo de lo que el movimiento hubiera tolerado.
 
@@ -116,7 +116,7 @@ La FECH reflejó también esa trayectoria. Según La Izquierda Diario, _«años 
 
 En 2021, Boric ganó la presidencia con el apoyo de esa misma generación. Uno de sus compromisos más recordados fue la condonación del CAE. En una entrevista en TVN en diciembre de 2021 reiteró el compromiso. En la cuenta pública de 2022 volvió a mencionarlo. Al término de su mandato, la condonación no había ocurrido. La deuda superaba los 7,3 billones de pesos. Los mismos parlamentarios del Frente Amplio que habían emergido del movimiento estudiantil presentaban oficios y proyectos de ley para _humanizar_ los cobros de una deuda que habían prometido eliminar.
 
-**2026: el Estado persigue a quienes endeudó**
+### 2026: el Estado persigue a quienes endeudó
 
 ![Hombre leyendo el diario en la calle, Santiago](/revista/imagenes/deuda-cae/lector-calle.jpg)
 
@@ -136,7 +136,7 @@ La Tesorería anunció además el inicio de embargos sobre bienes raíces, comen
 
 La bancada del Frente Amplio, los mismos que prometieron la condonación, reaccionó presentando un oficio a la TGR y un proyecto de ley para «humanizar» el proceso. La presidenta del FA, Constanza Martínez, escribió en X que _«el clasismo de este gobierno no solo es evidente: es inmoral»_. Tenía razón. Pero la ironía política es que la facultad que permite esos embargos fue perfeccionada durante la administración del mismo partido al que ella pertenece.
 
-**El número que lo dice todo**
+### El número que lo dice todo
 
 Hay una cifra que sintetiza la historia del CAE mejor que cualquier argumento político: entre 2006 y 2023, el Estado chileno gastó **7,25 billones de pesos** en recompras de créditos a la banca. La deuda total vigente del CAE a diciembre de 2023 es de **7,35 billones de pesos**.
 
@@ -144,7 +144,7 @@ El Estado ha gastado en beneficiar a los bancos casi exactamente lo mismo que ho
 
 Lo que Chile gastó en sostener ese negocio durante casi dos décadas habría alcanzado para transformar estructuralmente el sistema educativo. En cambio, financió la deuda de una generación. Y esa misma generación está siendo perseguida hoy, con embargo en mano, por el Estado que la endeudó.
 
-**Sin cierre: la deuda sigue corriendo**
+### Sin cierre: la deuda sigue corriendo
 
 Camila revisó su cuenta el viernes. Estaba vacía. El arriendo del mes quedó sin pagar. Su historia no comenzó con Kast ni con la TGR: comenzó en 2005, con una ley firmada por Lagos y Bitar; continuó con cada gobierno que amplió el sistema sin cuestionarlo; pasó por el movimiento estudiantil que prometió cambiarlo y terminó administrándolo; y llegó hasta hoy, cuando el Estado que creó la deuda, que comprándola a la banca se convirtió en acreedor, y que prometió condonarla, la cobra con embargos sobre sueldos y propiedades.
 
@@ -152,6 +152,6 @@ El CAE ha sobrevivido a seis presidentes, a la Revolución Pingüina, al movimie
 
 **El problema no es técnico. Es político. Y la cuenta la pagan, como siempre, los de abajo.**
 
-**Fuentes**
+### Fuentes
 
 Fundación SOL, «CAE: Endeudamiento, Privatización y Negocio Bancario» (2024). - José Miguel Salazar, «El largo viaje: Cambio en la coordinación de la educación superior chilena, 1980-2016», Archivos Analíticos de Políticas Educativas, Vol. 25 (2017). - Salazar y Leihy, «El Manual Invisible», Archivos Analíticos de Políticas Educativas, Vol. 21 (2013). - Yuri Peña, «El declive del movimiento estudiantil universitario en Chile» (La Izquierda Diario, 2018). - La Izquierda Diario Chile, «A 10 años del 4 de agosto de 2011» (2021). - Sergio Gresz Toso, «Chile: el movimiento estudiantil en la encrucijada» (SinPermiso, enero 2012). - Scielo, «Fracturas y representación política en el movimiento estudiantil: Chile 2011». - BioBioChile, «Me dejaron en pelota: Deudores del CAE denuncian que TGR y bancos embargaron 100% de su dinero» (junio 2026). - Emol, «Bancada del FA oficia a la TGR por embargo de totalidad de fondos» (junio 2026). - La Tercera, «FA cuestiona embargos a deudores del CAE» (junio 2026). - TGR, comunicados de cobro CAE (abril-junio 2026). - Corte Suprema Rol N° 187.906-2023 (fallo 8 marzo 2024). - CMF, Informe Endeudamiento 2023. - INJUV, Encuesta Nacional de Juventud. - DICOM-Equifax-USS, 43° Informe de Deuda Morosa, 4° trimestre 2023. - DIPRES, informes de ejecución presupuestaria.

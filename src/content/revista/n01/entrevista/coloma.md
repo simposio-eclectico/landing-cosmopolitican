@@ -1,7 +1,7 @@
 ---
-title: '"Ven y cuéntame la verdad: en el supermercado el sueldo no alcanza"'
-titleLead: '"Ven y cuéntame la verdad:'
-titleHighlight: 'en el supermercado el sueldo no alcanza"'
+title: 'Ven y cuéntame la verdad'
+titleLead: 'Ven y cuéntame la verdad:'
+titleHighlight: '"en el supermercado el sueldo no alcanza"'
 author: "Jaime Coloma"
 pubDate: 2026-07-03
 category: "Contenido audiovisual"

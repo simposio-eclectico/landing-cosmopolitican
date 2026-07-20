@@ -37,9 +37,8 @@ No haremos una larga historia, sino una fotografía móvil de estos últimos cua
 
 ## Los pasos de Jara: el baile del retroceso
 
-<div class="articulo__side-row articulo__side-row--right">
 
-<figure class="articulo__side-img">
+<figure class="articulo__side-img--right">
 
 ![Marcha contra las AFPs en Santiago](/revista/imagenes/modo-avion/marcha-afps.jpg)
 
@@ -52,15 +51,11 @@ No haremos una larga historia, sino una fotografía móvil de estos últimos cua
 
 </figure>
 
-<div class="articulo__side-text">
-
 En abril del 2024 Jeanette Jara (PC), exministra del Trabajo, bailaba cumbia, junto a Camila Vallejos (PC), para celebrar la promulgación de la **Ley de 40 horas (ley 21.561)**. En TikTok e Instagram se viralizaron los pasos de lo que para el oficialismo fue un gran triunfo, cargado de emotividad. Sin embargo, el jolgorio no logró hacer desaparecer lo regresivo de esta política, identificado por varios análisis.
 
 Tomemos por caso lo expuesto por Fundación SOL: la reducción formal de la jornada, en realidad, disfraza de flexibilidad el control empresarial sobre los tiempos de trabajo, que permite intensificar semanas laborales y desplazar la negociación hacia "acuerdos" profundamente asimétricos entre empleadores y trabajadores. A ello se suma la posibilidad de compensar horas extraordinarias sin el recargo correspondiente. Tampoco es una medida capaz de abordar la persistente "pobreza de tiempo", que recae especialmente en mujeres.
 
 Más que una ampliación de los derechos laborales, la reforma reconfigura las condiciones de la negociación laboral, debilitando la posición de los trabajadores, bajo la apariencia de un avance. Como enuncia Andrea Sato en una columna en _Cooperativa_: "en un contexto donde sólo el 13% de las trabajadoras y trabajadores negocia colectivamente, esta ley otorga más control a los empleadores en términos de organización de la jornada"<sup>[\[1\]](#footnote-1)</sup>. Lo curioso es que ni los movimientos sociales ni las organizaciones de trabajadores ofrecieron resistencia.
-
-</div>
 
 </div>
 
@@ -117,9 +112,7 @@ A pesar de la percepción de pasividad social, el período 2022-2026 ha estado m
 
 ### Salud primaria: paros reiterados sin solución estructural
 
-<div class="articulo__side-row articulo__side-row--left">
-
-<figure class="articulo__side-img">
+<figure class="articulo__side-img--left">
 
 ![Trabajadora de salud primaria durante una marcha](/revista/imagenes/modo-avion/paro-nacional-trabajadores-2.jpg)
 
@@ -127,13 +120,9 @@ A pesar de la percepción de pasividad social, el período 2022-2026 ha estado m
 
 </figure>
 
-<div class="articulo__side-text">
-
 Ejemplo de ello son las movilizaciones de los trabajadores de la salud primaria (Confusam). En marzo de 2023, el paro de la atención primaria estuvo motivado por los problemas en la aplicación de la Ley de Retiro, las Metas Sanitarias, el Bono Trato Usuario y, aún más grave, por el no pago del Bono por Desempeño Difícil<sup>[\[3\]](#footnote-3)</sup>. Luego, en agosto del mismo año, la movilización estuvo motivada por los atrasos en el incentivo al retiro —que han provocado el fallecimiento de algunos funcionarios mientras esperaban esta bonificación—, la violencia ejercida por delincuentes contra los trabajadores del área, y las descoordinaciones en la entrega de la asignación por trato al usuario<sup>[\[4\]](#footnote-4)</sup>. Posteriormente, desde el 27 al 29 de septiembre, Confusam convocó un paro nacional de funcionarios de salud municipal en rechazo a las insuficientes respuestas del Gobierno y al desfinanciamiento del sector, manteniendo turnos éticos en atención primaria. A lo anterior, se suman el despido de miles de funcionarios de la salud.
 
 Durante 2024 la situación no fue distinta. Durante el paro nacional de los días 17 y 18 de abril, se denunciaron múltiples fallas en el sistema de salud: retraso en el pago del incentivo al retiro —con más de dos mil trabajadores en espera y 42 fallecidos sin recibirlo—; condiciones deficientes y barreras burocráticas; violencia creciente contra el personal (agresiones, secuestro de ambulancias y daños a infraestructura) sin protección adecuada; y la ausencia de implementación de la ley de trato usuario en Atención Primaria, lo que consolidó aún más las desigualdades laborales<sup>[\[5\]](#footnote-5)</sup>. Luego, en septiembre del mismo año, la Confusam llamó a un paro de tres días por el aumento de las agresiones al personal, la demora en el pago del incentivo al retiro y el deficiente funcionamiento de las plataformas tecnológicas de gestión en atención primaria.
-
-</div>
 
 </div>
 
@@ -146,7 +135,7 @@ Durante 2024 la situación no fue distinta. Durante el paro nacional de los día
 
 <div class="articulo__side-row articulo__side-row--right">
 
-<figure class="articulo__side-img">
+<figure class="articulo__side-img--right">
 
 ![Funcionarias de la Ajunji marchan con pancarta](/revista/imagenes/modo-avion/chiquillas-ajunji.jpg)
 
@@ -154,13 +143,9 @@ Durante 2024 la situación no fue distinta. Durante el paro nacional de los día
 
 </figure>
 
-<div class="articulo__side-text">
-
 Esto ha sucedido también frente a las crisis terminales en educación, como la huelga de hambre y el paro de meses de los profesores en el Servicio Local de Educación Pública (SLEP) de Atacama (2023-2024) o las recientes protestas por sueldos impagos en el SLEP Marga Marga (abril 2026). Algunas de estas movilizaciones fueron apoyadas por el Colegio de Profesores, como la situación de la escuela en Puerto Saavedra, que fue tomada por apoderados debido a las condiciones de infraestructura del establecimiento.
 
 Asimismo, la organización dirigida por el profesor Carlos Díaz Marchant (PH) inició el 2023 un paro indefinido en los meses de julio-agosto basado en diversas demandas (pago de la Deuda Histórica, pago de bonos de retiro atrasados, cambio al modelo de financiamiento de la educación, revisión de la Jornada Escolar Completa, entre otras). Las movilizaciones se reanudaron en 2024 a causa de bonos impagos y, en marzo, se convocó a un paro nacional. Un mes después, _El Mercurio_ se quejaba del quinto llamado a paralización del año<sup>[\[7\]](#footnote-7)</sup>, lo que se repitió en agosto. Para 2025, pese a la situación crítica, solo hubo un "paro nacional de advertencia" el 15 de mayo, y, luego, el 4 y 5 de junio, una huelga nacional que duró 48 horas.
-
-</div>
 
 </div>
 

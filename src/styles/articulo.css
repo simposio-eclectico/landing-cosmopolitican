@@ -411,29 +411,26 @@
 	margin: 2rem 0 2.5rem;
 }
 
-.articulo__side-text p:last-child {
-	margin-bottom: 0;
-}
-
-.articulo__side-img {
+.articulo__side-img--right {
 	float: right;
 	width: min(300px, 38%);
 	margin: 0 0 1rem 2rem;
 }
 
-.articulo__side-row--left .articulo__side-img {
+.articulo__side-img--left {
 	float: left;
+	width: min(300px, 38%);
 	margin: 0 2rem 1rem 0;
 }
 
-.articulo__side-img img {
+.articulo__side-img--right img, .articulo__side-img--left img {
 	width: 100%;
 	margin: 0;
 	display: block;
 	object-fit: cover;
 }
 
-.articulo__side-img figcaption {
+.articulo__side-img--right figcaption, .articulo__side-img--left figcaption {
 	margin: 0.5rem 0 0;
 	font-size: 13px;
 	line-height: 1.5;
@@ -504,11 +501,33 @@
 	font-style: italic;
 }
 
+.articulo__figura--3-2 {
+	max-width: 540px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.articulo__figura--3-2 img {
+	aspect-ratio: 3 / 2;
+	max-height: none;
+	height: auto;
+	object-fit: cover;
+}
+
+.articulo__figura--16-10 img {
+	aspect-ratio: 16 / 10;
+	max-height: none;
+	height: auto;
+	object-fit: cover;
+	object-position: center 33%;
+}
+
 .articulo__fig-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 	gap: 16px;
 	margin: 2.25rem 0;
+	width: 100%;
 }
 
 .articulo__fig-grid .articulo__figura {
@@ -855,7 +874,7 @@
 		margin: 0 0 1.5rem;
 	}
 
-	.articulo__side-img {
+	.articulo__side-img--left, .articulo__side-img--right {
 		float: none;
 		width: 100%;
 		margin: 0 0 1.5rem;

@@ -16,26 +16,30 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 
 <section class="hero-especial">
 	<div class="hero-especial__imagen">
-		{
-			image ? (
-				<div class="hero-especial__foto-wrap">
-					<Image
-						src={image}
-						alt={imageAlt ?? title}
-						class="hero-especial__foto"
-						width={600}
-						height={600}
-					/>
-				</div>
-			) : (
-				<div class="hero-especial__foto-wrap hero-especial__foto-wrap--placeholder" />
-			)
-		}
+		<a href={href} class="hero-especial__imagen-link">
+			{
+				image ? (
+					<div class="hero-especial__foto-wrap">
+						<Image
+							src={image}
+							alt={imageAlt ?? title}
+							class="hero-especial__foto"
+							width={600}
+							height={600}
+						/>
+					</div>
+				) : (
+					<div class="hero-especial__foto-wrap hero-especial__foto-wrap--placeholder" />
+				)
+			}
+		</a>
 	</div>
 	<div class="hero-especial__contenido">
 		<p class="hero-especial__eyebrow">{eyebrow}</p>
 		<div class="hero-especial__bloque">
-			<h1 class="hero-especial__titulo">{title}</h1>
+			<h1 class="hero-especial__titulo">
+				<a href={href}>{title}</a>
+			</h1>
 		</div>
 		<p class="hero-especial__bajada">{summary}</p>
 		<a href={href} class="hero-especial__cta">
@@ -57,6 +61,15 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 	.hero-especial__imagen {
 		display: flex;
 		justify-content: center;
+	}
+
+	.hero-especial__imagen-link {
+		display: block;
+	}
+
+	.hero-especial__imagen-link:hover .hero-especial__foto {
+		transform: scale(1.03);
+		transition: transform 0.3s ease;
 	}
 
 	.hero-especial__foto-wrap {
@@ -102,7 +115,15 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 		font-size: var(--size-h1-especial);
 		font-weight: 900;
 		line-height: 1.1;
+	}
+
+	.hero-especial__titulo a {
 		color: var(--color-negro);
+		transition: color 0.15s ease;
+	}
+
+	.hero-especial__titulo a:hover {
+		color: var(--color-magenta);
 	}
 
 	.hero-especial__bajada {

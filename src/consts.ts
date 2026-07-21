@@ -33,6 +33,23 @@ export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	internacional: "Internacional",
 };
 
+export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
+	editorial:
+		"La palabra de la redacción en cada número: contexto, tono y punto de partida de la edición.",
+	reportajes:
+		"Historias largas desde el terreno: investigación, crónica y mirada de clase sobre lo que pasa.",
+	columnas:
+		"Opinión, crónica y texto breve: reflexiones sobre trabajo, barrio y política cotidiana.",
+	entrevistas:
+		"Conversaciones con quienes piensan, organizan y disputan el presente.",
+	reels:
+		"Fragmentos breves en video: memes, clips y otras formas de no volvernos anticuados.",
+	podcast:
+		"Episodios de audio para escuchar en la micro, en el turno o donde caiga.",
+	internacional:
+		"Miradas desde y hacia afuera: conflictos, solidaridades y debates globales.",
+};
+
 export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.filter(
 	(section) => section !== "editorial",
 ).map((section) => ({

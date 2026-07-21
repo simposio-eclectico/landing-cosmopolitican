@@ -3,6 +3,7 @@ import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import {
+	MENU_SECTION_DESCRIPTIONS,
 	MENU_SECTION_LABELS,
 	MENU_SECTIONS,
 	SITE_NAME,
@@ -20,19 +21,14 @@ const { menuSection } = Astro.params as { menuSection: MenuSection };
 const revistas = await getCollection("revista");
 const sectionArticles = getArticlesByMenuSection(revistas, menuSection);
 const sectionLabel = MENU_SECTION_LABELS[menuSection];
+const sectionDescription = MENU_SECTION_DESCRIPTIONS[menuSection];
 ---
 
 <ElegantLayout title={`${sectionLabel} — ${SITE_NAME}`}>
 	<div class="archivo">
 		<header class="archivo__header">
 			<h1 class="archivo__titulo">{sectionLabel}</h1>
-			<p class="archivo__bajada">
-				{
-					sectionArticles.length === 0
-						? "Pronto habrá contenido en esta sección."
-						: `${sectionArticles.length} ${sectionArticles.length === 1 ? "pieza publicada" : "piezas publicadas"}.`
-				}
-			</p>
+			<p class="archivo__bajada">{sectionDescription}</p>
 		</header>
 
 		{

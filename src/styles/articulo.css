@@ -377,6 +377,18 @@
 	margin-bottom: 2.5rem;
 }
 
+.articulo__nota-editorial {
+	margin: 0 0 2rem;
+	padding: 1.375rem 1.375rem 1.375rem 2rem;
+	border-radius: 12px;
+	background: oklch(90% 0.05 350);
+	font-family: var(--font-serif);
+	font-size: 15px;
+	font-style: italic;
+	line-height: 1.6;
+	color: oklch(25% 0 0);
+}
+
 .articulo__aside {
 	float: right;
 	width: min(280px, 36%);

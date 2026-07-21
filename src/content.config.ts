@@ -25,7 +25,7 @@ const transcriptionFragmentSchema = z.object({
 
 const revista = defineCollection({
 	loader: glob({ base: "./src/content/revista", pattern: "**/*.{md,mdx}" }),
-	schema: () =>
+	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
 			author: z.string().default(SITE_NAME),
@@ -39,7 +39,7 @@ const revista = defineCollection({
 			titleLead: z.string().optional(),
 			titleHighlight: z.string().optional(),
 			subtitle: z.string().optional(),
-			image: z.string().optional(),
+			image: z.optional(image()),
 			imageAlt: z.string().optional(),
 			imageCaption: z.string().optional(),
 			imageCredit: z.string().optional(),

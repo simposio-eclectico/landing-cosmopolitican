@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 import ArticleOriginalLink from "@components/revista/ArticleOriginalLink.astro";
 import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import ArticleHeroCaption from "@components/revista/ArticleHeroCaption.astro";
@@ -74,12 +75,12 @@ const showHeroCaption = Boolean(
 							{
 								isFeaturedHero && (
 									<header class="articulo__hero articulo__hero--portada">
-										<img
+										<Image
 											class="articulo__hero-portada-imagen"
-											src={post.data.image}
+											src={post.data.image!}
 											alt={heroImageAlt}
-											width="1440"
-											height="640"
+											width={1440}
+											height={640}
 										/>
 										<div class="articulo__hero-portada-overlay" aria-hidden="true" />
 										<div class="articulo__hero-portada-contenido">

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 import { MENU_SECTION_LABELS } from "@consts";
@@ -22,13 +23,13 @@ const { articles, heading = "Más artículos que te pueden interesar" } = Astro.
 						<article class="relacionados__card">
 							<a href={href} class="relacionados__link">
 								{article.data.image && (
-									<img
+									<Image
 										src={article.data.image}
 										alt={article.data.imageAlt ?? article.data.title}
 										class="relacionados__image"
 										loading="lazy"
-										width="320"
-										height="200"
+										width={320}
+										height={200}
 									/>
 								)}
 								<div class="relacionados__body">

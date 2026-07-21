@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { formatDurationLabel } from "@lib/videoArticle";
 
@@ -35,13 +36,13 @@ const {
 							<a href={href} class="relacionados-sidebar__link">
 								{
 									article.data.image && (
-										<img
+										<Image
 											src={article.data.image}
 											alt={article.data.imageAlt ?? article.data.title}
 											class="relacionados-sidebar__image"
 											loading="lazy"
-											width="120"
-											height="80"
+											width={120}
+											height={80}
 										/>
 									)
 								}

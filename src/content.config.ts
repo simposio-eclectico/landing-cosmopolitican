@@ -55,6 +55,7 @@ const revista = defineCollection({
 				.array(transcriptionFragmentSchema)
 				.default([]),
 			customStyles: z.string().optional(),
+			originalUrl: z.string().url().optional(),
 		})
 		.refine((data) => !data.image || Boolean(data.imageAlt), {
 			message: "imageAlt es obligatorio cuando hay image",

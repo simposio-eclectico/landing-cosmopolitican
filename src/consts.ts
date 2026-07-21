@@ -17,6 +17,7 @@ export const MENU_SECTIONS = [
 	"entrevistas",
 	"reels",
 	"podcast",
+	"internacional",
 ] as const;
 
 export type MenuSection = (typeof MENU_SECTIONS)[number];
@@ -27,6 +28,7 @@ export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	entrevistas: "Entrevistas",
 	reels: "Reels",
 	podcast: "Podcast",
+	internacional: "Internacional",
 };
 
 export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.map((section) => ({

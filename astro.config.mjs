@@ -7,5 +7,12 @@ import { defineConfig } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://cosmopolitican.cl",
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx({
+			components: {
+				ArticleFigure: "./src/components/revista/ArticleFigure.astro",
+			},
+		}),
+		sitemap(),
+	],
 });

@@ -42,6 +42,9 @@ const revista = defineCollection({
 			image: z.string().optional(),
 			imageAlt: z.string().optional(),
 			imageCaption: z.string().optional(),
+			imageCredit: z.string().optional(),
+			imageLicense: z.string().optional(),
+			imageLicenseUrl: z.string().url().optional(),
 			slug: z.string().optional(),
 			issueNumber: z.string(),
 			theme: z.enum(["default", "featured", "dark"]).default("default"),
@@ -52,6 +55,24 @@ const revista = defineCollection({
 				.array(transcriptionFragmentSchema)
 				.default([]),
 			customStyles: z.string().optional(),
+		})
+		.refine((data) => !data.image || Boolean(data.imageAlt), {
+			message: "imageAlt es obligatorio cuando hay image",
+			path: ["imageAlt"],
+		})
+		.refine(
+			(data) =>
+				!data.image ||
+				data.theme !== "featured" ||
+				Boolean(data.imageCaption),
+			{
+				message: "imageCaption es obligatorio en artículos featured con image",
+				path: ["imageCaption"],
+			},
+		)
+		.refine((data) => !data.imageLicense || Boolean(data.imageCredit), {
+			message: "imageCredit es obligatorio cuando hay imageLicense",
+			path: ["imageCredit"],
 		}),
 });
 

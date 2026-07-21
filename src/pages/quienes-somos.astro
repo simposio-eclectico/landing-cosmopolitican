@@ -1,5 +1,6 @@
 ---
 import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
+import ArticleFigure from "@components/revista/ArticleFigure.astro";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { SITE_NAME, SITE_SLOGAN, SITE_TITLE } from "@consts";
 import "@styles/articulo.css";
@@ -69,17 +70,13 @@ const heroImageAlt =
 								responden correos y llevan la vida sobre los hombros.
 							</p>
 
-							<figure class="articulo__figura">
-								<img
-									src="/revista/imagenes/somos/sillon-cara.jpg"
-									alt="Un sillón con una cara pintada, frente a un muro con un mural, en blanco y negro"
-									width="820"
-									height="460"
-								/>
-								<figcaption>
-									El sillón nos mira igual que nosotros a la ciudad.
-								</figcaption>
-							</figure>
+							<ArticleFigure
+								src="/revista/imagenes/somos/sillon-cara.jpg"
+								alt="Un sillón con una cara pintada, frente a un muro con un mural, en blanco y negro"
+								caption="El sillón nos mira igual que nosotros a la ciudad."
+								width={820}
+								height={460}
+							/>
 
 							<p>
 								Mientras las imágenes del mundo insisten en mostrarnos paisajes irreales,
@@ -89,28 +86,20 @@ const heroImageAlt =
 							</p>
 
 							<div class="articulo__fig-grid">
-								<figure class="articulo__figura">
-									<img
-										src="/revista/imagenes/somos/gato-tele.jpg"
-										alt="Un gato callejero junto a un televisor en desuso, en una calle de barrio"
-										width="520"
-										height="340"
-									/>
-									<figcaption>
-										La vida cotidiana también mira de reojo.
-									</figcaption>
-								</figure>
-								<figure class="articulo__figura">
-									<img
-										src="/revista/imagenes/somos/nino-en-su-vola.jpg"
-										alt="Un niño gesticulando frente a un muro con grafitis"
-										width="520"
-										height="340"
-									/>
-									<figcaption>
-										Reivindicamos el derecho a la crítica sin palabras de seis sílabas.
-									</figcaption>
-								</figure>
+								<ArticleFigure
+									src="/revista/imagenes/somos/gato-tele.jpg"
+									alt="Un gato callejero junto a un televisor en desuso, en una calle de barrio"
+									caption="La vida cotidiana también mira de reojo."
+									width={520}
+									height={340}
+								/>
+								<ArticleFigure
+									src="/revista/imagenes/somos/nino-en-su-vola.jpg"
+									alt="Un niño gesticulando frente a un muro con grafitis"
+									caption="Reivindicamos el derecho a la crítica sin palabras de seis sílabas."
+									width={520}
+									height={340}
+								/>
 							</div>
 
 							<p>

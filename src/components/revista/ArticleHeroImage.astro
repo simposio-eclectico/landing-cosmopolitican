@@ -1,0 +1,25 @@
+---
+import ArticleHeroCaption from "@components/revista/ArticleHeroCaption.astro";
+
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+	credit?: string;
+	license?: string;
+	licenseUrl?: string;
+}
+
+const { src, alt, caption, credit, license, licenseUrl } = Astro.props;
+---
+
+<figure class="articulo__hero-imagen">
+	<img src={src} alt={alt} width="560" height="420" />
+	<ArticleHeroCaption
+		as="figcaption"
+		caption={caption}
+		credit={credit}
+		license={license}
+		licenseUrl={licenseUrl}
+	/>
+</figure>

@@ -15,12 +15,16 @@ import { getCollection } from "astro:content";
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
+	imageAlt?: string;
 	bare?: boolean;
 }
 
 const {
 	title = SITE_TITLE,
 	description = SITE_DESCRIPTION,
+	image,
+	imageAlt,
 	bare = false,
 } = Astro.props;
 
@@ -54,7 +58,12 @@ const isNavActive = (href: string, match?: (path: string) => boolean) => {
 <!doctype html>
 <html lang="es">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			image={image}
+			imageAlt={imageAlt}
+		/>
 	</head>
 	<body>
 		<header class="site-header">

@@ -185,19 +185,19 @@ const isNavActive = (href: string, match?: (path: string) => boolean) => {
 
 		<footer class="site-footer">
 			<div class="site-footer__inner contenedor">
-				<div class="site-footer__brand">
-					<img
-						src="/logo.png"
-						alt={SITE_NAME}
-						class="nav-brand__logo nav-brand__logo--small"
-						width="519"
-						height="617"
-					/>
-					<span class="site-footer__tagline">{SITE_SLOGAN}</span>
-				</div>
-				<p class="site-footer__copy">
+				<a href="/" class="site-footer__brand">
+						<img
+							src="/logo.png"
+							alt={SITE_NAME}
+							class="nav-brand__logo nav-brand__logo--small"
+							width="519"
+							height="617"
+						/>
+						<span class="site-footer__tagline">{SITE_SLOGAN}</span>
+					</a>
+				<a href="/" class="site-footer__copy">
 					© {new Date().getFullYear()} {SITE_NAME}
-				</p>
+				</a>
 			</div>
 		</footer>
 

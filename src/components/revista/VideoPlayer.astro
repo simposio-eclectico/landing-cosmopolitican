@@ -1,4 +1,6 @@
 ---
+import { isYoutubeVideoUrl } from "@lib/videoArticle";
+
 interface Props {
 	videoUrl?: string;
 	poster?: string;
@@ -8,8 +10,7 @@ interface Props {
 
 const { videoUrl = "", poster, posterAlt = "", duration } = Astro.props;
 
-const isYoutube =
-	videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be");
+const isYoutube = isYoutubeVideoUrl(videoUrl);
 
 const youtubeEmbedUrl = (() => {
 	if (!isYoutube) {
@@ -32,7 +33,7 @@ const youtubeEmbedUrl = (() => {
 <div class="video-player" data-video-player>
 	{
 		isYoutube && youtubeEmbedUrl ? (
-			<div class="video-player__embed" hidden data-video-embed>
+			<div class="video-player__embed">
 				<iframe
 					src={youtubeEmbedUrl}
 					title={posterAlt}
@@ -40,59 +41,64 @@ const youtubeEmbedUrl = (() => {
 					allowfullscreen
 				/>
 			</div>
-		) : videoUrl ? (
-			<video
-				class="video-player__element"
-				controls
-				preload="metadata"
-				poster={poster}
-				hidden
-				data-video-element
-			>
-				<source src={videoUrl} type="video/mp4" />
-			</video>
-		) : null
-	}
+		) : (
+			<>
+				{
+					videoUrl ? (
+						<video
+							class="video-player__element"
+							controls
+							preload="metadata"
+							poster={poster}
+							hidden
+							data-video-element
+						>
+							<source src={videoUrl} type="video/mp4" />
+						</video>
+					) : null
+				}
 
-	<button
-		type="button"
-		class="video-player__poster"
-		data-video-trigger
-		aria-label="Reproducir entrevista"
-		disabled={!videoUrl}
-	>
-		{
-			poster && (
-				<img
-					src={poster}
-					alt={posterAlt}
-					class="video-player__poster-image"
-					width="960"
-					height="540"
-				/>
-			)
-		}
-		<span class="video-player__overlay" aria-hidden="true" />
-		<span class="video-player__play" aria-hidden="true">
-			<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-				<path d="M8 5v14l11-7z" />
-			</svg>
-		</span>
-		{
-			duration && (
-				<span class="video-player__duration" aria-hidden="true">
-					{duration}
-				</span>
-			)
-		}
-	</button>
+				<button
+					type="button"
+					class="video-player__poster"
+					data-video-trigger
+					aria-label="Reproducir entrevista"
+					disabled={!videoUrl}
+				>
+					{
+						poster && (
+							<img
+								src={poster}
+								alt={posterAlt}
+								class="video-player__poster-image"
+								width="960"
+								height="540"
+							/>
+						)
+					}
+					<span class="video-player__overlay" aria-hidden="true" />
+					<span class="video-player__play" aria-hidden="true">
+						<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M8 5v14l11-7z" />
+						</svg>
+					</span>
+					{
+						duration && (
+							<span class="video-player__duration" aria-hidden="true">
+								{duration}
+							</span>
+						)
+					}
+				</button>
+			</>
+		)
+	}
 </div>
 
 <script>
 	document.querySelectorAll("[data-video-player]").forEach((player) => {
 		const trigger = player.querySelector("[data-video-trigger]");
 		const video = player.querySelector("[data-video-element]");
-		const embed = player.querySelector("[data-video-embed]");
 
 		trigger?.addEventListener("click", () => {
 			if (!(trigger instanceof HTMLButtonElement) || trigger.disabled) {
@@ -104,11 +110,6 @@ const youtubeEmbedUrl = (() => {
 			if (video instanceof HTMLVideoElement) {
 				video.hidden = false;
 				video.play();
-				return;
-			}
-
-			if (embed instanceof HTMLElement) {
-				embed.hidden = false;
 			}
 		});
 	});

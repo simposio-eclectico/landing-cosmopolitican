@@ -28,6 +28,9 @@ export const formatDurationLabel = (duration: string) => {
 	return `${minutes} min`;
 };
 
+export const isYoutubeVideoUrl = (videoUrl: string) =>
+	videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be");
+
 export const getVideoSeekUrl = (videoUrl: string, time: string) => {
 	const seconds = parseTimestamp(time);
 
@@ -35,7 +38,7 @@ export const getVideoSeekUrl = (videoUrl: string, time: string) => {
 		return "";
 	}
 
-	if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
+	if (isYoutubeVideoUrl(videoUrl)) {
 		const separator = videoUrl.includes("?") ? "&" : "?";
 		return `${videoUrl}${separator}t=${seconds}`;
 	}

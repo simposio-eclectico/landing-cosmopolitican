@@ -43,6 +43,7 @@ const revista = defineCollection({
 			imageAlt: z.string().optional(),
 			imageCaption: z.string().optional(),
 			imageCredit: z.string().optional(),
+			imageCreditUrl: z.string().url().optional(),
 			imageLicense: z.string().optional(),
 			imageLicenseUrl: z.string().url().optional(),
 			slug: z.string().optional(),

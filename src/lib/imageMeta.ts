@@ -8,6 +8,7 @@ export type ArticleFigureAspect = "3-2" | "16-10";
 
 export type ImageCreditProps = {
 	credit?: string;
+	creditUrl?: string;
 	license?: string;
 	licenseUrl?: string;
 };
@@ -54,7 +55,8 @@ export function getFigureClassNames({
 
 export function hasImageAttribution({
 	credit,
+	creditUrl,
 	license,
 }: ImageCreditProps): boolean {
-	return Boolean(credit || license);
+	return Boolean(credit || creditUrl || license);
 }

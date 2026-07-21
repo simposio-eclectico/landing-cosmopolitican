@@ -8,7 +8,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"validate:images": "node scripts/validate-images.mjs",
-		"build": "pnpm validate:images && astro build",
+		"clean:astro": "node scripts/clean-astro-cache.mjs",
+		"build": "pnpm clean:astro && pnpm validate:images && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
 		"lint": "pnpx @biomejs/biome format --write"

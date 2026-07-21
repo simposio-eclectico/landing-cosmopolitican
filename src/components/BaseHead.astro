@@ -9,6 +9,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	image?: string | ImageMetadata;
+	imageAlt?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -17,7 +18,10 @@ const {
 	title = SITE_TITLE,
 	description = SITE_DESCRIPTION,
 	image = "/og-image.jpeg",
+	imageAlt,
 } = Astro.props;
+
+const socialImageAlt = imageAlt ?? description;
 
 const imageSrc = typeof image === "string" ? image : image.src;
 const imageWidth = typeof image === "string" ? null : image.width;
@@ -96,7 +100,7 @@ const schema = {
 		<meta property="og:image:height" content={String(imageHeight)} />
 	)
 }
-<meta property="og:image:alt" content={description} />
+<meta property="og:image:alt" content={socialImageAlt} />
 <meta property="og:site_name" content={SITE_TITLE} />
 
 <!-- Twitter -->
@@ -105,7 +109,7 @@ const schema = {
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(imageSrc, Astro.url)} />
-<meta name="twitter:image:alt" content={description} />
+<meta name="twitter:image:alt" content={socialImageAlt} />
 <meta name="twitter:site" content="@Cosmopolitican" />
 <meta name="twitter:creator" content="@Cosmopolitican" />
 

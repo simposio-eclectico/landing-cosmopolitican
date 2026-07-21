@@ -1,11 +1,14 @@
 ---
 import { getCollection, render } from "astro:content";
 import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
+import ArticleHeroCaption from "@components/revista/ArticleHeroCaption.astro";
+import ArticleHeroImage from "@components/revista/ArticleHeroImage.astro";
 import VideoArticle from "@components/revista/VideoArticle.astro";
 import RelatedArticles from "@components/revista/RelatedArticles.astro";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { SITE_NAME, MENU_SECTION_LABELS } from "@consts";
 import { formatWordCount, getReadingMeta } from "@lib/articuloMeta";
+import { revistaMdxComponents } from "@lib/revistaMdxComponents";
 import { getRelatedArticles } from "@lib/revistaMenu";
 import "@styles/articulo.css";
 
@@ -34,13 +37,31 @@ const marginLabel = `${MENU_SECTION_LABELS[post.data.menuSection]}`;
 const relatedHeading = `Más ${MENU_SECTION_LABELS[post.data.menuSection].toLowerCase()} que te pueden interesar`;
 const isVideoArticle = post.data.format === "video";
 const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image);
+const heroImageAlt = post.data.imageAlt ?? "";
+const heroCaptionProps = {
+	caption: post.data.imageCaption,
+	credit: post.data.imageCredit,
+	license: post.data.imageLicense,
+	licenseUrl: post.data.imageLicenseUrl,
+};
+const showHeroCaption = Boolean(
+	heroCaptionProps.caption ||
+		heroCaptionProps.credit ||
+		heroCaptionProps.license,
+);
 ---
 
-<ElegantLayout title={`${post.data.title} - ${SITE_NAME}`} bare>
+<ElegantLayout
+	title={`${post.data.title} - ${SITE_NAME}`}
+	description={post.data.summary}
+	image={post.data.image}
+	imageAlt={post.data.imageAlt}
+	bare
+>
 	{
 		isVideoArticle ? (
 			<VideoArticle post={post} relatedArticles={relatedArticles}>
-				<Content />
+				<Content components={revistaMdxComponents} />
 			</VideoArticle>
 		) : (
 			<>
@@ -55,7 +76,7 @@ const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image
 										<img
 											class="articulo__hero-portada-imagen"
 											src={post.data.image}
-											alt={post.data.imageAlt ?? post.data.title}
+											alt={heroImageAlt}
 											width="1440"
 											height="640"
 										/>
@@ -106,8 +127,8 @@ const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image
 
 							<div class="articulo__contenedor">
 						{
-							post.data.imageCaption && isFeaturedHero && (
-								<p class="articulo__hero-caption">{post.data.imageCaption}</p>
+							showHeroCaption && isFeaturedHero && (
+								<ArticleHeroCaption {...heroCaptionProps} />
 							)
 						}
 
@@ -122,14 +143,11 @@ const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image
 									>
 										{
 											post.data.image && (
-												<figure class="articulo__hero-imagen">
-													<img
-														src={post.data.image}
-														alt={post.data.imageAlt ?? post.data.title}
-														width="560"
-														height="420"
-													/>
-												</figure>
+												<ArticleHeroImage
+													src={post.data.image}
+													alt={heroImageAlt}
+													{...heroCaptionProps}
+												/>
 											)
 										}
 
@@ -188,7 +206,7 @@ const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image
 
 						<div class="articulo__cuerpo">
 							<div class="articulo__contenido">
-								<Content />
+								<Content components={revistaMdxComponents} />
 							</div>
 							<div class="articulo__firma">
 								<p>Escrito por <strong>{post.data.author}</strong> para Cosmopolitican, tu revista con clase.</p>

@@ -1,0 +1,77 @@
+---
+import { hasImageAttribution } from "@lib/imageMeta";
+
+interface Props {
+	caption?: string;
+	credit?: string;
+	license?: string;
+	licenseUrl?: string;
+	as?: "p" | "figcaption";
+	class?: string;
+}
+
+const {
+	caption,
+	credit,
+	license,
+	licenseUrl,
+	as = "p",
+	class: className = as === "p" ? "articulo__hero-caption" : undefined,
+} = Astro.props;
+
+const showCaption = Boolean(
+	caption || hasImageAttribution({ credit, license }),
+);
+---
+
+{
+	showCaption && as === "figcaption" ? (
+		<figcaption>
+			{caption && <span class="articulo__fig-caption">{caption}</span>}
+			{
+				hasImageAttribution({ credit, license }) && (
+					<span class="articulo__fig-credit">
+						{caption && " "}
+						{credit && <>Foto: {credit}</>}
+						{license && licenseUrl && (
+							<>
+								{credit && " · "}
+								<a href={licenseUrl} rel="license">{license}</a>
+							</>
+						)}
+						{license && !licenseUrl && (
+							<>
+								{credit && " · "}
+								{license}
+							</>
+						)}
+					</span>
+				)
+			}
+		</figcaption>
+	) : showCaption ? (
+		<p class={className}>
+			{caption && <span class="articulo__fig-caption">{caption}</span>}
+			{
+				hasImageAttribution({ credit, license }) && (
+					<span class="articulo__fig-credit">
+						{caption && " "}
+						{credit && <>Foto: {credit}</>}
+						{license && licenseUrl && (
+							<>
+								{credit && " · "}
+								<a href={licenseUrl} rel="license">{license}</a>
+							</>
+						)}
+						{license && !licenseUrl && (
+							<>
+								{credit && " · "}
+								{license}
+							</>
+						)}
+					</span>
+				)
+			}
+		</p>
+	) : null
+}

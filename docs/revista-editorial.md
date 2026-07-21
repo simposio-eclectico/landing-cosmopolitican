@@ -129,3 +129,34 @@ Los tres textos publicados en `src/content/revista/n01/` pertenecen a este mismo
 - Frontmatter `sectionOrder`: orden dentro del menú del número
 - Menú lateral (`ElegantLayout`): generado desde `DRAWER_MENU_GROUPS` + artículos del número actual
 - Rutas de contenido: `src/content/revista/n01/{reportajes,opinion,...}/`
+
+## Fuentes en artículos
+
+Los reportajes con bibliografía usan la sección `### Fuentes` dentro de `<div class="articulo__fuentes">`.
+
+### Formato
+
+**Cita específica** (paper, noticia, fallo):
+
+```mdx
+- {Autor u organismo}, «{Título}», _{Medio}_, {fecha}. [enlace]({url})
+```
+
+**Fuente compuesta** (varios medios, dataset):
+
+```mdx
+- {Medio A} / {Medio B} — {descripción breve} ({fecha}). [enlace]({url})
+```
+
+**Documento institucional**:
+
+```mdx
+- {Organismo}, «{Informe}» ({año}). [enlace]({url})
+```
+
+### Convenciones
+
+- Títulos en guillemets `«»`; medios en cursiva `_Medio_`.
+- Fechas: `d de mes de año` para noticias; `(año)` o `(mes–mes de año)` para informes.
+- URL obligatoria cuando exista enlace público estable; usar `[enlace](url)`, no URL cruda.
+- Notas al pie solo si hay referencias `[N]` en el cuerpo: `<sup id="footnote-ref-N"><a href="#footnote-N">[N]</a></sup>` en texto; `[↑](#footnote-ref-N) <span id="footnote-N"></span>` al final de la entrada en Fuentes.

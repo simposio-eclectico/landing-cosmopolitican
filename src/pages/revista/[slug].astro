@@ -36,7 +36,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 
 const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
 const marginLabel = `${MENU_SECTION_LABELS[post.data.menuSection]}`;
-const relatedHeading = `Más ${MENU_SECTION_LABELS[post.data.menuSection].toLowerCase()} que te pueden interesar`;
+const relatedHeading = `Te puede interesar`;
 const isVideoArticle = post.data.format === "video";
 const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image);
 const heroImageAlt = post.data.imageAlt ?? "";

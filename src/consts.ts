@@ -12,6 +12,7 @@ export const CATEGORIES = {
 } as const;
 
 export const MENU_SECTIONS = [
+	"editorial",
 	"reportajes",
 	"columnas",
 	"entrevistas",
@@ -23,6 +24,7 @@ export const MENU_SECTIONS = [
 export type MenuSection = (typeof MENU_SECTIONS)[number];
 
 export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
+	editorial: "Editorial",
 	reportajes: "Reportajes",
 	columnas: "Columnas",
 	entrevistas: "Entrevistas",
@@ -31,7 +33,9 @@ export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	internacional: "Internacional",
 };
 
-export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.map((section) => ({
+export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.filter(
+	(section) => section !== "editorial",
+).map((section) => ({
 	slug: section,
 	label: MENU_SECTION_LABELS[section],
 	href: `/revista/seccion/${section}`,

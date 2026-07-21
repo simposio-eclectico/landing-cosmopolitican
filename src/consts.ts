@@ -16,7 +16,6 @@ export const MENU_SECTIONS = [
 	"reportajes",
 	"columnas",
 	"entrevistas",
-	"reels",
 	"podcast",
 	"internacional",
 ] as const;
@@ -28,7 +27,6 @@ export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	reportajes: "Reportajes",
 	columnas: "Columnas",
 	entrevistas: "Entrevistas",
-	reels: "Reels",
 	podcast: "Podcast",
 	internacional: "Internacional",
 };
@@ -42,8 +40,6 @@ export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
 		"Opinión, crónica y texto breve: reflexiones sobre trabajo, barrio y política cotidiana.",
 	entrevistas:
 		"Conversaciones con quienes piensan, organizan y disputan el presente.",
-	reels:
-		"Fragmentos breves en video: memes, clips y otras formas de no volvernos anticuados.",
 	podcast:
 		"Episodios de audio para escuchar en la micro, en el turno o donde caiga.",
 	internacional:

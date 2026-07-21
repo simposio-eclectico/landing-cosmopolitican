@@ -1,0 +1,318 @@
+---
+import type { SearchEntry } from "@lib/searchIndex";
+
+interface Props {
+	searchIndex: SearchEntry[];
+}
+
+const { searchIndex } = Astro.props;
+---
+
+<button
+	type="button"
+	class="search-modal__trigger"
+	aria-label="Buscar"
+	id="nav-search-btn"
+>
+	<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+		<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+		<path d="M20 20L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+	</svg>
+</button>
+
+<div
+	id="search-overlay"
+	class="search-overlay"
+	role="dialog"
+	aria-modal="true"
+	aria-label="Buscar artículos"
+	hidden
+>
+	<div class="search-panel">
+		<form class="search-form" role="search" onsubmit="return false">
+			<label class="search-form__label" for="search-input">Buscar</label>
+			<div class="search-form__field">
+				<svg
+					class="search-form__icon"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					aria-hidden="true"
+				>
+					<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+					<path
+						d="M20 20L16 16"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+					/>
+				</svg>
+				<input
+					type="search"
+					id="search-input"
+					class="search-form__input"
+					placeholder="Buscar artículos, autores o secciones…"
+					autocomplete="off"
+					spellcheck="false"
+				/>
+				<button
+					type="button"
+					id="search-close"
+					class="search-form__close"
+					aria-label="Cerrar buscador"
+				>
+					&times;
+				</button>
+			</div>
+		</form>
+		<p id="search-hint" class="search-hint">
+			Escribe para buscar en la revista. Atajo: <kbd>⌘</kbd><kbd>K</kbd>
+		</p>
+		<ul id="search-results" class="search-results" role="listbox" hidden />
+		<p id="search-empty" class="search-empty" hidden>
+			No se encontraron resultados.
+		</p>
+	</div>
+</div>
+
+<script
+	id="search-index-data"
+	type="application/json"
+	set:html={JSON.stringify(searchIndex)}
+/>
+
+<script>
+	import { initSearchModal } from "@lib/initSearchModal";
+
+	const parseSearchIndex = () => {
+		const data = document.getElementById("search-index-data");
+
+		if (!data?.textContent) {
+			return [];
+		}
+
+		return JSON.parse(data.textContent);
+	};
+
+	document.addEventListener("DOMContentLoaded", () => {
+		initSearchModal(parseSearchIndex());
+	});
+</script>
+
+<style>
+	.search-modal__trigger {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border: none;
+		background: none;
+		color: var(--color-nav-link);
+		cursor: pointer;
+		transition: color 0.15s ease;
+	}
+
+	.search-modal__trigger:hover {
+		color: var(--color-magenta);
+	}
+
+	.search-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 1100;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		padding: 96px 24px 24px;
+		background: rgba(0, 0, 0, 0.45);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.2s ease;
+	}
+
+	.search-overlay.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.search-panel {
+		width: min(100%, 640px);
+		max-height: min(70vh, 560px);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		background: var(--color-blanco);
+		border: 1px solid var(--color-gris-borde);
+		box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+	}
+
+	.search-form {
+		padding: 1rem 1rem 0.75rem;
+		border-bottom: 1px solid var(--color-gris-borde);
+	}
+
+	.search-form__label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.search-form__field {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.search-form__icon {
+		flex-shrink: 0;
+		color: var(--color-gris-txt);
+	}
+
+	.search-form__input {
+		flex: 1;
+		min-width: 0;
+		border: none;
+		background: none;
+		font: inherit;
+		font-size: 18px;
+		color: var(--color-negro);
+		outline: none;
+	}
+
+	.search-form__input::-webkit-search-cancel-button {
+		display: none;
+	}
+
+	.search-form__close {
+		flex-shrink: 0;
+		width: 32px;
+		height: 32px;
+		border: none;
+		background: none;
+		font-size: 1.75rem;
+		line-height: 1;
+		color: var(--color-gris-txt);
+		cursor: pointer;
+	}
+
+	.search-form__close:hover {
+		color: var(--color-magenta);
+	}
+
+	.search-hint,
+	.search-empty {
+		margin: 0;
+		padding: 1rem 1.25rem;
+		font-size: 14px;
+		color: var(--color-gris-txt);
+	}
+
+	.search-hint kbd {
+		display: inline-block;
+		min-width: 1.5rem;
+		padding: 0.1rem 0.35rem;
+		margin: 0 0.1rem;
+		border: 1px solid var(--color-gris-borde);
+		border-radius: 4px;
+		font: inherit;
+		font-size: 12px;
+		background: var(--color-fondo);
+	}
+
+	.search-results {
+		margin: 0;
+		padding: 0.25rem 0;
+		list-style: none;
+		overflow-y: auto;
+	}
+
+	.search-results :global(.search-result) {
+		border-bottom: 1px solid var(--color-separador);
+	}
+
+	.search-results :global(.search-result:last-child) {
+		border-bottom: none;
+	}
+
+	.search-results :global(.search-result__link) {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 1rem 1.25rem;
+		color: inherit;
+		text-decoration: none;
+		transition: background 0.15s ease;
+	}
+
+	.search-results :global(.search-result__link:hover),
+	.search-results :global(.search-result__link--active) {
+		background: var(--color-fondo);
+	}
+
+	.search-results :global(.search-result__media) {
+		flex-shrink: 0;
+		width: 100px;
+		height: 100px;
+		overflow: hidden;
+	}
+
+	.search-results :global(.search-result__thumb) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.search-results :global(.search-result__media--placeholder) {
+		background: var(--color-gris-borde);
+	}
+
+	.search-results :global(.search-result__content) {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.search-results :global(.search-result__title) {
+		display: block;
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 1.35;
+		color: var(--color-negro);
+	}
+
+	.search-results :global(.search-result__meta) {
+		display: block;
+		margin-top: 0.5rem;
+		font-size: 12px;
+		line-height: 1.4;
+	}
+
+	.search-results :global(.search-result__section),
+	.search-results :global(.search-result__author) {
+		color: var(--color-magenta);
+	}
+
+	.search-results :global(.search-result__section) {
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.search-results :global(.search-result__separator) {
+		color: var(--color-magenta);
+		opacity: 0.55;
+	}
+
+	.search-results :global(.search-result__author) {
+		font-style: italic;
+	}
+</style>

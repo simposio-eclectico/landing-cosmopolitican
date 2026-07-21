@@ -1,5 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import cosmocan from "@assets/revista/imagenes/cosmocan.png";
 import RelatedArticlesSidebar from "@components/revista/RelatedArticlesSidebar.astro";
 import VideoPlayer from "@components/revista/VideoPlayer.astro";
 import { formatDurationLabel, getVideoSeekUrl } from "@lib/videoArticle";
@@ -112,12 +114,12 @@ const hasSplitTitle = Boolean(titleLead && titleHighlight);
 				</div>
 
 				<div class="video-articulo__info-col">
-					<img
+					<Image
 						class="video-articulo__deco"
-						src="/revista/imagenes/cosmocan.png"
+						src={cosmocan}
 						alt=""
-						width="180"
-						height="180"
+						width={180}
+						height={180}
 					/>
 
 					<div class="video-articulo__rubro">

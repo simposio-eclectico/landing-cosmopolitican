@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import ArticleHeroCaption from "@components/revista/ArticleHeroCaption.astro";
 
 interface Props {
-	src: string;
+	src: ImageMetadata;
 	alt: string;
 	caption?: string;
 	credit?: string;
@@ -14,7 +16,7 @@ const { src, alt, caption, credit, license, licenseUrl } = Astro.props;
 ---
 
 <figure class="articulo__hero-imagen">
-	<img src={src} alt={alt} width="560" height="420" />
+	<Image src={src} alt={alt} width={560} height={420} />
 	<ArticleHeroCaption
 		as="figcaption"
 		caption={caption}

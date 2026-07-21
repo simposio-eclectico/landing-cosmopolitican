@@ -2,10 +2,12 @@
 import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import ArticleFigure from "@components/revista/ArticleFigure.astro";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
+import { Image } from "astro:assets";
+import cosmocan from "@assets/revista/imagenes/cosmocan.png";
+import heroImage from "@assets/revista/imagenes/somos/nino-y-ventana.jpg";
 import { SITE_NAME, SITE_SLOGAN, SITE_TITLE } from "@consts";
 import "@styles/articulo.css";
 
-const heroImage = "/revista/imagenes/somos/nino-y-ventana.jpg";
 const heroImageAlt =
 	"Un niño se asoma por la ventana de una construcción de ladrillo a medio terminar";
 ---
@@ -17,20 +19,20 @@ const heroImageAlt =
 
 			<div class="articulo__columna">
 				<header class="articulo__hero articulo__hero--portada">
-					<img
+					<Image
 						class="articulo__hero-portada-imagen somos__hero-imagen"
 						src={heroImage}
 						alt={heroImageAlt}
-						width="1440"
-						height="680"
+						width={1440}
+						height={680}
 					/>
 					<div class="articulo__hero-portada-overlay" aria-hidden="true" />
-					<img
+					<Image
 						class="somos__mascota"
-						src="/revista/imagenes/cosmocan.png"
+						src={cosmocan}
 						alt=""
-						width="150"
-						height="150"
+						width={150}
+						height={150}
 						aria-hidden="true"
 					/>
 					<div class="articulo__hero-portada-contenido">
@@ -58,12 +60,8 @@ const heroImageAlt =
 								cosas sean distintas.
 							</p>
 
-							<blockquote class="articulo__cita articulo__cita--columna">
-								<p>
-									Una voluntad cruza todas estas palabras e imágenes: llevar a escena el
-									único glamour posible, el glamour de clase.
-								</p>
-							</blockquote>
+							> Una voluntad cruza todas estas palabras e imágenes: llevar a escena el
+							único glamour posible, el glamour de clase.
 
 							<p>
 								El de quienes trabajan, se endeudan, esperan la micro, cargan bolsas,
@@ -71,7 +69,7 @@ const heroImageAlt =
 							</p>
 
 							<ArticleFigure
-								src="/revista/imagenes/somos/sillon-cara.jpg"
+								src="somos/sillon-cara.jpg"
 								alt="Un sillón con una cara pintada, frente a un muro con un mural, en blanco y negro"
 								caption="El sillón nos mira igual que nosotros a la ciudad."
 								width={820}
@@ -87,14 +85,14 @@ const heroImageAlt =
 
 							<div class="articulo__fig-grid">
 								<ArticleFigure
-									src="/revista/imagenes/somos/gato-tele.jpg"
+									src="somos/gato-tele.jpg"
 									alt="Un gato callejero junto a un televisor en desuso, en una calle de barrio"
 									caption="La vida cotidiana también mira de reojo."
 									width={520}
 									height={340}
 								/>
 								<ArticleFigure
-									src="/revista/imagenes/somos/nino-en-su-vola.jpg"
+									src="somos/nino-en-su-vola.jpg"
 									alt="Un niño gesticulando frente a un muro con grafitis"
 									caption="Reivindicamos el derecho a la crítica sin palabras de seis sílabas."
 									width={520}

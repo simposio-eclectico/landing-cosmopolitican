@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 import { MENU_SECTION_LABELS } from "@consts";
@@ -18,12 +19,12 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 		{
 			image ? (
 				<div class="hero-especial__foto-wrap">
-					<img
+					<Image
 						src={image}
 						alt={imageAlt ?? title}
 						class="hero-especial__foto"
-						width="600"
-						height="600"
+						width={600}
+						height={600}
 					/>
 				</div>
 			) : (

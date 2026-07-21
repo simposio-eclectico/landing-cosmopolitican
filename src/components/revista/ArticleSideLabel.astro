@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import cosmocan from "@assets/revista/imagenes/cosmocan.png";
+
 interface Props {
 	label: string;
 }
@@ -10,12 +13,12 @@ const { label } = Astro.props;
 	<div class="article-side-label__sticky">
 		<div class="article-side-label__line" aria-hidden="true" />
 		<span class="article-side-label__text">{label}</span>
-		<img
-			src="/revista/imagenes/cosmocan.png"
+		<Image
+			src={cosmocan}
 			alt=""
 			class="article-side-label__mascota"
-			width="34"
-			height="34"
+			width={34}
+			height={34}
 		/>
 		<span class="article-side-label__circulo" aria-hidden="true" />
 	</div>

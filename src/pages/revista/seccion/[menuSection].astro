@@ -1,6 +1,7 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import {
 	MENU_SECTION_LABELS,
 	MENU_SECTIONS,
@@ -46,13 +47,13 @@ const sectionLabel = MENU_SECTION_LABELS[menuSection];
 								>
 									{
 										post.data.image && (
-											<img
+											<Image
 												src={post.data.image}
 												alt={post.data.imageAlt ?? post.data.title}
 												class="archivo__card-image"
 												loading="lazy"
-												width="400"
-												height="250"
+												width={400}
+												height={250}
 											/>
 										)
 									}

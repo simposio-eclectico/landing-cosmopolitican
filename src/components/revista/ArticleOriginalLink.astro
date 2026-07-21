@@ -1,0 +1,13 @@
+---
+interface Props {
+	url: string;
+}
+
+const { url } = Astro.props;
+const hostname = new URL(url).hostname.replace(/^www\./, "");
+---
+
+<p class="articulo__original">
+	Publicado originalmente en
+	<a href={url} rel="noopener noreferrer" target="_blank">{hostname}</a>
+</p>

@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import ArticleOriginalLink from "@components/revista/ArticleOriginalLink.astro";
 import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import ArticleHeroCaption from "@components/revista/ArticleHeroCaption.astro";
 import ArticleHeroImage from "@components/revista/ArticleHeroImage.astro";
@@ -211,6 +212,11 @@ const showHeroCaption = Boolean(
 							<div class="articulo__firma">
 								<p>Escrito por <strong>{post.data.author}</strong> para Cosmopolitican, tu revista con clase.</p>
 							</div>
+							{
+								post.data.originalUrl && (
+									<ArticleOriginalLink url={post.data.originalUrl} />
+								)
+							}
 						</div>
 
 						<RelatedArticles

@@ -591,6 +591,24 @@
 	margin: 0;
 }
 
+.articulo__original {
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--color-gris-txt);
+	margin: -2rem 5rem 3.5rem;
+	text-align: right;
+}
+
+.articulo__original a {
+	color: var(--color-negro);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.articulo__original a:hover {
+	color: var(--color-rojo);
+}
+
 .articulo__cierre {
 	margin-top: 2rem;
 	padding: 1.75rem 2rem;

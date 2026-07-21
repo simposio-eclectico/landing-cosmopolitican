@@ -1,0 +1,42 @@
+---
+import { getSpotifyEmbedUrl } from "@lib/spotifyEmbed";
+
+interface Props {
+	url: string;
+	title?: string;
+	height?: number;
+}
+
+const { url, title = "Reproductor de Spotify", height = 232 } = Astro.props;
+const embedUrl = getSpotifyEmbedUrl(url);
+---
+
+{
+	embedUrl ? (
+		<div class="spotify-embed">
+			<iframe
+				src={embedUrl}
+				title={title}
+				height={height}
+				allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+				loading="lazy"
+			/>
+		</div>
+	) : null
+}
+
+<style>
+	.spotify-embed {
+		width: 100%;
+		margin: 32px 0;
+		border-radius: 12px;
+		overflow: hidden;
+		background: var(--color-negro);
+	}
+
+	.spotify-embed iframe {
+		display: block;
+		width: 100%;
+		border: 0;
+	}
+</style>

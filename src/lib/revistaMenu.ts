@@ -24,10 +24,17 @@ export type DrawerMenuItem =
 			style: DrawerLinkStyle;
 	  };
 
+const isEditorialArticle = (article: CollectionEntry<"revista">) =>
+	article.data.menuSection === "editorial";
+
 const compareArticles = (
 	a: CollectionEntry<"revista">,
 	b: CollectionEntry<"revista">,
 ) => {
+	if (isEditorialArticle(a) !== isEditorialArticle(b)) {
+		return isEditorialArticle(a) ? -1 : 1;
+	}
+
 	const themeOrder =
 		THEME_SORT_ORDER[a.data.theme] - THEME_SORT_ORDER[b.data.theme];
 
@@ -135,6 +142,12 @@ export const getLeadArticle = (
 	issueNumber: string = CURRENT_ISSUE.number,
 ) => {
 	const issueArticles = getIssueArticles(articles, issueNumber);
+	const editorial = issueArticles.find(isEditorialArticle);
+
+	if (editorial) {
+		return editorial;
+	}
+
 	const sorted = [...issueArticles].sort(compareArticles);
 
 	return (

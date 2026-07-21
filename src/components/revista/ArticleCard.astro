@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { article } = Astro.props;
-const { title, author, pubDate, summary, image, imageAlt } = article.data;
+const { title, author, pubDate, summary, image, imageAlt, section } = article.data;
 const href = `/revista/${article.data.slug ?? article.id}`;
 const formattedDate = pubDate.toLocaleDateString("es-ES", {
 	year: "numeric",
@@ -41,7 +41,7 @@ const formattedDate = pubDate.toLocaleDateString("es-ES", {
 			<a href={href}>{title}</a>
 		</h2>
 		<p class="article-card__author">
-			por <em>{author}</em>
+			<span class="article-card__section-label">{section}</span> por <em>{author}</em>
 		</p>
 		<p class="article-card__summary">{summary}</p>
 	</div>
@@ -108,5 +108,12 @@ const formattedDate = pubDate.toLocaleDateString("es-ES", {
 		line-height: 1.6;
 		color: var(--color-texto);
 		margin: 0;
+	}
+
+	.article-card__section-label {
+		font-weight: 700;
+		color: var(--color-magenta);
+		margin-right: 4px;
+		text-transform: uppercase;
 	}
 </style>

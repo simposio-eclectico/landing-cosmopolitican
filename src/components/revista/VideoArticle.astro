@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import cosmocan from "@assets/revista/imagenes/cosmocan.png";
+import ArticleSummary from "@components/revista/ArticleSummary.astro";
 import RelatedArticlesSidebar from "@components/revista/RelatedArticlesSidebar.astro";
 import VideoPlayer from "@components/revista/VideoPlayer.astro";
 import { formatDurationLabel, getVideoSeekUrl } from "@lib/videoArticle";
@@ -40,15 +41,6 @@ const hasSplitTitle = Boolean(titleLead && titleHighlight);
 
 <article class="video-articulo">
 	<div class="video-articulo__layout">
-		<aside class="video-articulo__rail" aria-hidden="true">
-			<div class="video-articulo__rail-sticky">
-				<span class="icono-circulo video-articulo__rail-icono" />
-				<div class="video-articulo__rail-linea" />
-				<span class="video-articulo__rail-texto">CRÓNICAS &amp; REPORTAJES</span>
-				<div class="video-articulo__rail-linea" />
-			</div>
-		</aside>
-
 		<div class="video-articulo__columna">
 			<div class="video-articulo__tipo">
 				<span class="icono-circulo" aria-hidden="true" />
@@ -141,7 +133,7 @@ const hasSplitTitle = Boolean(titleLead && titleHighlight);
 						}
 					</h1>
 
-					<p class="video-articulo__bajada">{summary}</p>
+					<ArticleSummary summary={summary} class="video-articulo__bajada" />
 
 					<div class="video-articulo__meta">
 						<span class="video-articulo__autor">
@@ -173,14 +165,6 @@ const hasSplitTitle = Boolean(titleLead && titleHighlight);
 			<footer class="video-articulo__pie">
 				<div class="video-articulo__pie-separador" aria-hidden="true" />
 				<div class="video-articulo__pie-grid">
-					<p class="video-articulo__pie-texto">
-						<span class="video-articulo__pie-marca">
-							<span class="icono-circulo" aria-hidden="true" />
-							{SITE_NAME.toUpperCase()}
-						</span>
-						es una revista independiente que apuesta por el periodismo de barrio, la memoria y las historias que importan.
-						<em>Si te gustó esta entrevista, compártela y lee más en nuestras <a href="/revista/seccion/entrevistas">Entrevistas</a>.</em>
-					</p>
 					<a href="/revista/seccion/entrevistas" class="video-articulo__pie-cta">
 						→ Sigue viendo — Más entrevistas
 					</a>

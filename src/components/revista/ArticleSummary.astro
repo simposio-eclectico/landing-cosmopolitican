@@ -1,0 +1,12 @@
+---
+import { renderSummaryMarkdown } from "@lib/summaryMarkdown";
+
+interface Props {
+	summary: string;
+	class?: string;
+}
+
+const { summary, class: className } = Astro.props;
+---
+
+<p class={className} set:html={renderSummaryMarkdown(summary)} />

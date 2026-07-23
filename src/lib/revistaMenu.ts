@@ -24,26 +24,37 @@ export type DrawerMenuItem =
 			style: DrawerLinkStyle;
 	  };
 
+const DEFAULT_ARTICLE_ORDER = Number.MAX_SAFE_INTEGER;
+
 const isEditorialArticle = (article: CollectionEntry<"revista">) =>
 	article.data.menuSection === "editorial";
 
-const compareArticles = (
+const getArticleOrder = (article: CollectionEntry<"revista">) =>
+	article.data.order ?? DEFAULT_ARTICLE_ORDER;
+
+export const compareArticles = (
 	a: CollectionEntry<"revista">,
 	b: CollectionEntry<"revista">,
 ) => {
-	if (isEditorialArticle(a) !== isEditorialArticle(b)) {
-		return isEditorialArticle(a) ? -1 : 1;
+	const dateCompare = a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
+
+	if (dateCompare !== 0) {
+		return dateCompare;
 	}
 
-	const themeOrder =
-		THEME_SORT_ORDER[a.data.theme] - THEME_SORT_ORDER[b.data.theme];
+	const orderCompare = getArticleOrder(a) - getArticleOrder(b);
 
-	if (themeOrder !== 0) {
-		return themeOrder;
+	if (orderCompare !== 0) {
+		return orderCompare;
 	}
 
-	return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
+	return a.data.title.localeCompare(b.data.title, "es");
 };
+
+export const compareArticlesDesc = (
+	a: CollectionEntry<"revista">,
+	b: CollectionEntry<"revista">,
+) => compareArticles(b, a);
 
 const getSectionArticles = (
 	articles: CollectionEntry<"revista">[],
@@ -88,7 +99,7 @@ export const getIssueArticles = (
 ) =>
 	articles
 		.filter((article) => article.data.issueNumber === issueNumber)
-		.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+		.sort(compareArticles);
 
 export const getArticlesByMenuSection = (
 	articles: CollectionEntry<"revista">[],
@@ -96,7 +107,7 @@ export const getArticlesByMenuSection = (
 ) =>
 	[...articles]
 		.filter((article) => article.data.menuSection === menuSection)
-		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		.sort(compareArticlesDesc);
 
 export const getIssueSections = (
 	articles: CollectionEntry<"revista">[],

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
+import ArticleSummary from "@components/revista/ArticleSummary.astro";
 import { MENU_SECTION_LABELS } from "@consts";
 
 interface Props {
@@ -41,7 +42,7 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 				<a href={href}>{title}</a>
 			</h1>
 		</div>
-		<p class="hero-especial__bajada">{summary}</p>
+		<ArticleSummary summary={summary} class="hero-especial__bajada" />
 		<a href={href} class="hero-especial__cta">
 			<span class="icono-circulo" aria-hidden="true" />
 			Leer especial completo

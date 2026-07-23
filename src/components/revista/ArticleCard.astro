@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
+import ArticleSummary from "@components/revista/ArticleSummary.astro";
+
 interface Props {
 	article: CollectionEntry<"revista">;
 }
@@ -43,7 +45,7 @@ const formattedDate = pubDate.toLocaleDateString("es-ES", {
 		<p class="article-card__author">
 			<span class="article-card__section-label">{section}</span> por <em>{author}</em>
 		</p>
-		<p class="article-card__summary">{summary}</p>
+		<ArticleSummary summary={summary} class="article-card__summary" />
 	</div>
 </article>
 

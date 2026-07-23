@@ -1,12 +1,12 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
+import ArticleSummary from "@components/revista/ArticleSummary.astro";
+import { compareArticlesDesc } from "@lib/revistaMenu";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
 const revistas = await getCollection("revista");
-const sortedRevistas = [...revistas].sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const sortedRevistas = [...revistas].sort(compareArticlesDesc);
 ---
 
 <ElegantLayout title="Archivo — Cosmopolitican">
@@ -45,7 +45,10 @@ const sortedRevistas = [...revistas].sort(
 								<p class="archivo__card-author">
 									por <em>{post.data.author}</em>
 								</p>
-								<p class="archivo__card-summary">{post.data.summary}</p>
+								<ArticleSummary
+									summary={post.data.summary}
+									class="archivo__card-summary"
+								/>
 							</div>
 						</a>
 					</article>

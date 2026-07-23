@@ -2,11 +2,20 @@
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://cosmopolitican.cl",
+	env: {
+		schema: {
+			PUBLIC_SHOW_SECTION_DESCRIPTIONS: envField.boolean({
+				context: "client",
+				access: "public",
+				default: false,
+			}),
+		},
+	},
 	integrations: [
 		mdx({
 			components: {

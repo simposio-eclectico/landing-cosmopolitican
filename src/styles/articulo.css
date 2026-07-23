@@ -954,5 +954,6 @@
 
 	.articulo__cuerpo {
 		max-width: none;
+		margin: 0;
 	}
 }

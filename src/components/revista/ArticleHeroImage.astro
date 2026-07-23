@@ -13,10 +13,12 @@ interface Props {
 }
 
 const { src, alt, caption, credit, license, licenseUrl } = Astro.props;
+const HERO_IMAGE_WIDTH = 900;
+const HERO_IMAGE_HEIGHT = 562;
 ---
 
 <figure class="articulo__hero-imagen">
-	<Image src={src} alt={alt} width={560} height={420} />
+	<Image src={src} alt={alt} width={HERO_IMAGE_WIDTH} height={HERO_IMAGE_HEIGHT} />
 	<ArticleHeroCaption
 		as="figcaption"
 		caption={caption}

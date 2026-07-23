@@ -1,5 +1,6 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
+import ArticleSummary from "@components/revista/ArticleSummary.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import {
@@ -9,6 +10,7 @@ import {
 	SITE_NAME,
 	type MenuSection,
 } from "@consts";
+import { featureFlags } from "@lib/featureFlags";
 import { getArticlesByMenuSection } from "@lib/revistaMenu";
 
 export async function getStaticPaths() {
@@ -28,7 +30,11 @@ const sectionDescription = MENU_SECTION_DESCRIPTIONS[menuSection];
 	<div class="archivo">
 		<header class="archivo__header">
 			<h1 class="archivo__titulo">{sectionLabel}</h1>
-			<p class="archivo__bajada">{sectionDescription}</p>
+			{
+				featureFlags.showSectionDescriptions && (
+					<p class="archivo__bajada">{sectionDescription}</p>
+				)
+			}
 		</header>
 
 		{
@@ -70,7 +76,10 @@ const sectionDescription = MENU_SECTION_DESCRIPTIONS[menuSection];
 										<p class="archivo__card-author">
 											por <em>{post.data.author}</em>
 										</p>
-										<p class="archivo__card-summary">{post.data.summary}</p>
+										<ArticleSummary
+											summary={post.data.summary}
+											class="archivo__card-summary"
+										/>
 									</div>
 								</a>
 							</article>

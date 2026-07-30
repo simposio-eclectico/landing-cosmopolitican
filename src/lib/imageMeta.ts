@@ -20,6 +20,7 @@ export const CC_BY_NC_2 = {
 
 export const CHRISTIAN_C_CC = {
 	credit: "Christian c",
+	creditUrl: "https://www.flickr.com/photos/boikot/",
 	...CC_BY_NC_2,
 } as const;
 

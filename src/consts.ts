@@ -2,7 +2,7 @@ export const SITE_NAME = "Cosmopolitican";
 export const SITE_SLOGAN = "Tu revista con Clase";
 export const SITE_TITLE = `${SITE_NAME} | ${SITE_SLOGAN}`;
 export const SITE_DESCRIPTION = `Descubre ${SITE_NAME}, la revista digital definitiva para la dama y el varón. Moda, cultura, tendencias y estilo de vida con un toque de distinción y clase.`;
-export const SITE_MAIL = "hola@cosmopolitican.cl";
+export const SITE_MAIL = "contacto.cosmopolitican@gmail.com";
 export const SHOW_UNDER_CONSTRUCTION = true;
 
 export const CATEGORIES = {

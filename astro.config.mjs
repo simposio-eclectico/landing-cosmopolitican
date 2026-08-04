@@ -14,6 +14,16 @@ export default defineConfig({
 				access: "public",
 				default: false,
 			}),
+			PUBLIC_GA_MEASUREMENT_ID: envField.string({
+				context: "client",
+				access: "public",
+				default: "",
+			}),
+			PUBLIC_META_PIXEL_ID: envField.string({
+				context: "client",
+				access: "public",
+				default: "",
+			}),
 		},
 	},
 	integrations: [

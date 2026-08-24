@@ -49,14 +49,16 @@ const sectionDescription = MENU_SECTION_DESCRIPTIONS[menuSection];
 								>
 									{
 										post.data.image && (
-											<Image
-												src={post.data.image}
-												alt={post.data.imageAlt ?? post.data.title}
-												class="archivo__card-image"
-												loading="lazy"
-												width={400}
-												height={250}
-											/>
+											<div class="archivo__card-image-wrap">
+												<Image
+													src={post.data.image}
+													alt={post.data.imageAlt ?? post.data.title}
+													class="archivo__card-image"
+													loading="lazy"
+													width={400}
+													height={250}
+												/>
+											</div>
 										)
 									}
 									<div class="archivo__card-body">
@@ -127,11 +129,20 @@ const sectionDescription = MENU_SECTION_DESCRIPTIONS[menuSection];
 		display: block;
 	}
 
+	.archivo__card-image-wrap {
+		overflow: hidden;
+	}
+
 	.archivo__card-image {
 		width: 100%;
 		aspect-ratio: 16 / 10;
 		object-fit: cover;
 		display: block;
+	}
+
+	.archivo__card-link:hover .archivo__card-image {
+		transform: scale(1.03);
+		transition: transform 0.3s ease;
 	}
 
 	.archivo__card-body {

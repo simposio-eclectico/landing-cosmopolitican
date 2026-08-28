@@ -691,7 +691,6 @@
 	font-size: 17px;
 	line-height: 1.75;
 	color: var(--articulo-texto);
-	counter-reset: seccion;
 }
 
 .articulo__contenido > p:first-of-type::first-letter,
@@ -710,17 +709,12 @@
 }
 
 .articulo__contenido h2 {
-	counter-increment: seccion;
 	font-family: var(--font-serif);
 	font-size: clamp(22px, 3vw, 28px);
 	font-weight: 700;
 	line-height: 1.2;
 	color: var(--articulo-cita-borde);
 	margin: 3rem 0 1.25rem;
-}
-
-.articulo__contenido h2::before {
-	content: counter(seccion) ". ";
 }
 
 .articulo__contenido h3 {

@@ -1,0 +1,103 @@
+# Importar artículo a Cosmopolitican (Claude)
+
+Integra un artículo MDX a la revista desde un directorio o ZIP usando symlinks para desarrollo.
+
+## Uso rápido
+
+```bash
+node scripts/import-articulo.mjs --source ~/Downloads/carpeta-articulo
+node scripts/import-articulo.mjs --source ~/Downloads/articulo.zip
+node scripts/import-articulo.mjs --source ... --use-symlinks  # desarrollo: symlinks en lugar de copias
+```
+
+## Características
+
+✓ **ZIP automático**: detecta `.zip` y descomprime a temporal
+✓ **Symlinks opcionales**: `--use-symlinks` para desarrollo (no duplica archivos)
+✓ **Mapeo de imágenes**: genera plantilla `imagenes-map.json` si faltan imágenes
+✓ **Validación**: valida frontmatter al importar, integraciones construidas en `src/content.config.ts`
+
+## Flujo típico
+
+### 1. Con ZIP
+```bash
+node scripts/import-articulo.mjs --source ~/Downloads/articulo.zip --dry-run
+node scripts/import-articulo.mjs --source ~/Downloads/articulo.zip --map /tmp/imagenes-map.json
+```
+
+El script:
+- Descomprime el ZIP a temporal
+- Busca `.mdx` bajo `src/content/revista/`
+- Mapea imágenes desde directorios raíz y `uploads/`
+- Copia (o linkea con `--use-symlinks`) a `src/assets/revista/imagenes/{slug}/`
+
+### 2. Con carpeta
+```bash
+node scripts/import-articulo.mjs --source ~/Downloads/Nombre\ Carpeta
+```
+
+Mismo flujo, pero sin descomprimir.
+
+### 3. Desarrollo con symlinks
+```bash
+node scripts/import-articulo.mjs --source ... --use-symlinks
+```
+
+Crea links a imágenes en lugar de copiar. Útil durante iteración; fallback automático a copia si los symlinks no funcionan.
+
+## Después de importar
+
+```bash
+npm run validate:images  # valida frontmatter + alt/captions
+npm run build            # compila y optimiza imágenes
+npm run dev              # previsualiza en http://localhost:4321
+```
+
+Navega a `/revista/{slug}` para ver el artículo.
+
+## Mapeo de imágenes
+
+Si faltan imágenes, el script genera una plantilla `imagenes-map.json`:
+
+```json
+{
+  "_comentario": "Claves = nombre destino en assets. Valores = ruta relativa al --source",
+  "hero.jpg": "",
+  "figura-1.jpg": "",
+  "_imagenes_disponibles_en_origen": [
+    "uploads/imagen.jpg",
+    "assets/otra.png"
+  ]
+}
+```
+
+Completa los valores y rerun:
+
+```bash
+node scripts/import-articulo.mjs --source ... --map ruta/a/imagenes-map.json
+```
+
+## Notas
+
+- El MDX siempre se copia (nunca symlink)
+- Imágenes usan symlink/copia según `--use-symlinks`
+- Soporta caracteres especiales en rutas (usa `ditto` en lugar de `unzip`)
+- Comentarios `PENDIENTE:` deben resolverse manualmente en frontmatter
+
+## Referencia: campos obligatorios del frontmatter
+
+| Campo | Valores | Notas |
+|-------|---------|-------|
+| `title` | string | — |
+| `author` | string | default: `"Cosmopolitican"` |
+| `pubDate` | `YYYY-MM-DD` | — |
+| `summary` | string | 1–2 frases, puede incluir `**negritas**` |
+| `issueNumber` | `"Nº 01"`, `"Nº 02"`, etc. | — |
+| `menuSection` | enum | `editorial`, `reportajes`, `columnas`, `entrevistas`, `podcast`, `internacional` |
+| `slug` | kebab-case | sin acentos; derivado del título si falta |
+| `image` | ruta relativa | obligatorio si `theme: featured` |
+| `imageAlt` | string | obligatorio si hay `image` |
+| `imageCaption` | string | obligatorio si `theme: featured` + `image` |
+| `imageCredit` | string | obligatorio si hay `imageLicense` |
+
+Ver `src/content.config.ts` para el esquema completo y reglas `.refine()`.

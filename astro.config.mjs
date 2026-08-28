@@ -24,6 +24,11 @@ export default defineConfig({
 				access: "public",
 				default: "",
 			}),
+			PUBLIC_FORMSPREE_ID: envField.string({
+				context: "client",
+				access: "public",
+				default: "",
+			}),
 		},
 	},
 	integrations: [

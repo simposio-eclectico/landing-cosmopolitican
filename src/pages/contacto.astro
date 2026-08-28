@@ -1,6 +1,9 @@
 ---
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { SITE_MAIL, SITE_TITLE } from "@consts";
+
+const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID;
+const formAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
 ---
 
 <ElegantLayout title={`Contacto - ${SITE_TITLE}`}>
@@ -12,10 +15,20 @@ import { SITE_MAIL, SITE_TITLE } from "@consts";
       <span class="t2">Un mensaje</span>
     </div>
 
+    {
+      !formspreeId && (
+        <div class="warning-banner">
+          ⚠️ Formulario no configurado. Configura PUBLIC_FORMSPREE_ID en .env
+        </div>
+      )
+    }
+
     <div class="contact-grid">
       <form
         class="contact-form"
-        onsubmit="event.preventDefault(); this.querySelector('.success-msg').style.display='block'; this.querySelector('.submit-btn').style.display='none';"
+        action={formAction}
+        method="POST"
+        {...(formspreeId ? {} : { onsubmit: "event.preventDefault(); alert('Formulario no configurado');" })}
       >
         <div class="field">
           <label class="field-label" for="name">Nombre</label>
@@ -65,9 +78,6 @@ import { SITE_MAIL, SITE_TITLE } from "@consts";
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </button>
-        <p class="success-msg" style="display:none;">
-          Mensaje enviado. Le responderemos a la brevedad.
-        </p>
       </form>
 
       <aside class="info-sidebar">
@@ -91,6 +101,16 @@ import { SITE_MAIL, SITE_TITLE } from "@consts";
   .contact-container {
     max-width: 1000px;
     margin: 0 auto;
+  }
+
+  .warning-banner {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
   }
 
   /* Título */

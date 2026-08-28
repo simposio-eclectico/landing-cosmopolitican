@@ -40,7 +40,7 @@ Articles are typically authored externally (Word → AI-generated MDX via the pr
 - `src/layouts/ElegantLayout.astro` — the shared shell: builds the nav, the mobile drawer menu (`@lib/revistaMenu`), and the client-side search index (`@lib/searchIndex`) from the full `revista` collection on every page render.
 
 ### `src/lib/` helpers (each is narrowly scoped, read before duplicating logic)
-`revistaMenu.ts` (drawer/nav/related-articles derivation from the collection), `revistaImages.ts`, `searchIndex.ts` (builds the data behind `SearchModal`), `articuloMeta.ts` (word count/reading time), `imageMeta.ts`, `videoArticle.ts`, `spotifyEmbed.ts`, `summaryMarkdown.ts`, `revistaMdxComponents.ts` (components auto-available inside MDX bodies, e.g. `ArticleFigure` — also registered in `astro.config.mjs`'s `mdx()` integration).
+`revistaMenu.ts` (drawer/nav/related-articles derivation from the collection), `revistaImages.ts`, `searchIndex.ts` (builds the data behind `SearchModal`), `articuloMeta.ts` (word count/reading time), `imageMeta.ts`, `videoArticle.ts`, `spotifyEmbed.ts`, `summaryMarkdown.ts`, `revistaMdxComponents.ts` (components auto-available inside MDX bodies, e.g. `ArticleFigure` — also registered in `astro.config.mjs`'s `mdx()` integration), `authorMeta.ts` (author slug generation and href generation).
 
 ### Feature flags & env
 `src/lib/featureFlags.ts` wraps `astro:env/client` vars (schema in `astro.config.mjs`). Public env vars: `PUBLIC_SHOW_SECTION_DESCRIPTIONS`, `PUBLIC_GA_MEASUREMENT_ID`, `PUBLIC_META_PIXEL_ID` — see `.env.example`. `SHOW_UNDER_CONSTRUCTION` in `src/consts.ts` gates the under-construction UI (`UnderConstruction.astro`).
@@ -50,6 +50,15 @@ Articles are typically authored externally (Word → AI-generated MDX via the pr
 
 ### Design reference
 Visual system (colors, type scale, grid) for the "Especial" cover layout is fully specified in `docs/guia-diseno-web.md` — consult it before making styling decisions in `src/styles/` or revista components rather than guessing values.
+
+### Author pages
+Dynamic author pages at `/revista/autor/{autor-slug}` auto-generate from the unique authors in the collection. Each page:
+- Lists all articles by that author, sorted by date (newest first)
+- Shows author name, article count, and a clean reading list
+- Author names in article headers are clickable links to their pages
+- URLs auto-generate from author names using `getAuthorSlug()` (handles accents, spaces, etc.)
+
+Helper: `getAuthorHref(authorName)` returns the URL for a given author.
 
 ### Deployment
 GitHub Actions (`.github/workflows/build.yml`) builds on push to `main` and deploys `dist/` to GitHub Pages. `dist/` is committed output from local builds and should not be hand-edited.

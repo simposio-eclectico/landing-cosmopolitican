@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
-import { CURRENT_ISSUE, type DrawerLinkStyle, type MenuSection } from "@consts";
+import { type DrawerLinkStyle, type MenuSection } from "@consts";
 
 type RevistaTheme = CollectionEntry<"revista">["data"]["theme"];
 
@@ -93,13 +93,6 @@ const sortSections = (
 const getMenuStyle = (theme: RevistaTheme): DrawerLinkStyle =>
 	theme === "featured" ? "main" : "sub";
 
-export const getIssueArticles = (
-	articles: CollectionEntry<"revista">[],
-	issueNumber: string = CURRENT_ISSUE.number,
-) =>
-	articles
-		.filter((article) => article.data.issueNumber === issueNumber)
-		.sort(compareArticles);
 
 export const getArticlesByMenuSection = (
 	articles: CollectionEntry<"revista">[],
@@ -109,17 +102,6 @@ export const getArticlesByMenuSection = (
 		.filter((article) => article.data.menuSection === menuSection)
 		.sort(compareArticlesDesc);
 
-export const getIssueSections = (
-	articles: CollectionEntry<"revista">[],
-	issueNumber: string = CURRENT_ISSUE.number,
-): string[] => {
-	const issueArticles = getIssueArticles(articles, issueNumber);
-	const sections = [
-		...new Set(issueArticles.map((article) => article.data.section)),
-	];
-
-	return sortSections(issueArticles, sections);
-};
 
 export const getSectionsByCategory = (
 	articles: CollectionEntry<"revista">[],
@@ -150,16 +132,14 @@ export const getSectionsByCategory = (
 
 export const getLeadArticle = (
 	articles: CollectionEntry<"revista">[],
-	issueNumber: string = CURRENT_ISSUE.number,
 ) => {
-	const issueArticles = getIssueArticles(articles, issueNumber);
-	const editorial = issueArticles.find(isEditorialArticle);
+	const editorial = articles.find(isEditorialArticle);
 
 	if (editorial) {
 		return editorial;
 	}
 
-	const sorted = [...issueArticles].sort(compareArticles);
+	const sorted = [...articles].sort(compareArticles);
 
 	return (
 		sorted.find(
@@ -173,12 +153,10 @@ export const getLeadArticle = (
 export const getCoverCardArticles = (
 	articles: CollectionEntry<"revista">[],
 	leadArticle: CollectionEntry<"revista"> | undefined,
-	issueNumber: string = CURRENT_ISSUE.number,
 ) => {
-	const issueArticles = getIssueArticles(articles, issueNumber);
 	const leadId = leadArticle?.id;
 
-	return issueArticles
+	return articles
 		.filter((article) => article.id !== leadId)
 		.sort(compareArticles);
 };
@@ -186,17 +164,15 @@ export const getCoverCardArticles = (
 export const getRelatedArticles = (
 	articles: CollectionEntry<"revista">[],
 	currentArticleId: string,
-	issueNumber: string = CURRENT_ISSUE.number,
 	limit = 3,
 ) => {
 	const currentArticle = articles.find((article) => article.id === currentArticleId);
-	const issueArticles = getIssueArticles(articles, issueNumber);
-	const sameMenuSection = issueArticles.filter(
+	const sameMenuSection = articles.filter(
 		(article) =>
 			article.id !== currentArticleId &&
 			article.data.menuSection === currentArticle?.data.menuSection,
 	);
-	const fallbackArticles = issueArticles.filter(
+	const fallbackArticles = articles.filter(
 		(article) => article.id !== currentArticleId,
 	);
 
@@ -211,11 +187,8 @@ export const getRelatedArticles = (
 
 export const buildDrawerMenu = (
 	articles: CollectionEntry<"revista">[],
-	issueNumber: string = CURRENT_ISSUE.number,
 ): DrawerMenuItem[] => {
-	const issueArticles = getIssueArticles(articles, issueNumber);
-
-	return [...issueArticles].sort(compareArticles).map((article) => ({
+	return [...articles].sort(compareArticles).map((article) => ({
 		type: "article" as const,
 		label: article.data.menuLabel ?? article.data.title,
 		href: `/revista/${article.data.slug ?? article.id}`,

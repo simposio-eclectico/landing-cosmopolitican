@@ -48,7 +48,6 @@ const revista = defineCollection({
 			imageLicense: z.string().optional(),
 			imageLicenseUrl: z.string().url().optional(),
 			slug: z.string().optional(),
-			issueNumber: z.string(),
 			theme: z.enum(["default", "featured", "dark"]).default("default"),
 			format: z.enum(["article", "video"]).default("article"),
 			duration: z.string().optional(),

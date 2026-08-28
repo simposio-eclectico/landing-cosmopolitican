@@ -4,6 +4,10 @@ import { SITE_MAIL, SITE_TITLE } from "@consts";
 
 const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID;
 const formAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
+
+if (!formspreeId) {
+  console.warn("Formspree contact form not configured. Set PUBLIC_FORMSPREE_ID in .env");
+}
 ---
 
 <ElegantLayout title={`Contacto - ${SITE_TITLE}`}>
@@ -15,20 +19,11 @@ const formAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
       <span class="t2">Un mensaje</span>
     </div>
 
-    {
-      !formspreeId && (
-        <div class="warning-banner">
-          ⚠️ Formulario no configurado. Configura PUBLIC_FORMSPREE_ID en .env
-        </div>
-      )
-    }
-
     <div class="contact-grid">
       <form
         class="contact-form"
-        action={formAction}
-        method="POST"
-        {...(formspreeId ? {} : { onsubmit: "event.preventDefault(); alert('Formulario no configurado');" })}
+        action={formAction || "#"}
+        method={formspreeId ? "POST" : "GET"}
       >
         <div class="field">
           <label class="field-label" for="name">Nombre</label>
@@ -101,16 +96,6 @@ const formAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
   .contact-container {
     max-width: 1000px;
     margin: 0 auto;
-  }
-
-  .warning-banner {
-    background-color: #fff3cd;
-    border: 1px solid #ffc107;
-    color: #856404;
-    padding: 1rem;
-    border-radius: 4px;
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
   }
 
   /* Título */

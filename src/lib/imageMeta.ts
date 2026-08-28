@@ -18,11 +18,6 @@ export const CC_BY_NC_2 = {
 	licenseUrl: "https://creativecommons.org/licenses/by-nc/2.0/",
 } as const;
 
-export const CHRISTIAN_C_CC = {
-	credit: "Christian c",
-	creditUrl: "https://www.flickr.com/photos/boikot/",
-	...CC_BY_NC_2,
-} as const;
 
 export function getFigureClassNames({
 	variant = "figura",

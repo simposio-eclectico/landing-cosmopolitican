@@ -1,0 +1,183 @@
+---
+import { getCollection } from "astro:content";
+import ElegantLayout from "@layouts/ElegantLayout.astro";
+import { SITE_NAME } from "@consts";
+import "@styles/articulo.css";
+
+export async function getStaticPaths() {
+	const revistas = await getCollection("revista");
+
+	// Extraer autores únicos y crear slugs
+	const authorMap = new Map();
+	revistas.forEach((article) => {
+		const author = article.data.author || SITE_NAME;
+		if (!authorMap.has(author)) {
+			authorMap.set(author, {
+				name: author,
+				slug: author
+					.toLowerCase()
+					.normalize("NFD")
+					.replace(/[̀-ͯ]/g, "")
+					.replace(/[^\w\s-]/g, "")
+					.trim()
+					.replace(/\s+/g, "-"),
+			});
+		}
+	});
+
+	return Array.from(authorMap.values()).map((author) => ({
+		params: { slug: author.slug },
+		props: { authorName: author.name },
+	}));
+}
+
+interface Props {
+	authorName: string;
+}
+
+const { slug } = Astro.params;
+const { authorName } = Astro.props;
+
+const revistas = await getCollection("revista");
+const authorArticles = revistas
+	.filter((article) => {
+		const author = article.data.author || SITE_NAME;
+		return author === authorName;
+	})
+	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const title = `Artículos de ${authorName}`;
+const description = `Lee todos los artículos escritos por ${authorName} en ${SITE_NAME}`;
+---
+
+<ElegantLayout title={title} description={description}>
+	<main class="site-main site-main--bare">
+		<div class="site-main__inner contenedor">
+			<article class="articulo articulo--portada">
+				<div class="articulo__contenedor">
+					<div class="articulo__layout">
+						<div class="articulo__columna">
+							<header class="articulo__hero articulo__hero--stacked">
+								<div class="articulo__hero-cabecera">
+									<div class="articulo__rubro">
+										<p class="articulo__eyebrow">Autor</p>
+									</div>
+									<h1 class="articulo__titulo">{authorName}</h1>
+									<p class="articulo__bajada">
+										{authorArticles.length} artículo{authorArticles.length !== 1 ? "s" : ""}
+									</p>
+								</div>
+							</header>
+
+							<div class="articulo__contenido articulo-autor__lista">
+								{
+									authorArticles.map((article) => {
+										const slug = article.data.slug || article.id;
+										const formattedDate = article.data.pubDate.toLocaleDateString("es-ES", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										});
+
+										return (
+											<article class="articulo-autor__item">
+												<h2 class="articulo-autor__item-titulo">
+													<a href={`/revista/${slug}`}>{article.data.title}</a>
+												</h2>
+												{article.data.subtitle && (
+													<p class="articulo-autor__item-subtitulo">
+														{article.data.subtitle}
+													</p>
+												)}
+												<p class="articulo-autor__item-summary">
+													{article.data.summary}
+												</p>
+												<div class="articulo-autor__item-meta">
+													<span class="articulo-autor__item-fecha">{formattedDate}</span>
+													{article.data.section && (
+														<span class="articulo-autor__item-seccion">
+															{article.data.section}
+														</span>
+													)}
+												</div>
+											</article>
+										);
+									})
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</main>
+</ElegantLayout>
+
+<style>
+	.articulo-autor__lista {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		margin-top: 2rem;
+	}
+
+	.articulo-autor__item {
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--color-gris-borde);
+	}
+
+	.articulo-autor__item:last-child {
+		border-bottom: none;
+	}
+
+	.articulo-autor__item-titulo {
+		margin: 0 0 0.75rem;
+		font-size: clamp(20px, 2.5vw, 26px);
+		font-weight: 700;
+		line-height: 1.25;
+		font-family: var(--font-serif);
+	}
+
+	.articulo-autor__item-titulo a {
+		color: var(--color-magenta);
+		text-decoration: none;
+	}
+
+	.articulo-autor__item-titulo a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.articulo-autor__item-subtitulo {
+		margin: 0 0 0.75rem;
+		font-size: 16px;
+		font-style: italic;
+		color: var(--color-gris-txt);
+		line-height: 1.5;
+	}
+
+	.articulo-autor__item-summary {
+		margin: 0 0 1rem;
+		font-size: 16px;
+		line-height: 1.6;
+		color: var(--articulo-texto);
+	}
+
+	.articulo-autor__item-meta {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		font-size: 13px;
+		color: var(--color-gris-txt);
+	}
+
+	.articulo-autor__item-fecha {
+		display: block;
+	}
+
+	.articulo-autor__item-seccion {
+		display: block;
+		font-weight: 600;
+		color: var(--color-magenta);
+	}
+</style>

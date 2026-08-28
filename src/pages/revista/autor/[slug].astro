@@ -1,8 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
+import ArticleSummary from "@components/revista/ArticleSummary.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import { SITE_NAME } from "@consts";
-import "@styles/articulo.css";
 
 export async function getStaticPaths() {
 	const revistas = await getCollection("revista");
@@ -35,7 +36,6 @@ interface Props {
 	authorName: string;
 }
 
-const { slug } = Astro.params;
 const { authorName } = Astro.props;
 
 const revistas = await getCollection("revista");
@@ -46,138 +46,161 @@ const authorArticles = revistas
 	})
 	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const title = `Artículos de ${authorName}`;
+const title = `Artículos de ${authorName} — ${SITE_NAME}`;
 const description = `Lee todos los artículos escritos por ${authorName} en ${SITE_NAME}`;
 ---
 
-<ElegantLayout title={title} description={description}>
-	<main class="site-main site-main--bare">
-		<div class="site-main__inner contenedor">
-			<article class="articulo articulo--portada">
-				<div class="articulo__contenedor">
-					<div class="articulo__layout">
-						<div class="articulo__columna">
-							<header class="articulo__hero articulo__hero--stacked">
-								<div class="articulo__hero-cabecera">
-									<div class="articulo__rubro">
-										<p class="articulo__eyebrow">Autor</p>
+<ElegantLayout {title} {description}>
+	<div class="archivo">
+		<header class="archivo__header">
+			<h1 class="archivo__titulo">{authorName}</h1>
+			<p class="archivo__bajada">
+				{authorArticles.length} artículo{authorArticles.length !== 1 ? "s" : ""}
+			</p>
+		</header>
+
+		{
+			authorArticles.length > 0 && (
+				<div class="archivo__grid">
+					{
+						authorArticles.map((post) => (
+							<article class="archivo__card">
+								<a
+									href={`/revista/${post.data.slug || post.id}`}
+									class="archivo__card-link"
+								>
+									{
+										post.data.image && (
+											<div class="archivo__card-image-wrap">
+												<Image
+													src={post.data.image}
+													alt={post.data.imageAlt ?? post.data.title}
+													class="archivo__card-image"
+													loading="lazy"
+													width={400}
+													height={250}
+												/>
+											</div>
+										)
+									}
+									<div class="archivo__card-body">
+										<time
+											class="archivo__card-date"
+											datetime={post.data.pubDate.toISOString()}
+										>
+											{
+												post.data.pubDate.toLocaleDateString("es-ES", {
+													year: "numeric",
+													month: "long",
+													day: "numeric",
+												})
+											}
+										</time>
+										<h2 class="archivo__card-title">{post.data.title}</h2>
+										{post.data.section && (
+											<p class="archivo__card-section">{post.data.section}</p>
+										)}
+										<ArticleSummary
+											summary={post.data.summary}
+											class="archivo__card-summary"
+										/>
 									</div>
-									<h1 class="articulo__titulo">{authorName}</h1>
-									<p class="articulo__bajada">
-										{authorArticles.length} artículo{authorArticles.length !== 1 ? "s" : ""}
-									</p>
-								</div>
-							</header>
-
-							<div class="articulo__contenido articulo-autor__lista">
-								{
-									authorArticles.map((article) => {
-										const slug = article.data.slug || article.id;
-										const formattedDate = article.data.pubDate.toLocaleDateString("es-ES", {
-											year: "numeric",
-											month: "long",
-											day: "numeric",
-										});
-
-										return (
-											<article class="articulo-autor__item">
-												<h2 class="articulo-autor__item-titulo">
-													<a href={`/revista/${slug}`}>{article.data.title}</a>
-												</h2>
-												{article.data.subtitle && (
-													<p class="articulo-autor__item-subtitulo">
-														{article.data.subtitle}
-													</p>
-												)}
-												<p class="articulo-autor__item-summary">
-													{article.data.summary}
-												</p>
-												<div class="articulo-autor__item-meta">
-													<span class="articulo-autor__item-fecha">{formattedDate}</span>
-													{article.data.section && (
-														<span class="articulo-autor__item-seccion">
-															{article.data.section}
-														</span>
-													)}
-												</div>
-											</article>
-										);
-									})
-								}
-							</div>
-						</div>
-					</div>
+								</a>
+							</article>
+						))
+					}
 				</div>
-			</article>
-		</div>
-	</main>
+			)
+		}
+	</div>
 </ElegantLayout>
 
 <style>
-	.articulo-autor__lista {
-		display: flex;
-		flex-direction: column;
-		gap: 2.5rem;
-		margin-top: 2rem;
+	.archivo {
+		max-width: var(--contenedor-max);
+		margin: 0 auto;
+		padding: 0 var(--padding-lateral);
 	}
 
-	.articulo-autor__item {
+	.archivo__header {
+		margin-bottom: 3rem;
 		padding-bottom: 2rem;
-		border-bottom: 1px solid var(--color-gris-borde);
+		border-bottom: 1px solid var(--color-separador);
 	}
 
-	.articulo-autor__item:last-child {
-		border-bottom: none;
+	.archivo__titulo {
+		font-size: clamp(28px, 4vw, 40px);
+		font-weight: 900;
+		color: var(--color-magenta);
+		margin-bottom: 0.5rem;
 	}
 
-	.articulo-autor__item-titulo {
-		margin: 0 0 0.75rem;
-		font-size: clamp(20px, 2.5vw, 26px);
+	.archivo__bajada {
+		font-size: 16px;
+		color: var(--color-gris-txt);
+		margin: 0;
+	}
+
+	.archivo__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--gap-cards);
+	}
+
+	.archivo__card-link {
+		display: block;
+	}
+
+	.archivo__card-image-wrap {
+		overflow: hidden;
+	}
+
+	.archivo__card-image {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		display: block;
+	}
+
+	.archivo__card-link:hover .archivo__card-image {
+		transform: scale(1.03);
+		transition: transform 0.3s ease;
+	}
+
+	.archivo__card-body {
+		margin-top: 12px;
+	}
+
+	.archivo__card-date {
+		display: block;
+		font-size: var(--size-fecha);
+		color: var(--color-gris-fecha);
+		margin-bottom: 6px;
+	}
+
+	.archivo__card-title {
+		font-size: var(--size-card-titulo);
 		font-weight: 700;
 		line-height: 1.25;
-		font-family: var(--font-serif);
-	}
-
-	.articulo-autor__item-titulo a {
 		color: var(--color-magenta);
-		text-decoration: none;
+		margin-bottom: 6px;
+		transition: color 0.15s ease;
 	}
 
-	.articulo-autor__item-titulo a:hover {
-		text-decoration: underline;
-		text-underline-offset: 3px;
+	.archivo__card-link:hover .archivo__card-title {
+		color: var(--color-magenta-hover);
 	}
 
-	.articulo-autor__item-subtitulo {
-		margin: 0 0 0.75rem;
-		font-size: 16px;
-		font-style: italic;
-		color: var(--color-gris-txt);
-		line-height: 1.5;
-	}
-
-	.articulo-autor__item-summary {
-		margin: 0 0 1rem;
-		font-size: 16px;
-		line-height: 1.6;
-		color: var(--articulo-texto);
-	}
-
-	.articulo-autor__item-meta {
-		display: flex;
-		align-items: center;
-		gap: 16px;
+	.archivo__card-section {
 		font-size: 13px;
+		margin: 0 0 8px;
 		color: var(--color-gris-txt);
-	}
-
-	.articulo-autor__item-fecha {
-		display: block;
-	}
-
-	.articulo-autor__item-seccion {
-		display: block;
 		font-weight: 600;
-		color: var(--color-magenta);
+	}
+
+	.archivo__card-summary {
+		font-size: 14px;
+		line-height: 1.6;
+		margin: 0;
 	}
 </style>

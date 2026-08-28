@@ -2,6 +2,8 @@
 
 Integra un artículo MDX a la revista desde un directorio o ZIP usando symlinks para desarrollo.
 
+⚠️ **IMPORTANTE**: Tu rol es SOLO transformar formato. NO inventar, NO agregar conclusiones, NO resumir, NO "mejorar" el texto. El contenido viene del usuario; tú solo lo conviertes de Word → MDX.
+
 ## Uso rápido
 
 ```bash

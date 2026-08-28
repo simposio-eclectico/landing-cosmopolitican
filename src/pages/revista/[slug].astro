@@ -233,10 +233,10 @@ const hasSplitTitle = Boolean(titleLead && titleHighlight);
 							</div>
 							<div class="articulo__firma">
 								{(!post.data.author || post.data.author.includes("Cosmopolitican")) && (
-									<p>Escrito por <strong>{post.data.author}</strong>, tu revista con clase.</p>
+									<p>Escrito por <strong><a href={getAuthorHref(post.data.author)}>{post.data.author}</a></strong>, tu revista con clase.</p>
 									)}
 								{post.data.author && !post.data.author.includes("Cosmopolitican") && (
-									<p>Escrito por <strong>{post.data.author}</strong> para Cosmopolitican, tu revista con clase.</p>
+									<p>Escrito por <strong><a href={getAuthorHref(post.data.author)}>{post.data.author}</a></strong> para Cosmopolitican, tu revista con clase.</p>
 								)}
 							</div>
 							{

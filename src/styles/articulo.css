@@ -665,6 +665,15 @@
 	margin: 0;
 }
 
+.articulo__firma a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.articulo__firma a:hover {
+	color: inherit;
+}
+
 .articulo__original {
 	font-size: 13px;
 	line-height: 1.5;

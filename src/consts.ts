@@ -18,6 +18,7 @@ export const MENU_SECTIONS = [
 	"entrevistas",
 	"podcast",
 	"internacional",
+	"horoscopo",
 ] as const;
 
 export type MenuSection = (typeof MENU_SECTIONS)[number];
@@ -29,6 +30,7 @@ export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	entrevistas: "Entrevistas",
 	podcast: "Podcast",
 	internacional: "Internacional",
+	horoscopo: "Horóscopo",
 };
 
 export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
@@ -44,6 +46,8 @@ export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
 		"Episodios de audio para escuchar en la micro, en el turno o donde caiga.",
 	internacional:
 		"Miradas desde y hacia afuera: conflictos, solidaridades y debates globales.",
+	horoscopo:
+		"Tu guía astral: predicciones y reflexiones según tu signo zodiacal.",
 };
 
 export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.filter(

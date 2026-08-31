@@ -1,3 +1,13 @@
+---
+name: import-revista-articulo
+description: >-
+  Importa un artículo MDX a la revista Cosmopolitican desde una carpeta o un
+  ZIP (usando scripts/import-articulo.mjs en la raíz del repo, con soporte de
+  descompresión automática y symlinks opcionales). Usar cuando el usuario pida
+  importar/agregar un artículo a la revista y entregue un .zip o carpeta de
+  salida generada con docs/prompt-articulos.md.
+---
+
 # Importar artículo a Cosmopolitican (Claude)
 
 Integra un artículo MDX a la revista desde un directorio o ZIP usando symlinks para desarrollo.

@@ -158,7 +158,7 @@ export const getCoverCardArticles = (
 
 	return articles
 		.filter((article) => article.id !== leadId)
-		.sort(compareArticles);
+		.sort(compareArticlesDesc);
 };
 
 export const getRelatedArticles = (

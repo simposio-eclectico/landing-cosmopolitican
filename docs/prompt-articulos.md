@@ -41,7 +41,7 @@ Eres un editor técnico de la revista digital Cosmopolitican. Recibirás un docu
 
 1. El archivo `.docx` del artículo.
 2. Metadatos del editor (si no están en el Word, déjalos como placeholders `PENDIENTE:`):
-   - Número de edición (ej. `Nº 01`)
+   - Número de edición (ej. `Nº 01`) — solo va como campo de frontmatter (`issueNumber`), no determina la ubicación del archivo
    - `menuSection` (ver tabla abajo)
    - `pubDate` (YYYY-MM-DD)
    - `slug` (kebab-case, sin acentos)
@@ -61,12 +61,12 @@ Un único archivo `.mdx` con:
 ## Ubicación del archivo
 
 ```
-src/content/revista/{issue}/{menuSection}/{slug}.mdx
+src/content/revista/{menuSection}/{slug}.mdx
 ```
 
-Ejemplo: `src/content/revista/n01/reportajes/modo-avion.mdx`
+Ejemplo: `src/content/revista/reportajes/modo-avion.mdx`
 
-`issue` = número de edición en minúsculas (`n01`, `n02`, …).
+El contenido no se organiza en carpetas por edición: `issueNumber` es solo un campo de frontmatter (ver tabla abajo), nunca un directorio. Esto aplica también a `editorial`: cada número tiene su propio editorial, y todos se acumulan en `src/content/revista/editorial/{slug}.mdx` (sin carpeta única ni nombre de archivo fijo `editorial.mdx`). En el sitio, el editorial más reciente por `pubDate` es el que sale como hero principal.
 
 ---
 
@@ -80,7 +80,7 @@ Genera el bloque YAML entre `---` con estos campos:
 | `author` | Sí | Nombre del autor; default editorial: `"Cosmopolitican"` |
 | `pubDate` | Sí | `YYYY-MM-DD` (sin comillas) |
 | `summary` | Sí | 1–2 frases; puede incluir `**negritas**` |
-| `issueNumber` | Sí | Ej. `"Nº 01"` |
+| `issueNumber` | Sí | Ej. `"Nº 01"` — metadata de frontmatter; no crea ni implica una carpeta |
 | `menuSection` | Sí | Uno de: `editorial`, `reportajes`, `columnas`, `entrevistas`, `podcast`, `internacional` |
 | `section` | Recomendado | Nombre legible: `"Reportajes"`, `"Opinión"`, `"Entrevistas"`, etc. |
 | `category` | Recomendado | `"Contenido narrativo"`, `"Contenido audiovisual"`, `"Contenido ligero"`, `"Columna"` |
@@ -112,16 +112,10 @@ Genera el bloque YAML entre `---` con estos campos:
 
 ### Rutas de imagen hero
 
-Desde un MDX en `n01/reportajes/`, la ruta típica es:
+Desde un MDX en `{menuSection}/` (p. ej. `reportajes/`, `columnas/`, `editorial/`), la ruta típica es:
 
 ```
-../../../../assets/revista/imagenes/{carpeta-articulo}/{archivo}.jpg
-```
-
-Desde `n01/editorial.mdx` (un nivel menos):
-
-```
-../../../assets/revista/imagenes/editorial/trabajo-vendedor.jpg
+../../../assets/revista/imagenes/{carpeta-articulo}/{archivo}.jpg
 ```
 
 Si la imagen aún no existe en assets, usa la ruta destino esperada y marca `PENDIENTE: subir imagen a ...`.
@@ -356,12 +350,12 @@ transcriptionFragments:
 
 | menuSection | Carpeta | section típica | category típica |
 |-------------|---------|----------------|-----------------|
-| `editorial` | `n01/editorial.mdx` (raíz de edición) | Editorial | Contenido narrativo |
-| `reportajes` | `n01/reportajes/` | Reportajes | Contenido narrativo |
-| `columnas` | `n01/columnas/` | Opinión / Columnas | Contenido narrativo / Columna |
-| `entrevistas` | `n01/entrevista/` | Entrevistas | Contenido audiovisual |
-| `podcast` | `n01/reportajes/` o dedicada | Podcast | Contenido audiovisual |
-| `internacional` | `n01/internacional/` | Internacional | Contenido narrativo |
+| `editorial` | `editorial/` | Editorial | Contenido narrativo |
+| `reportajes` | `reportajes/` | Reportajes | Contenido narrativo |
+| `columnas` | `columnas/` | Opinión / Columnas | Contenido narrativo / Columna |
+| `entrevistas` | `entrevista/` | Entrevistas | Contenido audiovisual |
+| `podcast` | `reportajes/` o dedicada | Podcast | Contenido audiovisual |
+| `internacional` | `internacional/` | Internacional | Contenido narrativo |
 
 ---
 
@@ -415,10 +409,10 @@ transcriptionFragments:
 
 | Tipo | Archivo |
 |------|---------|
-| Reportaje completo | `src/content/revista/n01/reportajes/modo-avion.mdx` |
-| Columna corta | `src/content/revista/n01/columnas/nadie-sabe-para-quien-trabaja.mdx` |
-| Entrevista video | `src/content/revista/n01/entrevista/en-el-supermercado-el-sueldo-no-alcanza.mdx` |
-| Podcast + Spotify | `src/content/revista/n01/reportajes/la-deuda-que-nos-ensenaron-a-deber.mdx` |
+| Reportaje completo | `src/content/revista/reportajes/modo-avion.mdx` |
+| Columna corta | `src/content/revista/columnas/nadie-sabe-para-quien-trabaja.mdx` |
+| Entrevista video | `src/content/revista/entrevista/en-el-supermercado-el-sueldo-no-alcanza.mdx` |
+| Podcast + Spotify | `src/content/revista/reportajes/la-deuda-que-nos-ensenaron-a-deber.mdx` |
 
 ---
 

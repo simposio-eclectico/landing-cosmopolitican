@@ -50,9 +50,7 @@ export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
 		"Tu guía astral: predicciones y reflexiones según tu signo zodiacal.",
 };
 
-export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.filter(
-	(section) => section !== "editorial",
-).map((section) => ({
+export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.map((section) => ({
 	slug: section,
 	label: MENU_SECTION_LABELS[section],
 	href: `/revista/seccion/${section}`,

@@ -133,10 +133,10 @@ export const getSectionsByCategory = (
 export const getLeadArticle = (
 	articles: CollectionEntry<"revista">[],
 ) => {
-	const editorial = articles.find(isEditorialArticle);
+	const editorials = articles.filter(isEditorialArticle).sort(compareArticlesDesc);
 
-	if (editorial) {
-		return editorial;
+	if (editorials.length > 0) {
+		return editorials[0];
 	}
 
 	const sorted = [...articles].sort(compareArticles);

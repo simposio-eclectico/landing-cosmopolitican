@@ -1,0 +1,11 @@
+---
+interface Props {
+	align?: "left" | "center" | "right";
+}
+
+const { align = "left" } = Astro.props;
+---
+
+<div class={`articulo__cierre articulo__cierre--${align}`}>
+	<slot />
+</div>

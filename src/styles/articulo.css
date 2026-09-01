@@ -696,7 +696,7 @@
 }
 
 .articulo__cierre {
-	margin-top: 2rem;
+	margin: 2rem 0;
 	padding: 1.75rem 2rem;
 	background: var(--articulo-cierre-fondo);
 }
@@ -708,6 +708,18 @@
 	font-size: clamp(20px, 3vw, 24px);
 	line-height: 1.4;
 	color: var(--articulo-cierre-texto);
+}
+
+.articulo__cierre--left {
+	text-align: left;
+}
+
+.articulo__cierre--center {
+	text-align: center;
+}
+
+.articulo__cierre--right {
+	text-align: right;
 }
 
 .articulo__contenido {
@@ -824,7 +836,7 @@
 }
 
 .articulo__contenido blockquote.articulo__cita--columna {
-	margin: 2.75rem auto;
+	margin: 2.75rem 0;
 	max-width: 640px;
 	padding: 4px 0 4px 28px;
 	border: none;

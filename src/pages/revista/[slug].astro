@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import ArticleOriginalLink from "@components/revista/ArticleOriginalLink.astro";
+import ArticleShare from "@components/revista/ArticleShare.astro";
 import ArticleSummary from "@components/revista/ArticleSummary.astro";
 import ArticleSideLabel from "@components/revista/ArticleSideLabel.astro";
 import ArticleHeroCaption from "@components/revista/ArticleHeroCaption.astro";
@@ -58,6 +59,10 @@ const showHeroCaption = Boolean(
 const titleHighlight = post.data.titleHighlight;
 const titleLead = post.data.titleLead;
 const hasSplitTitle = Boolean(titleLead && titleHighlight);
+const articleUrl = new URL(
+	`/revista/${post.data.slug ?? post.id}`,
+	Astro.site,
+).toString();
 ---
 
 <ElegantLayout
@@ -244,6 +249,7 @@ const hasSplitTitle = Boolean(titleLead && titleHighlight);
 									<ArticleOriginalLink url={post.data.originalUrl} />
 								)
 							}
+							<ArticleShare url={articleUrl} title={post.data.title} />
 						</div>
 
 						<RelatedArticles

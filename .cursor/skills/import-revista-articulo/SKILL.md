@@ -46,7 +46,8 @@ Importación:
 - [ ] 3. Mapear y copiar imágenes
 - [ ] 4. Resolver PENDIENTE: en frontmatter
 - [ ] 5. Validar (validate:images + build)
-- [ ] 6. Informar al usuario qué falta
+- [ ] 6. Evaluar calidad editorial del artículo
+- [ ] 7. Informar al usuario qué falta
 ```
 
 ### 1. Inventariar origen
@@ -124,7 +125,25 @@ pnpm build
 
 Si `validate:images` falla, corregir según el mensaje (alt, caption, créditos).
 
-### 6. Informar al usuario
+### 6. Evaluar calidad editorial del artículo
+
+Releer el texto ya importado (no el de origen) y devolver al editor una evaluación honesta, no una validación automática de trámite. Contrastar el tono contra [docs/revista-editorial.md](../../../docs/revista-editorial.md) si hay dudas sobre la línea editorial.
+
+Entregar:
+
+- **Nota general 1-5** (5 = listo para publicar tal cual, 1 = necesita reescritura sustancial), ponderando:
+  - **Extensión**: ¿es corta/larga para su `menuSection` y formato? (compara con artículos ya publicados de la misma sección)
+  - **Tono**: ¿calza con la línea editorial de Cosmopolitican y con el resto de la pieza (no cambia de registro a mitad de camino)?
+  - **Imágenes**: ¿hay suficientes, están bien ubicadas respecto al texto que ilustran, y los `alt`/`caption`/`credit` son descriptivos y no placeholders?
+- **Alertas obligatorias** (listar cada instancia con la cita textual o línea aproximada, no solo decir "hay errores"):
+  - Faltas de ortografía y tipeos (acentos, concordancia, mayúsculas)
+  - Falta de claridad sintáctica: oraciones demasiado largas o enredadas, sujetos ambiguos, párrafos que mezclan varias ideas sin transición
+  - Otros problemas vitales para un artículo de revista: título/bajada poco atractivos o que no reflejan el contenido, remate (`ArticuloCierre`) que no cierra la idea, citas (`blockquote`) mal elegidas o repetidas, fuentes/datos sin respaldo cuando el texto afirma cifras, inconsistencias de nombres/fechas dentro del propio texto
+- Si todo está limpio, decirlo explícitamente ("sin observaciones de ortografía/claridad") en vez de omitir la sección.
+
+Este resumen es para el editor humano, no bloquea el import ni reemplaza la validación técnica del paso 5.
+
+### 7. Informar al usuario
 
 Resumir:
 
@@ -132,6 +151,7 @@ Resumir:
 - Imágenes copiadas
 - Placeholders `PENDIENTE:` que quedaron
 - URL local tras `pnpm dev` (ruta `/revista/...` según slug)
+- La evaluación editorial del paso 6
 
 ## Reglas importantes
 

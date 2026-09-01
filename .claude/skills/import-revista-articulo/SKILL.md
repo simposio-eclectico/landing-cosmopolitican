@@ -40,6 +40,7 @@ node scripts/import-articulo.mjs --source ~/Downloads/articulo.zip --map /tmp/im
 El script:
 - Descomprime el ZIP a temporal
 - Busca `.mdx` bajo `src/content/revista/`
+- Coloca el MDX en `src/content/revista/{menuSection}/{slug}.mdx`, descartando cualquier carpeta de edición (`n01`, `n02`, …) que traiga la fuente: el repo no organiza el contenido por edición, `issueNumber` es solo un campo de frontmatter
 - Mapea imágenes desde directorios raíz y `uploads/`
 - Copia (o linkea con `--use-symlinks`) a `src/assets/revista/imagenes/{slug}/`
 
@@ -95,6 +96,7 @@ node scripts/import-articulo.mjs --source ... --map ruta/a/imagenes-map.json
 - Imágenes usan symlink/copia según `--use-symlinks`
 - Soporta caracteres especiales en rutas (usa `ditto` en lugar de `unzip`)
 - Comentarios `PENDIENTE:` deben resolverse manualmente en frontmatter
+- El destino nunca incluye una carpeta de edición (`n01/`, `n02/`, …), aunque la fuente sí la traiga: se aplana a `src/content/revista/{menuSection}/{slug}.mdx`
 
 ## Referencia: campos obligatorios del frontmatter
 
@@ -104,7 +106,7 @@ node scripts/import-articulo.mjs --source ... --map ruta/a/imagenes-map.json
 | `author` | string | default: `"Cosmopolitican"` |
 | `pubDate` | `YYYY-MM-DD` | — |
 | `summary` | string | 1–2 frases, puede incluir `**negritas**` |
-| `issueNumber` | `"Nº 01"`, `"Nº 02"`, etc. | — |
+| `issueNumber` | `"Nº 01"`, `"Nº 02"`, etc. | Solo metadata de frontmatter; no determina la carpeta destino |
 | `menuSection` | enum | `editorial`, `reportajes`, `columnas`, `entrevistas`, `podcast`, `internacional` |
 | `slug` | kebab-case | sin acentos; derivado del título si falta |
 | `image` | ruta relativa | obligatorio si `theme: featured` |

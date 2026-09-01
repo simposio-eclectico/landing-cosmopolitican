@@ -22,7 +22,7 @@ import {
 	symlinkSync,
 	unlinkSync,
 } from "node:fs";
-import { basename, dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve, sep } from "node:path";
 import { homedir } from "node:os";
 import { execSync } from "node:child_process";
 import { mkdtempSync, rmSync } from "node:fs";
@@ -371,10 +371,19 @@ function importArticle(options) {
 			join(sourceDir, REVISTA_CONTENT_PREFIX),
 			mdxPath,
 		);
-		const destMdx = join(projectDir, REVISTA_CONTENT_PREFIX, relFromRevista);
+		// El repo no organiza el contenido en carpetas por edición (issueNumber
+		// es solo un campo de frontmatter): se descarta un posible segmento
+		// inicial "n01", "n02", etc. y se aplana a src/content/revista/{menuSection}/{slug}.mdx
+		const relSegments = relFromRevista.split(sep);
+		const mdxFileName = relSegments.pop();
+		if (relSegments[0] && /^n\d+$/i.test(relSegments[0])) {
+			relSegments.shift();
+		}
+		const relDestPath = join(...relSegments, mdxFileName);
+		const destMdx = join(projectDir, REVISTA_CONTENT_PREFIX, relDestPath);
 		const destAssetsDir = join(projectDir, REVISTA_ASSETS_PREFIX, slug);
 
-		console.log(`\n📄 ${relFromRevista} (slug: ${slug})`);
+		console.log(`\n📄 ${relDestPath} (slug: ${slug})`);
 
 		copyOrLink(mdxPath, destMdx, options.dryRun, false); // MDX siempre copia, nunca symlink
 

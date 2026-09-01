@@ -89,6 +89,7 @@ const articleUrl = new URL(
 									<header class="articulo__hero articulo__hero--portada">
 										<Image
 											class="articulo__hero-portada-imagen"
+											style={`--articulo-hero-focal: ${post.data.imagePosition}`}
 											src={post.data.image!}
 											alt={heroImageAlt}
 											width={1440}
@@ -224,6 +225,7 @@ const articleUrl = new URL(
 											<ArticleHeroImage
 												src={post.data.image}
 												alt={heroImageAlt}
+												imagePosition={post.data.imagePosition}
 												{...heroCaptionProps}
 											/>
 										)

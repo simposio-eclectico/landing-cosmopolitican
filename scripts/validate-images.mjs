@@ -104,6 +104,15 @@ function validateFrontmatter(filePath, content) {
 			`${filePath}: falta imageCredit cuando hay imageLicense en el frontmatter`,
 		);
 	}
+
+	if (
+		isTruthyFrontmatterValue(frontmatter.imagePosition) &&
+		!["top", "center", "bottom"].includes(frontmatter.imagePosition)
+	) {
+		errors.push(
+			`${filePath}: imagePosition inválido (debe ser top, center o bottom)`,
+		);
+	}
 }
 
 function validateBodyImages(filePath, content) {

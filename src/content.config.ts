@@ -41,6 +41,7 @@ const revista = defineCollection({
 			titleHighlight: z.string().optional(),
 			subtitle: z.string().optional(),
 			image: z.optional(image()),
+			imagePosition: z.enum(["top", "center", "bottom"]).default("center"),
 			imageAlt: z.string().optional(),
 			imageCaption: z.string().optional(),
 			imageCredit: z.string().optional(),

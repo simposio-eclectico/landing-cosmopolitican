@@ -1,15 +1,23 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { extname, join, relative } from "node:path";
 
 const CONTENT_DIR = "src/content/revista";
+const IMAGES_DIR = "src/assets/revista/imagenes";
 const CC_LICENSE_HOSTS = ["creativecommons.org", "flickr.com", "wikimedia.org"];
 const ARTICLE_FIGURE_PATTERN =
 	/<ArticleFigure[\s\S]*?(?:\/>|<\/ArticleFigure>)/g;
+const EXT_TO_FORMAT = {
+	".jpg": "jpeg",
+	".jpeg": "jpeg",
+	".png": "png",
+	".webp": "webp",
+	".gif": "gif",
+};
 
 const errors = [];
 const warnings = [];
 
-function walkMarkdownFiles(dir) {
+function walkFiles(dir) {
 	const entries = readdirSync(dir);
 	const files = [];
 
@@ -18,16 +26,77 @@ function walkMarkdownFiles(dir) {
 		const stats = statSync(fullPath);
 
 		if (stats.isDirectory()) {
-			files.push(...walkMarkdownFiles(fullPath));
+			files.push(...walkFiles(fullPath));
 			continue;
 		}
 
-		if (/\.(md|mdx)$/.test(entry)) {
-			files.push(fullPath);
-		}
+		files.push(fullPath);
 	}
 
 	return files;
+}
+
+function walkMarkdownFiles(dir) {
+	return walkFiles(dir).filter((file) => /\.(md|mdx)$/.test(file));
+}
+
+function detectImageFormat(buffer) {
+	if (
+		buffer.length >= 4 &&
+		buffer[0] === 0x89 &&
+		buffer[1] === 0x50 &&
+		buffer[2] === 0x4e &&
+		buffer[3] === 0x47
+	) {
+		return "png";
+	}
+
+	if (buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) {
+		return "jpeg";
+	}
+
+	if (
+		buffer.length >= 12 &&
+		buffer.toString("ascii", 0, 4) === "RIFF" &&
+		buffer.toString("ascii", 8, 12) === "WEBP"
+	) {
+		return "webp";
+	}
+
+	if (buffer.length >= 6 && buffer.toString("ascii", 0, 6).startsWith("GIF8")) {
+		return "gif";
+	}
+
+	return "unknown";
+}
+
+function validateImageFileFormats() {
+	let imageFiles;
+
+	try {
+		imageFiles = walkFiles(IMAGES_DIR);
+	} catch {
+		return;
+	}
+
+	for (const filePath of imageFiles) {
+		const ext = extname(filePath).toLowerCase();
+		const expectedFormat = EXT_TO_FORMAT[ext];
+
+		if (!expectedFormat) {
+			continue;
+		}
+
+		const relativePath = relative(process.cwd(), filePath);
+		const buffer = readFileSync(filePath);
+		const actualFormat = detectImageFormat(buffer);
+
+		if (actualFormat !== "unknown" && actualFormat !== expectedFormat) {
+			errors.push(
+				`${relativePath}: la extensión ${ext} no coincide con el formato real del archivo (es ${actualFormat}). Esto rompe el og:image al compartir; reconvertir o renombrar el archivo.`,
+			);
+		}
+	}
 }
 
 function parseFrontmatter(content) {
@@ -199,6 +268,8 @@ for (const filePath of markdownFiles) {
 	validateFrontmatter(relativePath, content);
 	validateBodyImages(relativePath, content);
 }
+
+validateImageFileFormats();
 
 for (const warning of warnings) {
 	console.warn(`⚠ ${warning}`);

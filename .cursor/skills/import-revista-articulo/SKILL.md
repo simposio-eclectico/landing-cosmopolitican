@@ -123,7 +123,7 @@ pnpm validate:images
 pnpm build
 ```
 
-Si `validate:images` falla, corregir según el mensaje (alt, caption, créditos).
+Si `validate:images` falla, corregir según el mensaje (alt, caption, créditos, o extensión que no coincide con el formato real del archivo — las imágenes generadas por IA suelen venir como PNG con extensión `.jpg`; ese mismatch rompe el `og:image` al compartir, así que el script lo detecta y falla el build).
 
 ### 6. Evaluar calidad editorial del artículo
 

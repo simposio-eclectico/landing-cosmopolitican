@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { article } = Astro.props;
-const { title, summary, image, imageAlt } = article.data;
+const { title, summary, image, imageAlt, imagePosition } = article.data;
 const href = `/revista/${article.data.slug ?? article.id}`;
 const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 ---
@@ -25,8 +25,11 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 							src={image}
 							alt={imageAlt ?? title}
 							class="hero-especial__foto"
+							style={`--hero-especial-focal: ${imagePosition}`}
 							width={600}
 							height={600}
+							fit="cover"
+							position={imagePosition}
 						/>
 					</div>
 				) : (
@@ -85,6 +88,7 @@ const eyebrow = MENU_SECTION_LABELS[article.data.menuSection].toUpperCase();
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: var(--hero-especial-focal, center);
 		display: block;
 	}
 

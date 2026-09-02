@@ -27,7 +27,14 @@ const HERO_IMAGE_HEIGHT = 562;
 ---
 
 <figure class="articulo__hero-imagen" style={`--articulo-hero-focal: ${imagePosition}`}>
-	<Image src={src} alt={alt} width={HERO_IMAGE_WIDTH} height={HERO_IMAGE_HEIGHT} />
+	<Image
+		src={src}
+		alt={alt}
+		width={HERO_IMAGE_WIDTH}
+		height={HERO_IMAGE_HEIGHT}
+		fit="cover"
+		position={imagePosition}
+	/>
 	<ArticleHeroCaption
 		as="figcaption"
 		caption={caption}

@@ -1,0 +1,14 @@
+---
+interface Props {
+	label?: string;
+}
+
+const { label = "Advertencia de contenido" } = Astro.props;
+---
+
+<div class="articulo__alerta" role="note">
+	<p class="articulo__alerta__label">{label}</p>
+	<div class="articulo__alerta__texto">
+		<slot />
+	</div>
+</div>

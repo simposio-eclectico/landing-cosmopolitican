@@ -1,0 +1,121 @@
+---
+name: evaluar-calidad-editorial
+description: >-
+  Evalúa la calidad editorial de artículos ya publicados en
+  src/content/revista/ (extensión, cantidad de imágenes, ortografía,
+  claridad sintáctica, tono, remate, etc.), ya sea de un artículo puntual
+  elegido por el usuario o de la revista completa. Usar cuando pidan
+  "evaluar la calidad editorial", "revisar artículos publicados",
+  "auditar la revista" o un chequeo de calidad que no sea parte de un
+  import nuevo.
+---
+
+# Evaluar calidad editorial de la revista
+
+Audita artículos que **ya están en el repo** (a diferencia de
+[import-revista-articulo](../import-revista-articulo/SKILL.md), que evalúa un
+artículo recién importado como parte de su propio workflow). Usa el mismo
+criterio editorial que ese skill, aplicado retroactivamente.
+
+## Modo de uso
+
+Al invocarse, pregunta al usuario (si no lo especificó ya en su mensaje) cuál modo quiere:
+
+1. **Artículo puntual**: elige uno de la lista (por slug, título o sección).
+2. **Evaluación completa**: recorre todos los artículos de `src/content/revista/`.
+
+## Workflow
+
+```
+- [ ] 1. Listar artículos disponibles
+- [ ] 2. Confirmar alcance con el usuario (uno vs. todos)
+- [ ] 3. Leer cada artículo objetivo (MDX completo, no solo frontmatter)
+- [ ] 4. Evaluar cada uno con la rúbrica
+- [ ] 5. Entregar el/los informes (+ ranking si es evaluación completa)
+```
+
+### 1. Listar artículos disponibles
+
+```bash
+node .cursor/skills/evaluar-calidad-editorial/scripts/list-articulos.mjs
+```
+
+Esto agrupa por `menuSection` y muestra slug, título, palabras, minutos de
+lectura, cantidad de imágenes y fecha — sirve tanto para que el usuario elija
+como para tener el punto de comparación de "extensión típica de la sección"
+que pide la rúbrica. Filtrar con `--menu-section {sección}` o `--slug {slug}`
+si ya se sabe el objetivo. Con `--json` devuelve el mismo detalle en JSON.
+
+### 2. Confirmar alcance
+
+Si el usuario no fue explícito, pregunta si quiere evaluar un artículo
+específico (dar la lista para elegir) o la revista completa. En evaluación
+completa, avisa de antemano cuántos artículos hay (el listado del paso 1 ya
+lo indica) porque leer todos puede ser una tarea larga.
+
+### 3. Leer cada artículo objetivo
+
+Leer el `.mdx` completo (frontmatter + cuerpo), no solo lo que muestra el
+listado. Si hay dudas sobre la línea editorial o el tono esperado, contrastar
+con [docs/revista-editorial.md](../../../docs/revista-editorial.md).
+
+Nota: artículos con `format: "video"` (ver frontmatter) tienen el contenido
+real en `transcriptionFragments`, no en el cuerpo MDX — el conteo de palabras
+del listado no aplica a ellos; evaluar la transcripción en su lugar.
+
+### 4. Evaluar con la rúbrica
+
+Misma rúbrica que usa `import-revista-articulo` en su paso de evaluación
+editorial — no inventar una nueva:
+
+- **Nota general 1-5** (5 = listo para publicar tal cual, 1 = necesita
+  reescritura sustancial), ponderando:
+  - **Extensión**: ¿es corta/larga para su `menuSection` y `format`?
+    (comparar contra el promedio de palabras de esa sección, dato que da el
+    script del paso 1)
+  - **Tono**: ¿calza con la línea editorial de Cosmopolitican y es
+    consistente dentro del propio artículo (no cambia de registro a mitad
+    de camino)?
+  - **Imágenes**: ¿hay suficientes para la extensión, están bien ubicadas
+    respecto al texto que ilustran, y los `alt`/`caption`/`credit` son
+    descriptivos y no placeholders o genéricos?
+- **Alertas obligatorias** (listar cada instancia con la cita textual o
+  línea aproximada, no solo decir "hay errores"):
+  - Faltas de ortografía y tipeos (acentos, concordancia, mayúsculas)
+  - Falta de claridad sintáctica: oraciones demasiado largas o enredadas,
+    sujetos ambiguos, párrafos que mezclan varias ideas sin transición
+  - Otros problemas vitales: título/bajada poco atractivos o que no
+    reflejan el contenido, remate (`ArticuloCierre`) que no cierra la idea,
+    citas (`blockquote`) mal elegidas o repetidas, cifras/datos sin
+    respaldo, inconsistencias de nombres/fechas dentro del propio texto
+- Si un artículo está limpio, decirlo explícitamente ("sin observaciones de
+  ortografía/claridad") en vez de omitir la sección — no asumir que "no
+  encontré nada" significa "no lo revisé bien".
+
+Esta es una lectura editorial real, no una corrida de linter: no basta con
+que `pnpm validate:images` pase.
+
+### 5. Entregar el informe
+
+**Artículo puntual**: informe con la estructura de la rúbrica de arriba.
+
+**Evaluación completa**: informe por artículo (agrupado por `menuSection`,
+igual que el listado) más una tabla resumen con columnas slug, sección,
+**palabras** (del listado del paso 1; para `format: "video"` usar la
+cantidad de palabras de la transcripción, no la del cuerpo MDX), nota 1-5 y
+la alerta más grave, ordenada de menor a mayor nota para que el editor
+priorice qué revisar primero.
+
+## Reglas importantes
+
+- **No editar** el contenido del artículo como parte de este skill — es solo
+  diagnóstico. Si el usuario pide corregir algo puntual después de leer el
+  informe, tratarlo como una tarea aparte y confirmar antes de tocar el MDX.
+- No reemplaza `pnpm validate:images` ni el build; esos siguen siendo la
+  validación técnica de frontmatter/imágenes.
+
+## Referencias del proyecto
+
+- Rúbrica original: [.cursor/skills/import-revista-articulo/SKILL.md](../import-revista-articulo/SKILL.md) (paso 6)
+- Línea editorial: [docs/revista-editorial.md](../../../docs/revista-editorial.md)
+- Esquema frontmatter: [src/content.config.ts](../../../src/content.config.ts)

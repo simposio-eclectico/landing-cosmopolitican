@@ -12,10 +12,10 @@ description: >-
 
 # Evaluar calidad editorial de la revista
 
-Audita artículos que **ya están en el repo** (a diferencia de
-[import-revista-articulo](../import-revista-articulo/SKILL.md), que evalúa un
-artículo recién importado como parte de su propio workflow). Usa el mismo
-criterio editorial que ese skill, aplicado retroactivamente.
+Audita artículos que **ya están en el repo**. La rúbrica de este documento es
+la fuente única de verdad: [import-revista-articulo](../import-revista-articulo/SKILL.md)
+la reutiliza en su paso 6 invocando este mismo skill sobre el artículo recién
+importado, en vez de duplicarla.
 
 ## Modo de uso
 
@@ -65,9 +65,6 @@ del listado no aplica a ellos; evaluar la transcripción en su lugar.
 
 ### 4. Evaluar con la rúbrica
 
-Misma rúbrica que usa `import-revista-articulo` en su paso de evaluación
-editorial — no inventar una nueva:
-
 - **Nota general 1-5** (5 = listo para publicar tal cual, 1 = necesita
   reescritura sustancial), ponderando:
   - **Extensión**: ¿es corta/larga para su `menuSection` y `format`?
@@ -98,6 +95,15 @@ editorial — no inventar una nueva:
     reflejan el contenido, remate (`ArticuloCierre`) que no cierra la idea,
     citas (`blockquote`) mal elegidas o repetidas, inconsistencias de
     nombres/fechas dentro del propio texto
+  - **Cobertura de un evento** (concierto, festival, feria, activación,
+    etc.) **sin ficha del evento**: debe cerrar con una sección tipo
+    "Ficha del evento" (tabla con campos como evento, lugar, fecha,
+    organizador), como en
+    `src/content/revista/reportajes/descuelgate-punk-funk-suicidio.mdx`
+  - **Tema sensible sin advertencia**: artículos que traten suicidio,
+    autolesión, abuso o violencia sexual explícita deben abrir con el
+    componente `<ArticleAlert>` (`src/components/revista/ArticleAlert.astro`),
+    no basta con mencionarlo de paso en el cuerpo del texto
 - Si un artículo está limpio, decirlo explícitamente ("sin observaciones de
   ortografía/claridad/fuentes") en vez de omitir la sección — no asumir que
   "no encontré nada" significa "no lo revisé bien".
@@ -126,6 +132,6 @@ priorice qué revisar primero.
 
 ## Referencias del proyecto
 
-- Rúbrica original: [.cursor/skills/import-revista-articulo/SKILL.md](../import-revista-articulo/SKILL.md) (paso 6)
+- Usado también por: [import-revista-articulo](../import-revista-articulo/SKILL.md) (paso 6, tras cada import)
 - Línea editorial: [docs/revista-editorial.md](../../../docs/revista-editorial.md)
 - Esquema frontmatter: [src/content.config.ts](../../../src/content.config.ts)

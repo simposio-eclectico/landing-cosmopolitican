@@ -3,7 +3,7 @@ import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { SITE_MAIL, SITE_TITLE } from "@consts";
 
 const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID;
-const formAction = formspreeId ? `https://formspree.io/f/${formspreeId}` : "";
+const formAction = `https://formspree.io/f/${formspreeId}`;
 
 if (!formspreeId) {
   console.warn("Formspree contact form not configured. Set PUBLIC_FORMSPREE_ID in .env");
@@ -19,61 +19,59 @@ if (!formspreeId) {
       <span class="t2">Un mensaje</span>
     </div>
 
-    <div class="contact-grid">
-      <form
-        class="contact-form"
-        action={formAction || "#"}
-        method={formspreeId ? "POST" : "GET"}
-      >
-        <div class="field">
-          <label class="field-label" for="name">Nombre</label>
-          <input
-            class="field-input"
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Su nombre completo"
-            required
-          />
-        </div>
+    <div class:list={["contact-grid", { "contact-grid--sin-formulario": !formspreeId }]}>
+      {formspreeId && (
+        <form class="contact-form" action={formAction} method="POST">
+          <div class="field">
+            <label class="field-label" for="name">Nombre</label>
+            <input
+              class="field-input"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Su nombre completo"
+              required
+            />
+          </div>
 
-        <div class="field">
-          <label class="field-label" for="email">Correo</label>
-          <input
-            class="field-input"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="correo@ejemplo.com"
-            required
-          />
-        </div>
+          <div class="field">
+            <label class="field-label" for="email">Correo</label>
+            <input
+              class="field-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="correo@ejemplo.com"
+              required
+            />
+          </div>
 
-        <div class="field">
-          <label class="field-label" for="message">Mensaje</label>
-          <textarea
-            class="field-input field-textarea"
-            id="message"
-            name="message"
-            rows="5"
-            placeholder="Su declaración…"
-            required></textarea>
-        </div>
+          <div class="field">
+            <label class="field-label" for="message">Mensaje</label>
+            <textarea
+              class="field-input field-textarea"
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Su declaración…"
+              required></textarea>
+          </div>
 
-        <button type="submit" class="cta-button submit-btn">
-          Enviar mensaje
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
-      </form>
+          <button type="submit" class="cta-button submit-btn">
+            Enviar mensaje
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </form>
+      )}
 
       <aside class="info-sidebar">
         <p class="field-label">Ubicación</p>
@@ -129,6 +127,11 @@ if (!formspreeId) {
     grid-template-columns: 3fr 2fr;
     gap: 4rem;
     align-items: start;
+  }
+
+  .contact-grid--sin-formulario {
+    grid-template-columns: 1fr;
+    max-width: 420px;
   }
 
   /* Formulario */

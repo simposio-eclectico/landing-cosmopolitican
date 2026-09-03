@@ -84,13 +84,23 @@ editorial — no inventar una nueva:
   - Faltas de ortografía y tipeos (acentos, concordancia, mayúsculas)
   - Falta de claridad sintáctica: oraciones demasiado largas o enredadas,
     sujetos ambiguos, párrafos que mezclan varias ideas sin transición
+  - **Afirmaciones numéricas sin fuente**: por cada cifra, porcentaje, monto
+    o dato estadístico que el cuerpo del artículo presente como hecho
+    (no como opinión), verificar que exista respaldo — cita inline con
+    atribución («según X», nota al pie) o entrada correspondiente en el
+    bloque `<div class="articulo__fuentes">` al final. Si el artículo no
+    tiene sección de Fuentes y hace afirmaciones numéricas, es una alerta
+    en sí misma, no solo la ausencia de la sección. Listar cada cifra sin
+    respaldo con su cita textual; no basta con revisar si la sección
+    "Fuentes" existe, hay que confirmar que cada número relevante esté
+    efectivamente cubierto por alguna de sus entradas.
   - Otros problemas vitales: título/bajada poco atractivos o que no
     reflejan el contenido, remate (`ArticuloCierre`) que no cierra la idea,
-    citas (`blockquote`) mal elegidas o repetidas, cifras/datos sin
-    respaldo, inconsistencias de nombres/fechas dentro del propio texto
+    citas (`blockquote`) mal elegidas o repetidas, inconsistencias de
+    nombres/fechas dentro del propio texto
 - Si un artículo está limpio, decirlo explícitamente ("sin observaciones de
-  ortografía/claridad") en vez de omitir la sección — no asumir que "no
-  encontré nada" significa "no lo revisé bien".
+  ortografía/claridad/fuentes") en vez de omitir la sección — no asumir que
+  "no encontré nada" significa "no lo revisé bien".
 
 Esta es una lectura editorial real, no una corrida de linter: no basta con
 que `pnpm validate:images` pase.

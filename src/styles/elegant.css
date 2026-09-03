@@ -34,6 +34,9 @@
 	--articulo-stat-fondo: oklch(99% 0.004 80);
 	--articulo-cierre-fondo: oklch(20% 0.03 350);
 	--articulo-cierre-texto: oklch(97% 0.02 350);
+	--articulo-alerta-fondo: oklch(93% 0.06 55);
+	--articulo-alerta-borde: oklch(62% 0.17 45);
+	--articulo-alerta-label: oklch(45% 0.15 45);
 	--articulo-hero-overlay: linear-gradient(
 		0deg,
 		oklch(10% 0 0 / 0.86) 0%,

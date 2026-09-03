@@ -1,3 +1,5 @@
+import { getRandomReadingTimeJoke } from "@lib/readingTimeJokes";
+
 const WORDS_PER_MINUTE = 200;
 
 export const getReadingMeta = (body: string) => {
@@ -15,6 +17,7 @@ export const getReadingMeta = (body: string) => {
 	return {
 		words,
 		minutes,
+		readingTimeJoke: getRandomReadingTimeJoke(minutes),
 	};
 };
 

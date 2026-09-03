@@ -30,7 +30,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const revistas = await getCollection("revista");
 const relatedArticles = getRelatedArticles(revistas, post.id);
-const { minutes, words } = getReadingMeta(post.body ?? "");
+const { minutes, words, readingTimeJoke } = getReadingMeta(post.body ?? "");
 
 const formattedDate = post.data.pubDate.toLocaleDateString("es-ES", {
 	year: "numeric",
@@ -143,7 +143,7 @@ const articleUrl = new URL(
 														<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
 														<path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 													</svg>
-													{minutes} min de lectura
+													{minutes} min de lectura, {readingTimeJoke}
 												</span>
 												<span class="articulo__stat articulo__stat--portada" aria-label="Cantidad de palabras">
 													<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -210,7 +210,7 @@ const articleUrl = new URL(
 													<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
 													<path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 												</svg>
-												{minutes} min de lectura
+												{minutes} min de lectura, {readingTimeJoke}
 											</span>
 											<span class="articulo__stat" aria-label="Cantidad de palabras">
 												<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">

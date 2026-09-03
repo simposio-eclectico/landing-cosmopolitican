@@ -1,0 +1,14 @@
+---
+interface Props {
+	width?: "normal" | "full";
+}
+
+const { width = "normal" } = Astro.props;
+
+const className =
+	width === "full" ? "articulo__aside articulo__aside--full" : "articulo__aside";
+---
+
+<aside class={className}>
+	<slot />
+</aside>

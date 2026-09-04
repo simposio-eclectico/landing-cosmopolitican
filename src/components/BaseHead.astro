@@ -11,6 +11,7 @@ interface Props {
 	description?: string;
 	image?: string | ImageMetadata;
 	imageAlt?: string;
+	socialTitle?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -20,8 +21,10 @@ const {
 	description = SITE_DESCRIPTION,
 	image = "/og-image.jpeg",
 	imageAlt,
+	socialTitle,
 } = Astro.props;
 
+const ogTitle = socialTitle ?? title;
 const socialImageAlt = imageAlt ?? description;
 
 const imageSrc = typeof image === "string" ? image : image.src;
@@ -92,7 +95,7 @@ const schema = {
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(imageSrc, Astro.url)} />
 {imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
@@ -107,7 +110,7 @@ const schema = {
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={Astro.url} />
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(imageSrc, Astro.url)} />
 <meta name="twitter:image:alt" content={socialImageAlt} />

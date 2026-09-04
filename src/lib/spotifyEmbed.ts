@@ -12,8 +12,7 @@ export const isSpotifyUrl = (spotifyUrl: string) => {
 	try {
 		const url = new URL(spotifyUrl);
 		return (
-			url.hostname === SPOTIFY_HOST ||
-			url.hostname === `www.${SPOTIFY_HOST}`
+			url.hostname === SPOTIFY_HOST || url.hostname === `www.${SPOTIFY_HOST}`
 		);
 	} catch {
 		return false;
@@ -29,7 +28,13 @@ export const getSpotifyEmbedUrl = (spotifyUrl: string) => {
 		const url = new URL(spotifyUrl);
 		const [type, id] = url.pathname.split("/").filter(Boolean);
 
-		if (!type || !id || !SPOTIFY_EMBED_TYPES.includes(type as typeof SPOTIFY_EMBED_TYPES[number])) {
+		if (
+			!type ||
+			!id ||
+			!SPOTIFY_EMBED_TYPES.includes(
+				type as (typeof SPOTIFY_EMBED_TYPES)[number],
+			)
+		) {
 			return "";
 		}
 

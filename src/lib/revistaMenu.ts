@@ -73,9 +73,7 @@ const getSectionPriority = (
 	);
 
 	return Math.min(
-		...sectionArticles.map(
-			(article) => THEME_SORT_ORDER[article.data.theme],
-		),
+		...sectionArticles.map((article) => THEME_SORT_ORDER[article.data.theme]),
 	);
 };
 
@@ -93,7 +91,6 @@ const sortSections = (
 const getMenuStyle = (theme: RevistaTheme): DrawerLinkStyle =>
 	theme === "featured" ? "main" : "sub";
 
-
 export const getArticlesByMenuSection = (
 	articles: CollectionEntry<"revista">[],
 	menuSection: MenuSection,
@@ -101,7 +98,6 @@ export const getArticlesByMenuSection = (
 	[...articles]
 		.filter((article) => article.data.menuSection === menuSection)
 		.sort(compareArticlesDesc);
-
 
 export const getSectionsByCategory = (
 	articles: CollectionEntry<"revista">[],
@@ -130,10 +126,10 @@ export const getSectionsByCategory = (
 	);
 };
 
-export const getLeadArticle = (
-	articles: CollectionEntry<"revista">[],
-) => {
-	const editorials = articles.filter(isEditorialArticle).sort(compareArticlesDesc);
+export const getLeadArticle = (articles: CollectionEntry<"revista">[]) => {
+	const editorials = articles
+		.filter(isEditorialArticle)
+		.sort(compareArticlesDesc);
 
 	if (editorials.length > 0) {
 		return editorials[0];
@@ -166,7 +162,9 @@ export const getRelatedArticles = (
 	currentArticleId: string,
 	limit = 3,
 ) => {
-	const currentArticle = articles.find((article) => article.id === currentArticleId);
+	const currentArticle = articles.find(
+		(article) => article.id === currentArticleId,
+	);
 	const sameMenuSection = articles.filter(
 		(article) =>
 			article.id !== currentArticleId &&

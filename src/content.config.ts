@@ -26,57 +26,59 @@ const transcriptionFragmentSchema = z.object({
 const revista = defineCollection({
 	loader: glob({ base: "./src/content/revista", pattern: "**/*.{md,mdx}" }),
 	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			author: z.string().default(SITE_NAME),
-			pubDate: z.coerce.date(),
-			order: z.number().int().optional(),
-			category: z.string().optional(),
-			section: z.string().default("Edición"),
-			menuSection: z.enum(MENU_SECTIONS),
-			menuLabel: z.string().optional(),
-			tags: z.array(z.string()).default([]),
-			summary: z.string(),
-			titleLead: z.string().optional(),
-			titleHighlight: z.string().optional(),
-			subtitle: z.string().optional(),
-			image: z.optional(image()),
-			imagePosition: z.enum(["top", "center", "bottom"]).default("center"),
-			imageAlt: z.string().optional(),
-			imageCaption: z.string().optional(),
-			imageCredit: z.string().optional(),
-			imageCreditUrl: z.string().url().optional(),
-			imageLicense: z.string().optional(),
-			imageLicenseUrl: z.string().url().optional(),
-			slug: z.string().optional(),
-			theme: z.enum(["default", "featured", "dark"]).default("default"),
-			format: z.enum(["article", "video"]).default("article"),
-			duration: z.string().optional(),
-			videoUrl: z.string().optional(),
-			transcriptionFragments: z
-				.array(transcriptionFragmentSchema)
-				.default([]),
-			customStyles: z.string().optional(),
-			originalUrl: z.string().url().optional(),
-		})
-		.refine((data) => !data.image || Boolean(data.imageAlt), {
-			message: "imageAlt es obligatorio cuando hay image",
-			path: ["imageAlt"],
-		})
-		.refine(
-			(data) =>
-				!data.image ||
-				data.theme !== "featured" ||
-				Boolean(data.imageCaption),
-			{
-				message: "imageCaption es obligatorio en artículos featured con image",
-				path: ["imageCaption"],
-			},
-		)
-		.refine((data) => !data.imageLicense || Boolean(data.imageCredit), {
-			message: "imageCredit es obligatorio cuando hay imageLicense",
-			path: ["imageCredit"],
-		}),
+		z
+			.object({
+				title: z.string(),
+				author: z.string().default(SITE_NAME),
+				pubDate: z.coerce.date(),
+				order: z.number().int().optional(),
+				category: z.string().optional(),
+				section: z.string().default("Edición"),
+				menuSection: z.enum(MENU_SECTIONS),
+				menuLabel: z.string().optional(),
+				tags: z.array(z.string()).default([]),
+				summary: z.string(),
+				titleLead: z.string().optional(),
+				titleHighlight: z.string().optional(),
+				subtitle: z.string().optional(),
+				image: z.optional(image()),
+				imagePosition: z.enum(["top", "center", "bottom"]).default("center"),
+				imageAlt: z.string().optional(),
+				imageCaption: z.string().optional(),
+				imageCredit: z.string().optional(),
+				imageCreditUrl: z.string().url().optional(),
+				imageLicense: z.string().optional(),
+				imageLicenseUrl: z.string().url().optional(),
+				slug: z.string().optional(),
+				theme: z.enum(["default", "featured", "dark"]).default("default"),
+				format: z.enum(["article", "video"]).default("article"),
+				duration: z.string().optional(),
+				videoUrl: z.string().optional(),
+				transcriptionFragments: z
+					.array(transcriptionFragmentSchema)
+					.default([]),
+				customStyles: z.string().optional(),
+				originalUrl: z.string().url().optional(),
+			})
+			.refine((data) => !data.image || Boolean(data.imageAlt), {
+				message: "imageAlt es obligatorio cuando hay image",
+				path: ["imageAlt"],
+			})
+			.refine(
+				(data) =>
+					!data.image ||
+					data.theme !== "featured" ||
+					Boolean(data.imageCaption),
+				{
+					message:
+						"imageCaption es obligatorio en artículos featured con image",
+					path: ["imageCaption"],
+				},
+			)
+			.refine((data) => !data.imageLicense || Boolean(data.imageCredit), {
+				message: "imageCredit es obligatorio cuando hay imageLicense",
+				path: ["imageCredit"],
+			}),
 });
 
 export const collections = { blog, revista };

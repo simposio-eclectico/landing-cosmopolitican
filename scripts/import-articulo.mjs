@@ -30,13 +30,7 @@ import { mkdtempSync, rmSync } from "node:fs";
 const REVISTA_CONTENT_PREFIX = join("src", "content", "revista");
 const REVISTA_ASSETS_PREFIX = join("src", "assets", "revista", "imagenes");
 
-const IMAGE_EXTENSIONS = new Set([
-	".jpg",
-	".jpeg",
-	".png",
-	".gif",
-	".webp",
-]);
+const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp"]);
 
 let tempDir = null;
 
@@ -216,7 +210,9 @@ function findSourceImages(sourceDir) {
 	for (const dir of candidates) {
 		images.push(
 			...walkFiles(dir, (filePath) =>
-				IMAGE_EXTENSIONS.has(filePath.slice(filePath.lastIndexOf(".")).toLowerCase()),
+				IMAGE_EXTENSIONS.has(
+					filePath.slice(filePath.lastIndexOf(".")).toLowerCase(),
+				),
 			),
 		);
 	}
@@ -300,7 +296,13 @@ function resolveMapSource(sourceDir, mapValue) {
 	throw new Error(`Imagen de origen no encontrada: ${mapValue}`);
 }
 
-function writeManifestTemplate(manifest, sourceImages, outputPath, dryRun, sourceDir) {
+function writeManifestTemplate(
+	manifest,
+	sourceImages,
+	outputPath,
+	dryRun,
+	sourceDir,
+) {
 	const template = {
 		_comentario:
 			"Claves = nombre destino en assets. Valores = ruta relativa al --source o absoluta.",
@@ -315,7 +317,10 @@ function writeManifestTemplate(manifest, sourceImages, outputPath, dryRun, sourc
 	);
 
 	if (dryRun) {
-		console.log("[dry-run] manifest template:", JSON.stringify(template, null, 2));
+		console.log(
+			"[dry-run] manifest template:",
+			JSON.stringify(template, null, 2),
+		);
 		return;
 	}
 
@@ -409,7 +414,12 @@ function importArticle(options) {
 			);
 
 			if (existsSync(mirroredSource)) {
-				copyOrLink(mirroredSource, destImage, options.dryRun, options.useSymlinks);
+				copyOrLink(
+					mirroredSource,
+					destImage,
+					options.dryRun,
+					options.useSymlinks,
+				);
 				continue;
 			}
 

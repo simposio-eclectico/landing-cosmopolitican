@@ -5,10 +5,7 @@ import HeroEspecial from "@components/revista/HeroEspecial.astro";
 import SideLabel from "@components/revista/SideLabel.astro";
 import ElegantLayout from "@layouts/ElegantLayout.astro";
 import { SITE_NAME } from "@consts";
-import {
-	getCoverCardArticles,
-	getLeadArticle,
-} from "@lib/revistaMenu";
+import { getCoverCardArticles, getLeadArticle } from "@lib/revistaMenu";
 
 const revistas = await getCollection("revista");
 const leadArticle = getLeadArticle(revistas);

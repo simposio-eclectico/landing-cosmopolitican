@@ -10,7 +10,7 @@ export const READING_TIME_JOKES: Record<number, string[]> = {
 		"te acompaña poniendo el agua pal café",
 		"te alcanza para buscar las llaves",
 		"léelo cuando el uber esté cerca",
-        "imagina que es un reel",
+		"imagina que es un reel",
 	],
 	5: [
 		"alcanzas a poner agua para el mate",
@@ -23,9 +23,9 @@ export const READING_TIME_JOKES: Record<number, string[]> = {
 		"alcanzas a colgar la ropa",
 		"lo mismo que esperas que cargue la app del banco un lunes",
 		"te alcanza para hacerte una ensalada",
-        "lo lees haciendo del «dos»",
-        "podría ser peor",
-        "pero los mejores de tu vida",
+		"lo lees haciendo del «dos»",
+		"podría ser peor",
+		"pero los mejores de tu vida",
 	],
 	9: [
 		"te queda tiempo si estás esperando la micro",
@@ -35,18 +35,18 @@ export const READING_TIME_JOKES: Record<number, string[]> = {
 		"alcanzas a hacer fila en el banco, con suerte",
 		"puedes sacar a pasear al perro, paradas incluidas",
 	],
-    12: [
-        "ya si igual está largo",
-        "una eternidad",
-        "pero te prometo que es weno",
-        "a la larga es weno",
-        "vale la pena",
-    ],
+	12: [
+		"ya si igual está largo",
+		"una eternidad",
+		"pero te prometo que es weno",
+		"a la larga es weno",
+		"vale la pena",
+	],
 };
 
-const READING_TIME_BUCKETS = Object.keys(READING_TIME_JOKES).map(Number).sort(
-	(a, b) => a - b,
-);
+const READING_TIME_BUCKETS = Object.keys(READING_TIME_JOKES)
+	.map(Number)
+	.sort((a, b) => a - b);
 
 const getNearestBucket = (minutes: number): number =>
 	READING_TIME_BUCKETS.reduce((nearest, bucket) =>

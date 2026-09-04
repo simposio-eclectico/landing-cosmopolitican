@@ -102,7 +102,8 @@ export const findSearchResults = (
 		.filter((entry) => getSearchHaystack(entry).includes(normalizedQuery))
 		.sort(
 			(a, b) =>
-				getSearchScore(b, normalizedQuery) - getSearchScore(a, normalizedQuery) ||
+				getSearchScore(b, normalizedQuery) -
+					getSearchScore(a, normalizedQuery) ||
 				a.title.localeCompare(b.title, "es"),
 		)
 		.slice(0, SEARCH_RESULTS_LIMIT);

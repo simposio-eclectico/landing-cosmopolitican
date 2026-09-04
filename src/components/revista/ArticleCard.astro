@@ -9,7 +9,8 @@ interface Props {
 }
 
 const { article } = Astro.props;
-const { title, author, pubDate, summary, image, imageAlt, section } = article.data;
+const { title, author, pubDate, summary, image, imageAlt, section } =
+	article.data;
 const href = `/revista/${article.data.slug ?? article.id}`;
 const formattedDate = pubDate.toLocaleDateString("es-ES", {
 	year: "numeric",

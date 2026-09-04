@@ -13,7 +13,8 @@ import { join, relative } from "node:path";
 
 const CONTENT_DIR = "src/content/revista";
 const WORDS_PER_MINUTE = 200;
-const ARTICLE_FIGURE_PATTERN = /<ArticleFigure[\s\S]*?(?:\/>|<\/ArticleFigure>)/g;
+const ARTICLE_FIGURE_PATTERN =
+	/<ArticleFigure[\s\S]*?(?:\/>|<\/ArticleFigure>)/g;
 
 function parseArgs(argv) {
 	const args = { json: false };
@@ -79,7 +80,12 @@ function buildEntry(filePath) {
 	const raw = readFileSync(filePath, "utf8");
 	const { data, body } = parseFrontmatter(raw);
 	const { words, minutes } = getReadingMeta(body);
-	const slug = data.slug ?? filePath.split("/").at(-1).replace(/\.(md|mdx)$/, "");
+	const slug =
+		data.slug ??
+		filePath
+			.split("/")
+			.at(-1)
+			.replace(/\.(md|mdx)$/, "");
 	const menuSection = filePath.split("/").at(-2);
 
 	return {
@@ -130,7 +136,9 @@ function main() {
 		const avgWords = Math.round(
 			items.reduce((sum, e) => sum + e.words, 0) / items.length,
 		);
-		console.log(`\n## ${menuSection} (${items.length} artículos, promedio ${avgWords} palabras)`);
+		console.log(
+			`\n## ${menuSection} (${items.length} artículos, promedio ${avgWords} palabras)`,
+		);
 		for (const e of items) {
 			console.log(
 				`- ${e.slug} | ${e.title} | ${e.words} palabras (~${e.readingMinutes} min) | ${e.imageCount} imágenes | ${e.pubDate ?? "sin fecha"} | ${e.path}`,

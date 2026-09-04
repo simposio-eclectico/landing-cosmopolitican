@@ -21,6 +21,7 @@ interface Props {
 	description?: string;
 	image?: string | ImageMetadata;
 	imageAlt?: string;
+	socialTitle?: string;
 	bare?: boolean;
 }
 
@@ -29,6 +30,7 @@ const {
 	description = SITE_DESCRIPTION,
 	image,
 	imageAlt,
+	socialTitle,
 	bare = false,
 } = Astro.props;
 
@@ -45,8 +47,16 @@ const navLinks = [
 		href,
 		match: (path: string) => path === href || path.startsWith(`${href}/`),
 	})),
-	{ label: "Somos", href: "/quienes-somos", match: (path: string) => path.includes("/quienes-somos") },
-	{ label: "Contacto", href: "/contacto", match: (path: string) => path.includes("/contacto") },
+	{
+		label: "Somos",
+		href: "/quienes-somos",
+		match: (path: string) => path.includes("/quienes-somos"),
+	},
+	{
+		label: "Contacto",
+		href: "/contacto",
+		match: (path: string) => path.includes("/contacto"),
+	},
 ];
 
 const currentPath = Astro.url.pathname;
@@ -68,6 +78,7 @@ const isNavActive = (href: string, match?: (path: string) => boolean) => {
 			description={description}
 			image={image}
 			imageAlt={imageAlt}
+			socialTitle={socialTitle}
 		/>
 	</head>
 	<body>

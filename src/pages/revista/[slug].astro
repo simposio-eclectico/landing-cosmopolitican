@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import ArticleOriginalLink from "@components/revista/ArticleOriginalLink.astro";
 import ArticleShare from "@components/revista/ArticleShare.astro";
 import ArticleSummary from "@components/revista/ArticleSummary.astro";
@@ -42,7 +42,8 @@ const sideLabel = MENU_SECTION_LABELS[post.data.menuSection].toUpperCase();
 const marginLabel = `${MENU_SECTION_LABELS[post.data.menuSection]}`;
 const relatedHeading = `Te puede interesar`;
 const isVideoArticle = post.data.format === "video";
-const isFeaturedHero = post.data.theme === "featured" && Boolean(post.data.image);
+const isFeaturedHero =
+	post.data.theme === "featured" && Boolean(post.data.image);
 const heroImageAlt = post.data.imageAlt ?? "";
 const heroCaptionProps = {
 	caption: post.data.imageCaption,
@@ -63,12 +64,26 @@ const articleUrl = new URL(
 	`/revista/${post.data.slug ?? post.id}`,
 	Astro.site,
 ).toString();
+
+// Los OG cards esperan 1200x630 (1.91:1); la imagen original del artículo
+// suele venir en otra proporción, así que generamos un recorte dedicado.
+const ogImage = post.data.image
+	? await getImage({
+			src: post.data.image,
+			width: 1200,
+			height: 630,
+			fit: "cover",
+			position: post.data.imagePosition,
+			format: "jpg",
+		})
+	: undefined;
 ---
 
 <ElegantLayout
 	title={`${post.data.title} - ${SITE_NAME}`}
+	socialTitle={post.data.title}
 	description={stripSummaryMarkdown(post.data.summary)}
-	image={post.data.image}
+	image={ogImage ? { src: ogImage.src, width: 1200, height: 630, format: "jpg" } : post.data.image}
 	imageAlt={post.data.imageAlt}
 	bare
 >

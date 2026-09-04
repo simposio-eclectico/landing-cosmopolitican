@@ -118,11 +118,7 @@ function parseArgs(argv) {
 }
 
 function normalize(str) {
-	return str
-		.normalize("NFD")
-		.replace(/[̀-ͯ]/g, "")
-		.toLowerCase()
-		.trim();
+	return str.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
 }
 
 function capitalize(str) {
@@ -179,10 +175,7 @@ function splitBySign(rawText) {
 	const entries = matches.map((match, i) => {
 		const start = match.index + 1;
 		const end = matches[i + 1]?.index ?? lines.length;
-		const body = lines
-			.slice(start, end)
-			.join("\n")
-			.trim();
+		const body = lines.slice(start, end).join("\n").trim();
 		return { sign: match.sign, label: match.label, body };
 	});
 
@@ -250,9 +243,7 @@ function buildFrontmatter(options, imageRelPath) {
 				options.imageCaption || `Servicio de utilidad pública: ${title}.`,
 			)}`,
 		);
-		lines.push(
-			`imageAlt: ${yamlString(options.imageAlt || `${title}.`)}`,
-		);
+		lines.push(`imageAlt: ${yamlString(options.imageAlt || `${title}.`)}`);
 		if (options.imageCredit) {
 			lines.push(`imageCredit: ${yamlString(options.imageCredit)}`);
 		}
@@ -329,7 +320,9 @@ function main() {
 	mkdirSync(join(projectDir, CONTENT_DIR), { recursive: true });
 	writeFileSync(destMdx, mdx);
 	console.log(`✓ ${join(CONTENT_DIR, `${options.slug}.mdx`)}`);
-	console.log("\n✓ Horóscopo generado. Revisa el texto y corre pnpm validate:images && pnpm build.");
+	console.log(
+		"\n✓ Horóscopo generado. Revisa el texto y corre pnpm validate:images && pnpm build.",
+	);
 }
 
 try {

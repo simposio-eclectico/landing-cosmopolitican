@@ -24,13 +24,7 @@ import { homedir } from "node:os";
 const REVISTA_CONTENT_PREFIX = join("src", "content", "revista");
 const REVISTA_ASSETS_PREFIX = join("src", "assets", "revista", "imagenes");
 
-const IMAGE_EXTENSIONS = new Set([
-	".jpg",
-	".jpeg",
-	".png",
-	".gif",
-	".webp",
-]);
+const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp"]);
 
 function expandHome(path) {
 	if (path.startsWith("~/")) {
@@ -183,7 +177,9 @@ function findSourceImages(sourceDir) {
 	for (const dir of candidates) {
 		images.push(
 			...walkFiles(dir, (filePath) =>
-				IMAGE_EXTENSIONS.has(filePath.slice(filePath.lastIndexOf(".")).toLowerCase()),
+				IMAGE_EXTENSIONS.has(
+					filePath.slice(filePath.lastIndexOf(".")).toLowerCase(),
+				),
 			),
 		);
 	}
@@ -265,7 +261,10 @@ function writeManifestTemplate(manifest, sourceImages, outputPath, dryRun) {
 	);
 
 	if (dryRun) {
-		console.log("[dry-run] manifest template:", JSON.stringify(template, null, 2));
+		console.log(
+			"[dry-run] manifest template:",
+			JSON.stringify(template, null, 2),
+		);
 		return;
 	}
 

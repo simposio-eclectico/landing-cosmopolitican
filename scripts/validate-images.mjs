@@ -51,7 +51,12 @@ function detectImageFormat(buffer) {
 		return "png";
 	}
 
-	if (buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) {
+	if (
+		buffer.length >= 3 &&
+		buffer[0] === 0xff &&
+		buffer[1] === 0xd8 &&
+		buffer[2] === 0xff
+	) {
 		return "jpeg";
 	}
 
@@ -117,7 +122,10 @@ function parseFrontmatter(content) {
 		}
 
 		const key = line.slice(0, separatorIndex).trim();
-		const value = line.slice(separatorIndex + 1).trim().replace(/^"|"$/g, "");
+		const value = line
+			.slice(separatorIndex + 1)
+			.trim()
+			.replace(/^"|"$/g, "");
 		frontmatter[key] = value;
 	}
 
@@ -151,7 +159,10 @@ function hasFigureAttribution(block) {
 function validateFrontmatter(filePath, content) {
 	const frontmatter = parseFrontmatter(content);
 
-	if (isTruthyFrontmatterValue(frontmatter.image) && !isTruthyFrontmatterValue(frontmatter.imageAlt)) {
+	if (
+		isTruthyFrontmatterValue(frontmatter.image) &&
+		!isTruthyFrontmatterValue(frontmatter.imageAlt)
+	) {
 		errors.push(`${filePath}: falta imageAlt en el frontmatter`);
 	}
 

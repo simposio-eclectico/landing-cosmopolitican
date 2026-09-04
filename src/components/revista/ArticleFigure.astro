@@ -41,7 +41,9 @@ const {
 
 const resolvedSrc = typeof src === "string" ? resolveRevistaImage(src) : src;
 const figureClass = getFigureClassNames({ variant, aspect });
-const showFigcaption = Boolean(caption || hasImageAttribution({ credit, creditUrl, license, licenseUrl }));
+const showFigcaption = Boolean(
+	caption || hasImageAttribution({ credit, creditUrl, license, licenseUrl }),
+);
 ---
 
 <figure class={figureClass}>

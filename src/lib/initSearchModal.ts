@@ -115,7 +115,13 @@ export const initSearchModal = (searchIndex: SearchEntry[]) => {
 	};
 
 	const openSearch = () => {
-		if (!searchOverlay || !searchInput || !searchEmpty || !searchHint || !searchResults) {
+		if (
+			!searchOverlay ||
+			!searchInput ||
+			!searchEmpty ||
+			!searchHint ||
+			!searchResults
+		) {
 			return;
 		}
 

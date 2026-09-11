@@ -19,6 +19,7 @@ export const MENU_SECTIONS = [
 	"podcast",
 	"internacional",
 	"horoscopo",
+	"voces-militantes",
 ] as const;
 
 export type MenuSection = (typeof MENU_SECTIONS)[number];
@@ -31,6 +32,7 @@ export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	podcast: "Podcast",
 	internacional: "Internacional",
 	horoscopo: "Horóscopo",
+	"voces-militantes": "Voces Militantes",
 };
 
 export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
@@ -48,6 +50,8 @@ export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
 		"Miradas desde y hacia afuera: conflictos, solidaridades y debates globales.",
 	horoscopo:
 		"Tu guía astral: predicciones y reflexiones según tu signo zodiacal.",
+	"voces-militantes":
+		"Testimonios, análisis y reflexiones de quienes disputan el poder desde la lucha social y política.",
 };
 
 export const TOP_NAV_MENU_SECTIONS = MENU_SECTIONS.map((section) => ({

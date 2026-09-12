@@ -14,6 +14,7 @@ export const CATEGORIES = {
 export const MENU_SECTIONS = [
 	"editorial",
 	"reportajes",
+	"cronicas",
 	"columnas",
 	"entrevistas",
 	"podcast",
@@ -27,6 +28,7 @@ export type MenuSection = (typeof MENU_SECTIONS)[number];
 export const MENU_SECTION_LABELS: Record<MenuSection, string> = {
 	editorial: "Editorial",
 	reportajes: "Reportajes",
+	cronicas: "Crónicas",
 	columnas: "Columnas",
 	entrevistas: "Entrevistas",
 	podcast: "Podcast",
@@ -40,6 +42,8 @@ export const MENU_SECTION_DESCRIPTIONS: Record<MenuSection, string> = {
 		"La palabra de la redacción en cada número: contexto, tono y punto de partida de la edición.",
 	reportajes:
 		"Historias largas desde el terreno: investigación, crónica y mirada de clase sobre lo que pasa.",
+	cronicas:
+		"Relatos de eventos, manifestaciones y momentos de la vida cotidiana urbana.",
 	columnas:
 		"Opinión, crónica y texto breve: reflexiones sobre trabajo, barrio y política cotidiana.",
 	entrevistas:

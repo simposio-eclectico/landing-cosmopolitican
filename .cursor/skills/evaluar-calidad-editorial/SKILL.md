@@ -13,7 +13,7 @@ description: >-
 # Evaluar calidad editorial de la revista
 
 Audita artículos que **ya están en el repo**. La rúbrica de este documento es
-la fuente única de verdad: [import-revista-articulo](../import-revista-articulo/SKILL.md)
+la fuente única de verdad: [import-articulo](../import-articulo/SKILL.md)
 la reutiliza en su paso 6 invocando este mismo skill sobre el artículo recién
 importado, en vez de duplicarla.
 
@@ -132,6 +132,6 @@ priorice qué revisar primero.
 
 ## Referencias del proyecto
 
-- Usado también por: [import-revista-articulo](../import-revista-articulo/SKILL.md) (paso 6, tras cada import)
+- Usado también por: [import-articulo](../import-articulo/SKILL.md) (paso 6, tras cada import)
 - Línea editorial: [docs/revista-editorial.md](../../../docs/revista-editorial.md)
 - Esquema frontmatter: [src/content.config.ts](../../../src/content.config.ts)

@@ -4,7 +4,7 @@
  * al repo landing-cosmopolitican.
  *
  * Uso:
- *   node .cursor/skills/import-revista-articulo/scripts/import-articulo.mjs \
+ *   node .cursor/skills/import-articulo/scripts/import-articulo.mjs \
  *     --source "~/Downloads/Ana Cosmopolitana diseño web 2" \
  *     [--map imagenes.json] [--dry-run] [--project .]
  */

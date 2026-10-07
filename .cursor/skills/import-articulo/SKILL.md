@@ -1,5 +1,5 @@
 ---
-name: import-revista-articulo
+name: import-articulo
 description: >-
   Importa artículos MDX generados con docs/prompt-articulos.md a la landing
   Cosmopolitican: copia el .mdx a src/content/revista/, mueve imágenes a
@@ -54,7 +54,7 @@ Importación:
 
 Leer el MDX en `{origen}/src/content/revista/**/*.mdx` y anotar:
 
-- `slug`, `menuSection`, `issueNumber` del frontmatter
+- `slug`, `menuSection` del frontmatter (`issueNumber` está deprecado: ignorarlo)
 - Imágenes esperadas: campo `image:` + atributos `src` de `<ArticleFigure>`
 - Comentarios `{/* PENDIENTE: ... → ruta destino */}` (indican qué falta exportar)
 
@@ -65,7 +65,7 @@ Listar imágenes en `{origen}/uploads/` y subcarpetas.
 Desde la raíz del proyecto:
 
 ```bash
-node .cursor/skills/import-revista-articulo/scripts/import-articulo.mjs \
+node .cursor/skills/import-articulo/scripts/import-articulo.mjs \
   --source "~/Downloads/Nombre de la carpeta" \
   --dry-run
 ```
@@ -97,7 +97,7 @@ Para identificar qué archivo corresponde a cada destino:
 Importar con mapa:
 
 ```bash
-node .cursor/skills/import-revista-articulo/scripts/import-articulo.mjs \
+node .cursor/skills/import-articulo/scripts/import-articulo.mjs \
   --source "~/Downloads/Nombre de la carpeta" \
   --map "~/Downloads/Nombre de la carpeta/imagenes-map.json"
 ```
@@ -156,10 +156,11 @@ Resumir:
 
 ## Reglas importantes
 
+- **Ignorar `issueNumber`**: deprecado y opcional; no pedirlo ni dejarlo como `PENDIENTE`.
 - **No editar** el texto del autor al importar; solo metadatos técnicos y rutas.
 - **No sobrescribir** un artículo existente sin confirmar con el usuario.
 - Ignorar en el origen: `.html`, `support.js`, `.docx`, `.DS_Store`, subcarpetas `jurgol/` u otros artefactos del generador.
-- La imagen hero usa ruta relativa desde el MDX hacia assets, ej. `../../../../assets/revista/imagenes/{slug}/archivo.jpg`.
+- La imagen hero usa ruta relativa desde el MDX hacia assets, ej. `../../../assets/revista/imagenes/{slug}/archivo.jpg` (3 niveles desde `src/content/revista/{menuSection}/`; 4 `../` rompen el build con `ImageNotFound`).
 - `<ArticleFigure src="...">` usa solo el path bajo `imagenes/`, ej. `{slug}/archivo.jpg`.
 
 ## Referencias del proyecto

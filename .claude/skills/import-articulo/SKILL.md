@@ -1,5 +1,5 @@
 ---
-name: import-revista-articulo
+name: import-articulo
 description: >-
   Importa un artículo MDX a la revista Cosmopolitican desde una carpeta o un
   ZIP (usando scripts/import-articulo.mjs en la raíz del repo, con soporte de
@@ -40,7 +40,8 @@ node scripts/import-articulo.mjs --source ~/Downloads/articulo.zip --map /tmp/im
 El script:
 - Descomprime el ZIP a temporal
 - Busca `.mdx` bajo `src/content/revista/`
-- Coloca el MDX en `src/content/revista/{menuSection}/{slug}.mdx`, descartando cualquier carpeta de edición (`n01`, `n02`, …) que traiga la fuente: el repo no organiza el contenido por edición, `issueNumber` es solo un campo de frontmatter
+- Coloca el MDX en `src/content/revista/{menuSection}/{slug}.mdx`, descartando cualquier carpeta de edición (`n01`, `n02`, …) que traiga la fuente: el repo no organiza el contenido por edición y `issueNumber` está deprecado (se ignora)
+- Corrige la ruta `image:` del frontmatter según la ubicación final del MDX (`../../../assets/revista/imagenes/{slug}/archivo` desde `src/content/revista/{menuSection}/`), sin importar cuántos `../` traiga la fuente
 - Mapea imágenes desde directorios raíz y `uploads/`
 - Copia (o linkea con `--use-symlinks`) a `src/assets/revista/imagenes/{slug}/`
 
@@ -92,6 +93,9 @@ node scripts/import-articulo.mjs --source ... --map ruta/a/imagenes-map.json
 
 ## Notas
 
+- `issueNumber` está deprecado y es opcional: no preguntarlo ni dejarlo pendiente al importar
+- La ruta `image:` siempre se reescribe a 3 niveles (`../../../assets/...`); un `../../../../` rompe el build con `ImageNotFound`
+
 - El MDX siempre se copia (nunca symlink)
 - Imágenes usan symlink/copia según `--use-symlinks`
 - Soporta caracteres especiales en rutas (usa `ditto` en lugar de `unzip`)
@@ -106,7 +110,7 @@ node scripts/import-articulo.mjs --source ... --map ruta/a/imagenes-map.json
 | `author` | string | default: `"Cosmopolitican"` |
 | `pubDate` | `YYYY-MM-DD` | — |
 | `summary` | string | 1–2 frases, puede incluir `**negritas**` |
-| `issueNumber` | `"Nº 01"`, `"Nº 02"`, etc. | Solo metadata de frontmatter; no determina la carpeta destino |
+| `issueNumber` | — | **Deprecado y opcional: ignorarlo.** No pedirlo, no marcarlo como `PENDIENTE` ni validarlo |
 | `menuSection` | enum | `editorial`, `reportajes`, `columnas`, `entrevistas`, `podcast`, `internacional` |
 | `slug` | kebab-case | sin acentos; derivado del título si falta |
 | `image` | ruta relativa | obligatorio si `theme: featured` |

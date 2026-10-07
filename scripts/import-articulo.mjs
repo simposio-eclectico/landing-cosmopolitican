@@ -190,6 +190,22 @@ function extractImageManifest(content, slug) {
 	return [...manifest].sort();
 }
 
+// Reescribe `image:` del frontmatter para que apunte a assets/revista/imagenes/{slug}/
+// con la profundidad correcta según dónde queda el MDX (la fuente puede traer
+// un número erróneo de "../", p. ej. el del layout antiguo con carpeta n01/).
+function normalizeHeroImagePath(content, destMdx, destAssetsDir) {
+	return content.replace(
+		/^(image:\s*)(["']?)([^\n"']+)\2[ \t]*$/m,
+		(_match, key, quote, rawPath) => {
+			const fileName = basename(rawPath.trim());
+			const relPath = relative(dirname(destMdx), join(destAssetsDir, fileName))
+				.split(sep)
+				.join("/");
+			return `${key}${quote}${relPath}${quote}`;
+		},
+	);
+}
+
 function findMdxFiles(sourceDir) {
 	const revistaDir = join(sourceDir, REVISTA_CONTENT_PREFIX);
 
@@ -377,7 +393,7 @@ function importArticle(options) {
 			mdxPath,
 		);
 		// El repo no organiza el contenido en carpetas por edición (issueNumber
-		// es solo un campo de frontmatter): se descarta un posible segmento
+		// está deprecado y se ignora): se descarta un posible segmento
 		// inicial "n01", "n02", etc. y se aplana a src/content/revista/{menuSection}/{slug}.mdx
 		const relSegments = relFromRevista.split(sep);
 		const mdxFileName = relSegments.pop();
@@ -390,7 +406,23 @@ function importArticle(options) {
 
 		console.log(`\n📄 ${relDestPath} (slug: ${slug})`);
 
-		copyOrLink(mdxPath, destMdx, options.dryRun, false); // MDX siempre copia, nunca symlink
+		const fixedContent = normalizeHeroImagePath(
+			content,
+			destMdx,
+			destAssetsDir,
+		);
+
+		if (fixedContent !== content) {
+			console.log("   ↳ ruta de image: corregida respecto al destino");
+		}
+
+		if (options.dryRun) {
+			console.log(`[dry-run] write ${destMdx}`);
+		} else {
+			ensureDir(dirname(destMdx), false);
+			writeFileSync(destMdx, fixedContent); // MDX siempre se escribe como copia, nunca symlink
+			console.log(`✓ ${relative(process.cwd(), destMdx)}`);
+		}
 
 		const missingImages = [];
 

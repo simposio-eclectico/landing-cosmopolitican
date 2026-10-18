@@ -592,6 +592,17 @@
 	margin: 0 2rem 1rem 0;
 }
 
+.articulo__embed--right {
+	float: right;
+	width: min(340px, 40%);
+	min-width: 326px;
+	margin: 0 0 1rem 2rem;
+}
+
+.articulo__embed--right .instagram-media {
+	margin: 0 !important;
+}
+
 .articulo__side-img--right img,
 .articulo__side-img--left img {
 	width: 100%;
@@ -1099,6 +1110,13 @@
 	.articulo__side-img--right {
 		float: none;
 		width: 100%;
+		margin: 0 0 1.5rem;
+	}
+
+	.articulo__embed--right {
+		float: none;
+		width: 100%;
+		min-width: 0;
 		margin: 0 0 1.5rem;
 	}
 

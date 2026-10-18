@@ -20,7 +20,7 @@ No test runner is configured in this repo.
 ## Architecture
 
 ### Content collections (`src/content.config.ts`)
-Two collections: `blog` (unused starter leftover) and `revista` (the real one). The `revista` schema has cross-field `.refine()` validation enforced at build time:
+One collection: `revista`. The `revista` schema has cross-field `.refine()` validation enforced at build time:
 - `imageAlt` required whenever `image` is set
 - `imageCaption` required when `theme: "featured"` has an `image`
 - `imageCredit` required whenever `imageLicense` is set

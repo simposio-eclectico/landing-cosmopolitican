@@ -9,8 +9,10 @@ The website for **Cosmopolitican** ("Tu revista con Clase"), a Chilean digital m
 ## Commands
 
 - `pnpm dev` — local dev server at `localhost:4321`
-- `pnpm build` — runs `clean:astro` → `validate:images` → `astro build`; always run this (or at least `validate:images`) after touching `src/content/revista/**` or `src/content.config.ts`
+- `pnpm build` — runs `clean:astro` → `validate:images` → `validate:videos` → `astro build`; always run this (or at least `validate:images`) after touching `src/content/revista/**` or `src/content.config.ts`
 - `pnpm validate:images` — standalone check of image/frontmatter rules in revista content (`scripts/validate-images.mjs`)
+- `pnpm optimize:videos` — convierte los originales de `videos-src/` (gitignored) a `public/videos/{slug}.mp4`: H.264 High + yuv420p, AAC, máx. 1080p, CRF 23, faststart (requiere `ffmpeg`). `--force` rehace los existentes
+- `pnpm validate:videos` — falla si algún archivo de `public/videos/` no es .mp4 H.264/AAC ≤1080p con faststart y ≤50 MB (corre dentro de `pnpm build`)
 - `pnpm preview` — serve the production build locally
 - `pnpm astro check` — type-check `.astro` files
 - `pnpm lint` — formats with Biome (`pnpx @biomejs/biome format --write`); Biome (not ESLint/Prettier) is the formatter/linter, tabs, double quotes, import organization on
@@ -32,6 +34,9 @@ One collection: `revista`. The `revista` schema has cross-field `.refine()` vali
 
 ### Importing articles
 Articles are typically authored externally (Word → AI-generated MDX via the prompt in `docs/prompt-articulos.md`) and then imported. There's a Cursor skill for this at `.cursor/skills/import-articulo/` (script: `scripts/import-articulo.mjs`) that copies the MDX into place — flattening away any per-issue folder (`n01`, `n02`, …) the source may include, since the repo doesn't organize content that way — maps loose images into `src/assets/revista/imagenes/{slug}/`, and flags `PENDIENTE:` placeholders that still need editor input (captions/credits) before the schema `.refine()` checks will pass. Follow that skill's workflow when handling an "import this article" style request instead of hand-rolling the file moves.
+
+### Videos
+Ningún video se commitea sin pasar por `pnpm optimize:videos`: los originales van en `videos-src/` (ignorado por git) y solo `public/videos/*.mp4` se versiona. Astro no transforma videos, así que `validate:videos` (parte de `build`, también en CI) es la garantía. Los videos de YouTube no pasan por esto (se embeben por iframe en `VideoPlayer`).
 
 ### Page/routing structure
 - `src/pages/revista/[slug].astro` — single article page; resolves `Content` via `render(post)`, computes reading time (`@lib/articuloMeta`), related articles (`@lib/revistaMenu`), and picks hero/video/summary components based on `post.data.theme`/`format`.

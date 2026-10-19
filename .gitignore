@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# videos originales (sin optimizar); salen por pnpm optimize:videos
+videos-src/

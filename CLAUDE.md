@@ -66,4 +66,4 @@ Dynamic author pages at `/revista/autor/{autor-slug}` auto-generate from the uni
 Helper: `getAuthorHref(authorName)` returns the URL for a given author.
 
 ### Deployment
-GitHub Actions (`.github/workflows/build.yml`) builds on push to `main` and deploys `dist/` to GitHub Pages. `dist/` is committed output from local builds and should not be hand-edited.
+The site is deployed on Render (not GitHub Pages), which builds and publishes on its own. GitHub Actions (`.github/workflows/build.yml`) only runs `pnpm run build` as CI validation on push to `main` and on pull requests; it does not deploy. `dist/` is gitignored build output and should not be hand-edited.

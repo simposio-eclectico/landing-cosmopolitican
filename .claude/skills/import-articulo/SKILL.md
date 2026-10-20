@@ -115,7 +115,7 @@ node scripts/import-articulo.mjs --source ... --map ruta/a/imagenes-map.json
 | `slug` | kebab-case | sin acentos; derivado del título si falta |
 | `image` | ruta relativa | obligatorio si `theme: featured` |
 | `imageAlt` | string | obligatorio si hay `image` |
-| `imageCaption` | string | obligatorio si `theme: featured` + `image` |
+| `imageCaption` | string | opcional |
 | `imageCredit` | string | obligatorio si hay `imageLicense` |
 
 Ver `src/content.config.ts` para el esquema completo y reglas `.refine()`.

@@ -49,17 +49,6 @@ const revista = defineCollection({
 				message: "imageAlt es obligatorio cuando hay image",
 				path: ["imageAlt"],
 			})
-			.refine(
-				(data) =>
-					!data.image ||
-					data.theme !== "featured" ||
-					Boolean(data.imageCaption),
-				{
-					message:
-						"imageCaption es obligatorio en artículos featured con image",
-					path: ["imageCaption"],
-				},
-			)
 			.refine((data) => !data.imageLicense || Boolean(data.imageCredit), {
 				message: "imageCredit es obligatorio cuando hay imageLicense",
 				path: ["imageCredit"],

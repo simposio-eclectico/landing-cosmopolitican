@@ -24,7 +24,6 @@ No test runner is configured in this repo.
 ### Content collections (`src/content.config.ts`)
 One collection: `revista`. The `revista` schema has cross-field `.refine()` validation enforced at build time:
 - `imageAlt` required whenever `image` is set
-- `imageCaption` required when `theme: "featured"` has an `image`
 - `imageCredit` required whenever `imageLicense` is set
 
 `menuSection` is a fixed enum (`editorial`, `reportajes`, `columnas`, `entrevistas`, `podcast`, `internacional`) defined in `src/consts.ts` (`MENU_SECTIONS`) — this drives both the schema and the top nav (`TOP_NAV_MENU_SECTIONS`).

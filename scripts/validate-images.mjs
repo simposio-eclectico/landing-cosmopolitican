@@ -167,16 +167,6 @@ function validateFrontmatter(filePath, content) {
 	}
 
 	if (
-		isTruthyFrontmatterValue(frontmatter.image) &&
-		frontmatter.theme === "featured" &&
-		!isTruthyFrontmatterValue(frontmatter.imageCaption)
-	) {
-		errors.push(
-			`${filePath}: falta imageCaption en artículo featured con image`,
-		);
-	}
-
-	if (
 		isTruthyFrontmatterValue(frontmatter.imageLicense) &&
 		!isTruthyFrontmatterValue(frontmatter.imageCredit)
 	) {

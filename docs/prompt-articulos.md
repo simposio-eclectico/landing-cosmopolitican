@@ -93,7 +93,7 @@ Genera el bloque YAML entre `---` con estos campos:
 | `order` | Opcional | Entero para orden en el menú de la edición |
 | `image` | Opcional | Ruta relativa al MDX hacia `src/assets/revista/imagenes/...` |
 | `imageAlt` | Si hay `image` | Descripción accesible; NO repetir el caption |
-| `imageCaption` | Si `theme: featured` + `image` | Texto bajo la foto hero |
+| `imageCaption` | Opcional | Texto bajo la foto hero |
 | `imageCredit` | Si hay `imageLicense` | Nombre del fotógrafo |
 | `imageCreditUrl` | Opcional | URL del perfil del fotógrafo |
 | `imageLicense` | Opcional | Ej. `"CC BY-NC 2.0"` |
@@ -107,7 +107,6 @@ Genera el bloque YAML entre `---` con estos campos:
 ### Reglas de validación (el build falla si no se cumplen)
 
 - Si hay `image` → `imageAlt` es obligatorio.
-- Si hay `image` + `theme: featured` → `imageCaption` es obligatorio.
 - Si hay `imageLicense` → `imageCredit` es obligatorio.
 
 ### Rutas de imagen hero
